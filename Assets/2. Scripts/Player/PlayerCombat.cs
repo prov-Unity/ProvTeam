@@ -4,47 +4,39 @@ using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
-    // public float health;
-    // public float comboLimitTime;
-    // public bool isAttacking;
+    [ReadOnly, SerializeField] private Weapon curWeapon;
+    private Player player;
 
-    // private Player player;
-    // private Weapon weapon;
+    private void Awake() {
+        player = GetComponentInChildren<Player>();
+        curWeapon = GetComponentInChildren<Weapon>();
+    }
 
-    // private void Awake() {
-    //     health = 100;
-    //     comboLimitTime = 2f;
-    //     isAttacking = false;
+    private void Update() {
+        ;
+    }
 
-    //     player = GetComponentInChildren<Player>();
-    //     weapon = GetComponentInChildren<Weapon>();
-    // }
-
-    // private void Update() {
-    //     ;
-    // }
-
-    // public void Attack() {
-    //     isAttacking = true;     
+    public void Attack() {
+        player.playerInfo.isAttacking = true;     
         
-    //     player.playerAnimation.PlayAttackAnimation();
-    // }
+        player.playerAnimation.PlayAttackAnimation();
+    }
 
-    // public void EnableWeaponCollider() {
-    //     weapon.EnableCollider();
-    // }
+    public void EnableWeaponCollider() {
+        curWeapon.EnableCollider();
+    }
 
-    // public void DisableWeaponCollider() {
-    //     weapon.DisableCollider();
-    // }
+    public void DisableWeaponCollider() {
+        curWeapon.DisableCollider();
+    }
 
-    // public void SetIsAttackingFalse() {
-    //     isAttacking = false;
-    // }
+    public void SetIsAttackingFalse() {
+        player.playerInfo.isAttacking = false;
+    }
 
-    // public void GetDamaged(float attackPower) {
-    //     health -= attackPower;
+    public void GetDamaged(float attackPower) {
+        player.playerInfo.health -= attackPower;
 
-    //     player.playerAnimation.PlayHitAnimation();
-    // }
+        player.playerAnimation.PlayHitAnimation();
+    }
 }

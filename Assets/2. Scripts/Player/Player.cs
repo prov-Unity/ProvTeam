@@ -4,14 +4,21 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [ReadOnly] public Transform neckTransform;
-    [ReadOnly] public PlayerInput playerInput;
-    [ReadOnly] public PlayerMovement playerMovement;
-    [ReadOnly] public PlayerCombat playerCombat;
+    [HideInInspector] public Transform neckTransform;
+
+    [HideInInspector] public PlayerInfo playerInfo;
+    [HideInInspector] public PlayerInputManager playerInputManager;
+    [HideInInspector] public PlayerMovement playerMovement;
+    [HideInInspector] public PlayerAnimation playerAnimation;
+    [HideInInspector] public PlayerCombat playerCombat;
 
     private void Awake() {
-        playerInput = GetComponent<PlayerInput>();
+        neckTransform = FindObjectOfType<PlayerNeck>().transform;
+
+        playerInfo = GetComponent<PlayerInfo>();
+        playerInputManager = GetComponent<PlayerInputManager>();
         playerMovement = GetComponent<PlayerMovement>();
+        playerAnimation = GetComponent<PlayerAnimation>();
         playerCombat = GetComponent<PlayerCombat>();
     }
 }
