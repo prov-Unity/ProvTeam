@@ -10,10 +10,19 @@ public class PlayerInputManager : MonoBehaviour
         player = GetComponent<Player>();
     }
 
+    // this variable exists for debug purpose only
+    bool isCreated = false;
+
     private void Update() {
         inputX = Input.GetAxisRaw("Horizontal");
         inputY = Input.GetAxisRaw("Vertical");
         player.playerMovement.Move(inputX, inputY);
+
+        if(!isCreated && Input.GetKeyDown(KeyCode.E)) {
+            // instantiate ornate_sword to right hand weapon slot
+            player.playerRightWeaponSlot.SelectWeapon(WeaponType.Ornate_Sword);
+            isCreated = true;
+        }
 
         if(Input.GetKeyDown(KeyCode.Space))
             player.playerMovement.Jump();

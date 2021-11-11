@@ -530,7 +530,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 686703605}
-  m_LocalRotation: {x: 0.046589922, y: 0.93142426, z: -0.3372221, w: 0.12868367}
+  m_LocalRotation: {x: 0.04658991, y: 0.93142426, z: -0.33722213, w: 0.12868364}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -730,6 +730,50 @@ Transform:
   m_Father: {fileID: 680335557}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &795399829
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 795399830}
+  - component: {fileID: 795399831}
+  m_Layer: 0
+  m_Name: WeaponManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &795399830
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 795399829}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &795399831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 795399829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0802cc588c8c89743898138b99aa585d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponPrefabs: []
 --- !u!1 &922802966
 GameObject:
   m_ObjectHideFlags: 3
@@ -3608,6 +3652,8 @@ MonoBehaviour:
   playerInputManager: {fileID: 0}
   playerMovement: {fileID: 0}
   playerAnimation: {fileID: 0}
+  playerLeftWeaponSlot: {fileID: 0}
+  playerRightWeaponSlot: {fileID: 0}
   playerCombat: {fileID: 0}
 --- !u!114 &2079817443
 MonoBehaviour:

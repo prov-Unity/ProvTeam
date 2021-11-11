@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     [HideInInspector] public PlayerInputManager playerInputManager;
     [HideInInspector] public PlayerMovement playerMovement;
     [HideInInspector] public PlayerAnimation playerAnimation;
+    [HideInInspector] public PlayerWeaponSlot playerLeftWeaponSlot;
+    [HideInInspector] public PlayerWeaponSlot playerRightWeaponSlot;
     [HideInInspector] public PlayerCombat playerCombat;
 
     private void Awake() {
@@ -19,6 +21,10 @@ public class Player : MonoBehaviour
         playerInputManager = GetComponent<PlayerInputManager>();
         playerMovement = GetComponent<PlayerMovement>();
         playerAnimation = GetComponent<PlayerAnimation>();
+
+        PlayerWeaponSlot[] slots = GetComponentsInChildren<PlayerWeaponSlot>();
+        playerLeftWeaponSlot = slots[0];
+        playerRightWeaponSlot = slots[1];
         playerCombat = GetComponent<PlayerCombat>();
     }
 }
