@@ -14,7 +14,7 @@ public class WeaponManager : MonoBehaviour
         instance = this;
 
         weaponPrefabs = new List<GameObject>();
-        weaponPrefabs.Add(null);
+        weaponPrefabs.Add(Resources.Load<GameObject>("Weapons/Fist"));
         weaponPrefabs.Add(null);
         weaponPrefabs.Add(Resources.Load<GameObject>("Weapons/Ornate_Sword"));
     }

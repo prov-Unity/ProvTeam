@@ -8,7 +8,7 @@ public class PlayerInfo : MonoBehaviour
     [ReadOnly] public float speedMove;
     [ReadOnly] public float speedJump;
 
-    [ReadOnly] public int weaponIndex;
+    [ReadOnly] public WeaponType weaponType;
     [ReadOnly] public int attackIndex;
     [ReadOnly] public float comboLimitTime;
 
@@ -23,7 +23,7 @@ public class PlayerInfo : MonoBehaviour
         speedMove = 5f;
         speedJump = 7f;
 
-        weaponIndex = 1;
+        weaponType = WeaponType.Fist;
         attackIndex = -1;
         comboLimitTime = 2f;
 

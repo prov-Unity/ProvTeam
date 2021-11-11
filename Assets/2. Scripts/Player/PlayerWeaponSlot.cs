@@ -19,4 +19,9 @@ public class PlayerWeaponSlot : MonoBehaviour
         curWeapon.transform.parent = gameObject.transform;
         curWeapon.transform.localScale = new Vector3(100f, 100f, 100f);
     }
+
+    public void DestroyCurWeapon() {
+        if(curWeapon != null)
+            Destroy(curWeapon);
+    }
 }

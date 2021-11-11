@@ -10,21 +10,32 @@ public class PlayerInputManager : MonoBehaviour
         player = GetComponent<Player>();
     }
 
-    // this variable exists for debug purpose only
-    bool isCreated = false;
-
     private void Update() {
         inputX = Input.GetAxisRaw("Horizontal");
         inputY = Input.GetAxisRaw("Vertical");
         player.playerMovement.Move(inputX, inputY);
 
-        if(!isCreated && Input.GetKeyDown(KeyCode.E)) {
-            // instantiate ornate_sword to right hand weapon slot
+        if(Input.GetKeyDown(KeyCode.Alpha1)) {
+            // switch to fist
+            player.playerLeftWeaponSlot.SelectWeapon(WeaponType.Fist);
+            player.playerRightWeaponSlot.SelectWeapon(WeaponType.Fist);
+
+            player.playerCombat.SetWeapons(player.playerLeftWeaponSlot.curWeapon.GetComponent<Weapon>(), player.playerRightWeaponSlot.curWeapon.GetComponent<Weapon>());
+
+            player.playerInfo.weaponType = WeaponType.Fist;
+            player.playerAnimation.ChangeMoveToFist();
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha2)) {
+            // switch to sword
+            player.playerLeftWeaponSlot.DestroyCurWeapon();
             player.playerRightWeaponSlot.SelectWeapon(WeaponType.Ornate_Sword);
-            isCreated = true;
 
             player.playerCombat.SetWeapons(null, player.playerRightWeaponSlot.curWeapon.GetComponent<Weapon>());
+
+            player.playerInfo.weaponType = WeaponType.Ornate_Sword;
+            player.playerAnimation.ChangeMoveTo2Hand();
         }
+
 
         if(Input.GetKeyDown(KeyCode.Space))
             player.playerMovement.Jump();

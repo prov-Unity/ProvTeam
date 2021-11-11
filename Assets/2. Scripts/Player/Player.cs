@@ -27,4 +27,12 @@ public class Player : MonoBehaviour
         playerRightWeaponSlot = slots[1];
         playerCombat = GetComponent<PlayerCombat>();
     }
+
+    private void Start() {
+        // these codes would be changed after save/load functionality is implemented
+        playerLeftWeaponSlot.SelectWeapon(WeaponType.Fist);
+        playerRightWeaponSlot.SelectWeapon(WeaponType.Fist);
+
+        playerCombat.SetWeapons(playerLeftWeaponSlot.curWeapon.GetComponent<Weapon>(), playerLeftWeaponSlot.curWeapon.GetComponent<Weapon>());
+    }
 }
