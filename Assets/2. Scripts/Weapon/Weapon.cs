@@ -24,11 +24,10 @@ public class Weapon : MonoBehaviour
     private void OnDrawGizmos()
     {
         if (_col == null)
-            _col = GetComponent<BoxCollider>();
+            _col = GetComponent<Collider>();
 
         Gizmos.color = new Color(0.3f, 0.22f, 0.6f, 0.6f);
         Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, transform.lossyScale);
-
         if (_col.GetType() == typeof(BoxCollider))
         {
             var collider = (BoxCollider) _col;
@@ -38,13 +37,8 @@ public class Weapon : MonoBehaviour
         {
             var collider = (CapsuleCollider) _col;
             DrawWireCapsule(collider.center,
-                            Quaternion.identity,
-                            collider.radius,
-                            0f,
-                            new Color(0.3f,
-                                0.22f,
-                                0.6f,
-                                0.6f));
+                0,
+                collider.radius);
         }
         if (_col.GetType() == typeof(SphereCollider))
         {
@@ -53,30 +47,54 @@ public class Weapon : MonoBehaviour
         }
     }
     
-    public void DrawWireCapsule(Vector3 _pos, Quaternion _rot, float _radius, float _height, Color _color = default(Color))
+     private void DrawSolidCapsule(Vector3 center, float height, float radius)
     {
-        if (_color != default(Color))
-            Handles.color = _color;
-        Matrix4x4 angleMatrix = Matrix4x4.TRS(_pos, _rot, Handles.matrix.lossyScale);
-        using (new Handles.DrawingScope(angleMatrix))
-        {
-            var pointOffset = (_height - (_radius * 2)) / 2;
- 
-            //draw sideways
-            Handles.DrawWireArc(Vector3.up * pointOffset, Vector3.left, Vector3.back, -180, _radius);
-            Handles.DrawLine(new Vector3(0, pointOffset, -_radius), new Vector3(0, -pointOffset, -_radius));
-            Handles.DrawLine(new Vector3(0, pointOffset, _radius), new Vector3(0, -pointOffset, _radius));
-            Handles.DrawWireArc(Vector3.down * pointOffset, Vector3.left, Vector3.back, 180, _radius);
-            //draw frontways
-            Handles.DrawWireArc(Vector3.up * pointOffset, Vector3.back, Vector3.left, 180, _radius);
-            Handles.DrawLine(new Vector3(-_radius, pointOffset, 0), new Vector3(-_radius, -pointOffset, 0));
-            Handles.DrawLine(new Vector3(_radius, pointOffset, 0), new Vector3(_radius, -pointOffset, 0));
-            Handles.DrawWireArc(Vector3.down * pointOffset, Vector3.back, Vector3.left, -180, _radius);
-            //draw center
-            Handles.DrawWireDisc(Vector3.up * pointOffset, Vector3.up, _radius);
-            Handles.DrawWireDisc(Vector3.down * pointOffset, Vector3.up, _radius);
- 
-        }
+        
+        var upper = center + Vector3.up * (height - 1) * 0.5f;
+        var lower = center - Vector3.up * (height - 1) * 0.5f;
+        var offsetX = new Vector3(radius, 0f, 0f);
+        var offsetZ = new Vector3(0f, 0f, radius);
+        
+        //draw frontways
+        Handles.DrawSolidArc(upper, Vector3.back, Vector3.left, 180, radius);
+        Handles.DrawLine(lower + offsetX, upper + offsetX);
+        Handles.DrawLine(lower - offsetX, upper - offsetX);
+        Handles.DrawSolidArc(lower, Vector3.back, Vector3.left, -180, radius);
+        
+        //draw sideways
+        Handles.DrawSolidArc(upper, Vector3.left, Vector3.back, -180, radius);
+        Handles.DrawLine(lower + offsetZ, upper + offsetZ);
+        Handles.DrawLine(lower - offsetZ, upper - offsetZ);
+        Handles.DrawSolidArc(lower, Vector3.left, Vector3.back, 180, radius);
+        
+        //draw center
+        Handles.DrawSolidDisc(upper, Vector3.up, radius);
+        Handles.DrawSolidDisc(lower, Vector3.up, radius);
+    }
+    
+    private void DrawWireCapsule(Vector3 center, float height, float radius)
+    {
+        
+        var upper = center + Vector3.up * (height - 1) * 0.5f;
+        var lower = center - Vector3.up * (height - 1) * 0.5f;
+        var offsetX = new Vector3(radius, 0f, 0f);
+        var offsetZ = new Vector3(0f, 0f, radius);
+        
+        //draw frontways
+        Handles.DrawWireArc(upper, Vector3.back, Vector3.left, 180, radius);
+        Handles.DrawLine(lower + offsetX, upper + offsetX);
+        Handles.DrawLine(lower - offsetX, upper - offsetX);
+        Handles.DrawWireArc(lower, Vector3.back, Vector3.left, -180, radius);
+        
+        //draw sideways
+        Handles.DrawWireArc(upper, Vector3.left, Vector3.back, -180, radius);
+        Handles.DrawLine(lower + offsetZ, upper + offsetZ);
+        Handles.DrawLine(lower - offsetZ, upper - offsetZ);
+        Handles.DrawWireArc(lower, Vector3.left, Vector3.back, 180, radius);
+        
+        //draw center
+        Handles.DrawWireDisc(upper, Vector3.up, radius);
+        Handles.DrawWireDisc(lower, Vector3.up, radius);
     }
 
     private void Awake()
