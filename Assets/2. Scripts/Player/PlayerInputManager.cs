@@ -15,6 +15,7 @@ public class PlayerInputManager : MonoBehaviour
         inputY = Input.GetAxisRaw("Vertical");
         player.playerMovement.Move(inputX, inputY);
 
+        // this code section would be gone to different script of which name might be PlayerWeaponSelector or so 
         if(Input.GetKeyDown(KeyCode.Alpha1)) {
             // switch to fist
             player.playerLeftWeaponSlot.SelectWeapon(WeaponType.Fist);
