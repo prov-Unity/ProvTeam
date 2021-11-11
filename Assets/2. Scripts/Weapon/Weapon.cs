@@ -99,7 +99,7 @@ public class Weapon : MonoBehaviour
 
     private void Awake()
     {
-        _col = GetComponent<BoxCollider>();
+        _col = GetComponent<Collider>();
     }
 
     public void CheckAttackTarget()
