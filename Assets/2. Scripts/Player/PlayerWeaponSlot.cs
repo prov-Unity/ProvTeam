@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerWeaponSlot : MonoBehaviour
 {
     private Player player;
-    private GameObject curWeapon;
+    [ReadOnly] public GameObject curWeapon;
 
     private void Awake() {
         player = GetComponentInParent<Player>();

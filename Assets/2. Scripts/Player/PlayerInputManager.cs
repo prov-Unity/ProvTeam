@@ -22,6 +22,8 @@ public class PlayerInputManager : MonoBehaviour
             // instantiate ornate_sword to right hand weapon slot
             player.playerRightWeaponSlot.SelectWeapon(WeaponType.Ornate_Sword);
             isCreated = true;
+
+            player.playerCombat.SetWeapons(null, player.playerRightWeaponSlot.curWeapon.GetComponent<Weapon>());
         }
 
         if(Input.GetKeyDown(KeyCode.Space))

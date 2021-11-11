@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
-    [ReadOnly, SerializeField] private Weapon curWeapon;
+    [ReadOnly, SerializeField] private Weapon leftWeapon;
+    [ReadOnly, SerializeField] private Weapon rightWeapon;
     private Player player;
 
     private void Awake() {
         player = GetComponentInChildren<Player>();
-        curWeapon = GetComponentInChildren<Weapon>();
     }
 
     private void Update() {
         ;
+    }
+
+    public void SetWeapons(Weapon inputLeftWeapon, Weapon inputRightWeapon) {
+        leftWeapon = inputLeftWeapon;
+        rightWeapon = inputRightWeapon;
     }
 
     public void Attack() {
@@ -22,12 +27,18 @@ public class PlayerCombat : MonoBehaviour
         player.playerAnimation.PlayAttackAnimation();
     }
 
-    public void EnableWeaponCollider() {
-        curWeapon.EnableCollider(true);
+    public void EnableLeftWeaponCollider() {
+        leftWeapon.EnableCollider(true);
+    }
+    public void DisableLeftWeaponCollider() {
+        leftWeapon.EnableCollider(false);
     }
 
-    public void DisableWeaponCollider() {
-        curWeapon.EnableCollider(false);
+    public void EnableRightWeaponCollider() {
+        rightWeapon.EnableCollider(true);
+    }
+    public void DisableRightWeaponCollider() {
+        rightWeapon.EnableCollider(false);
     }
 
     public void SetIsAttackingFalse() {
