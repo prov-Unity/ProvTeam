@@ -7,6 +7,8 @@ public class PlayerInfo : MonoBehaviour
     [ReadOnly] public float health;
     [ReadOnly] public float speedMove;
     [ReadOnly] public float speedJump;
+
+    [ReadOnly] public int weaponIndex;
     [ReadOnly] public int attackIndex;
     [ReadOnly] public float comboLimitTime;
 
@@ -16,9 +18,12 @@ public class PlayerInfo : MonoBehaviour
 
     private Player player;
     private void Awake() {
+        // these codes would be altered after save/load functionality is implemented
         health = 100f;
         speedMove = 5f;
         speedJump = 7f;
+
+        weaponIndex = 1;
         attackIndex = -1;
         comboLimitTime = 2f;
 

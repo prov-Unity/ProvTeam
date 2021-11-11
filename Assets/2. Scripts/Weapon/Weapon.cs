@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    private float attackPower;
+    [ReadOnly] public float attackPower;
 
     private MeshCollider curCollider;
 
@@ -20,11 +20,5 @@ public class Weapon : MonoBehaviour
 
     public void DisableCollider() {
         curCollider.enabled = false;
-    }
-
-    private void OnTriggerEnter(Collider other) {
-        if(other.CompareTag("Enemy")) {
-            //other.GetComponent<EnemyCombat>().GetDamaged(attackPower);
-        }
     }
 }
