@@ -2,16 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class SkeletonSlave_FSM : MonoBehaviour
 {
-    [Header("SkeletonData")] 
-    [ReadOnly] public int hp;
-    [ReadOnly] public int damage;
-    [ReadOnly] public int speed;
+    [Header("SkeletonData")]
     public MonsterData monsterData;
-
-    private SkeletonSlave_State skeletonSlaveState;
+    public int currentHp;
+    
+    private NavMeshAgent _agent;
+    private MonsterState monsterState;
     private Animator _animator;
     private MonsterInfo monsterInfo;
     private readonly int hashHit = Animator.StringToHash("Hit");
@@ -22,67 +22,92 @@ public class SkeletonSlave_FSM : MonoBehaviour
     
     private void Awake()
     {
-        monsterData = Resources.Load<MonsterData>("/Datas/MonsterData");
+        _agent = GetComponent<NavMeshAgent>();
+        monsterData = Resources.Load<MonsterData>("Datas/MonsterData");
         _animator = GetComponent<Animator>();
     }
     
     private void Start()
     {
         monsterInfo = monsterData.monsterInfos[0];
-        skeletonSlaveState = GetComponent<SkeletonSlave_State>();
-        StartCoroutine(MonsterAction(skeletonSlaveState.state));
+        currentHp = monsterInfo.hp;
+        monsterState = GetComponent<MonsterState>();
+        StartCoroutine(MonsterAction());
     }
 
     
-    public IEnumerator MonsterAction(State state)
+    public IEnumerator MonsterAction()
     {
-        switch (state)
+        while (true)
         {
-            case State.IDLE:
-                _animator.SetBool(hashTrace, false);
-                break;
-            case State.TRACE:
-                _animator.SetBool(hashTrace, true);
-                MoveToTarget();
-                break;
-            case State.ATTACK:
-                _animator.SetTrigger(hashAttack);
-                break;
-            case State.DEATH:
-                _animator.SetTrigger(hashDeath);
-                break;
-            default:
-                break;
-        }
+            switch (monsterState.state)
+            {
+                case State.IDLE:
+                    _agent.isStopped = true;
+                    _animator.SetBool(hashTrace, false);
+                    break;
+                case State.TRACE:
+                    _animator.SetBool(hashTrace, true);
+                    MoveToTarget();
+                    break;
+                case State.ATTACK:
+                    StartCoroutine(Attack());
+                    break;
+                case State.DEATH:
+                    _animator.SetTrigger(hashDeath);
+                    break;
+            }
 
-        yield return new WaitForSeconds(0.4f);
+            yield return new WaitForSeconds(0.4f);
+        }
     }
 
+    public IEnumerator Attack()
+    {
+        _agent.isStopped = true;
+        _agent.updatePosition = false;
+        _agent.updateRotation = false;
+        _agent.velocity = Vector3.zero;
+        yield return new WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(0)
+                                             .normalizedTime >=
+                                         1.2f);
+        
+        _animator.SetTrigger(hashAttack);
+        monsterState.state = State.IDLE;
+    }
 
     public void MoveToTarget()
     {
-        Vector3 dir = (skeletonSlaveState.targetTransform.position - transform.position).normalized;
-        transform.Translate(dir * speed);
-        float angle = Vector3.SignedAngle(transform.forward, skeletonSlaveState.targetTransform.position,
-                                                        Vector3.up);
-        transform.Rotate(0f, Mathf.Lerp(0f, angle, 0.5f), 0f);
+        _agent.isStopped = false;
+        _agent.updatePosition = true;
+        _agent.updateRotation = true;
+        _agent.SetDestination(monsterState.targetTransform.position);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Weapon"))
+        {
+            OnDamage(other.GetComponent<Weapon>().attackPower);
+        }
+        
+    }
     
-    public void OnDamage()
+
+    public void OnDamage(float damage)
     {
         _animator.SetTrigger(hashHit);
-        hp -= damage;
-        if (hp <= 0)
+        currentHp -= (int) damage;
+        if (currentHp <= 0)
         {
-            skeletonSlaveState.state = State.DEATH;
+            monsterState.state = State.DEATH;
+            
             _animator.SetTrigger(hashDeath);
         }
     }
-    
 
-    public void MonsterDestroy()
+    public IEnumerator Die()
     {
-        Destroy(this.gameObject);
+        yield return new WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.2f);
     }
 }
