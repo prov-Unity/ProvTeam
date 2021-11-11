@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
     private void UpdateIsGrounded() {
         RaycastHit hitInfo;
         Physics.Raycast(transform.position, Vector3.down, out hitInfo, Mathf.Infinity);
-        if(hitInfo.distance >= 1f)
+        if(hitInfo.distance >= 0.3f)
             player.playerInfo.isGrounded = false;
         else
             player.playerInfo.isGrounded = true;  
