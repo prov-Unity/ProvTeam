@@ -23,11 +23,11 @@ public class PlayerCombat : MonoBehaviour
     }
 
     public void EnableWeaponCollider() {
-        curWeapon.EnableCollider();
+        curWeapon.EnableCollider(true);
     }
 
     public void DisableWeaponCollider() {
-        curWeapon.DisableCollider();
+        curWeapon.EnableCollider(false);
     }
 
     public void SetIsAttackingFalse() {
