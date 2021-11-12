@@ -210,7 +210,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 466574, guid: e243cdbf40ae09049834a4fdf1876343, type: 3}
       propertyPath: m_LocalScale.y
-      value: 100
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 466574, guid: e243cdbf40ae09049834a4fdf1876343, type: 3}
       propertyPath: m_LocalScale.z
@@ -218,11 +218,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 466574, guid: e243cdbf40ae09049834a4fdf1876343, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.9
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 466574, guid: e243cdbf40ae09049834a4fdf1876343, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 32.8
+      value: 51.2
       objectReference: {fileID: 0}
     - target: {fileID: 466574, guid: e243cdbf40ae09049834a4fdf1876343, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2645,7 +2645,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 4
-  AttackDistance: 2
+  AttackDistance: 3
   sensorTransform: {fileID: 4740233476080640901}
   sensorCheckCycle: 0.4
   timeToForget: 5
@@ -2659,11 +2659,11 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 2
+  m_Speed: 3
   m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 2
+  m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
@@ -3269,7 +3269,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4796137044954678681}
   m_LocalRotation: {x: 0.17364816, y: 0, z: 0, w: 0.9848078}
-  m_LocalPosition: {x: 0, y: 5, z: -10}
+  m_LocalPosition: {x: 0, y: 5, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5412111871700900830}
