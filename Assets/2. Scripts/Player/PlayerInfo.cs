@@ -23,7 +23,7 @@ public class PlayerInfo : MonoBehaviour
         speedMove = 5f;
         speedJump = 7f;
 
-        weaponType = WeaponType.Fist;
+        weaponType = WeaponType.Fist_Left;
         attackIndex = -1;
         comboLimitTime = 2f;
 
