@@ -32,13 +32,21 @@ public class PlayerAnimation : MonoBehaviour
         comboCoroutineInfo = StartCoroutine("CheckComboLimit");
 
         player.playerInfo.attackIndex++;
-        if(player.playerInfo.attackIndex > 5) 
-            player.playerInfo.attackIndex = 0;    
+        switch(player.playerInfo.weaponType) {
+            case WeaponType.Fist_Left:
+                if(player.playerInfo.attackIndex > 3) 
+                    player.playerInfo.attackIndex = 0;   
+            break;
+            case WeaponType.TwoHand_Sword_Right:
+                if(player.playerInfo.attackIndex > 5) 
+                    player.playerInfo.attackIndex = 0;   
+            break;
+        }
         animator.SetInteger("AttackIndex", player.playerInfo.attackIndex);  
         switch(player.playerInfo.weaponType) {
-            case WeaponType.Fist: animator.SetTrigger("AttackFist"); break;
-            case WeaponType.Bone: break;
-            case WeaponType.Ornate_Sword: animator.SetTrigger("Attack2Hand"); break;
+            case WeaponType.Fist_Left: animator.SetTrigger("AttackFist"); break;
+            // case WeaponType.Bone: break;
+            case WeaponType.TwoHand_Sword_Right: animator.SetTrigger("Attack2Hand"); break;
         }   
     }
 
@@ -50,25 +58,25 @@ public class PlayerAnimation : MonoBehaviour
     public void PlayHitAnimation() {
         if(player.playerInfo.health > 0) {
             switch(player.playerInfo.weaponType) {
-                case WeaponType.Fist: animator.SetTrigger("HitFist"); break;
-                case WeaponType.Bone: break;
-                case WeaponType.Ornate_Sword: animator.SetTrigger("Hit2Hand"); break;
+                case WeaponType.Fist_Left: animator.SetTrigger("HitFist"); break;
+                // case WeaponType.Bone: break;
+                case WeaponType.TwoHand_Sword_Right: animator.SetTrigger("Hit2Hand"); break;
             }
         }
         else {
             switch(player.playerInfo.weaponType) {
-                case WeaponType.Fist: animator.SetTrigger("DeathFist"); break;
-                case WeaponType.Bone: break;
-                case WeaponType.Ornate_Sword: animator.SetTrigger("Death2Hand"); break;
+                case WeaponType.Fist_Left: animator.SetTrigger("DeathFist"); break;
+                // case WeaponType.Bone: break;
+                case WeaponType.TwoHand_Sword_Right: animator.SetTrigger("Death2Hand"); break;
             }
         }
     }
 
     public void PlayJumpAnimation() {
         switch(player.playerInfo.weaponType) {
-            case WeaponType.Fist: animator.SetTrigger("JumpFist"); break;
-            case WeaponType.Bone: break;
-            case WeaponType.Ornate_Sword: animator.SetTrigger("Jump2Hand"); break;
+            case WeaponType.Fist_Left: animator.SetTrigger("JumpFist"); break;
+            // case WeaponType.Bone: break;
+            case WeaponType.TwoHand_Sword_Right: animator.SetTrigger("Jump2Hand"); break;
         }
     }
     

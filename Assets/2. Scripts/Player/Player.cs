@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [HideInInspector] public Transform neckTransform;
+    [HideInInspector] public PlayerWeaponSpawnPoint[] playerWeaponSpawnPoints;
 
     [HideInInspector] public PlayerInfo playerInfo;
     [HideInInspector] public PlayerInputManager playerInputManager;
@@ -16,6 +17,7 @@ public class Player : MonoBehaviour
 
     private void Awake() {
         neckTransform = FindObjectOfType<PlayerNeck>().transform;
+        playerWeaponSpawnPoints = FindObjectsOfType<PlayerWeaponSpawnPoint>();
 
         playerInfo = GetComponent<PlayerInfo>();
         playerInputManager = GetComponent<PlayerInputManager>();
@@ -30,8 +32,8 @@ public class Player : MonoBehaviour
 
     private void Start() {
         // these codes would be changed after save/load functionality is implemented
-        playerLeftWeaponSlot.SelectWeapon(WeaponType.Fist);
-        playerRightWeaponSlot.SelectWeapon(WeaponType.Fist);
+        playerLeftWeaponSlot.SelectWeapon(WeaponType.Fist_Left);
+        playerRightWeaponSlot.SelectWeapon(WeaponType.Fist_Right);
 
         playerCombat.SetWeapons(playerLeftWeaponSlot.curWeapon.GetComponent<Weapon>(), playerLeftWeaponSlot.curWeapon.GetComponent<Weapon>());
     }
