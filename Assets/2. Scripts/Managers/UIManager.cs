@@ -4,17 +4,18 @@ using UnityEngine;
 using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
-    private GameObject popupWeaponSwitch;
-    // Start is called before the first frame update
-    void Awake()
+    [ReadOnly, SerializeField] private GameObject popupWeaponSwitch;
+    [ReadOnly, SerializeField] private Image hpUI;
+
+    private void Awake()
     {
-        popupWeaponSwitch = GetComponentInChildren<Image>().gameObject;
+        popupWeaponSwitch = FindObjectOfType<WeaponSelectionPopup>().gameObject;
         popupWeaponSwitch.SetActive(false);
         
+        hpUI = FindObjectOfType<PlayerHp>().GetComponent<Image>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Tab))
         {
@@ -25,5 +26,10 @@ public class UIManager : MonoBehaviour
         {
             popupWeaponSwitch.SetActive(false);
         }
+    }
+
+    public void UpdatePlayerHp(int playerHp)
+    {
+        hpUI.fillAmount = (float)playerHp/100f;
     }
 }
