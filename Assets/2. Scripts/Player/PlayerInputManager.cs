@@ -27,14 +27,14 @@ public class PlayerInputManager : MonoBehaviour
             player.playerInfo.attackIndex = 0;
             player.playerAnimation.ChangeMoveToFist();
         }
-        if(Input.GetKeyDown(KeyCode.Alpha2) && player.playerInfo.weaponType != WeaponType.TwoHand_Sword_Right) {
-            // switch to sword
+        if(Input.GetKeyDown(KeyCode.Alpha2) && player.playerInfo.weaponType != WeaponType.Bone_Right) {
+            // switch to bone
             player.playerLeftWeaponSlot.DestroyCurWeapon();
-            player.playerRightWeaponSlot.SelectWeapon(WeaponType.TwoHand_Sword_Right);
+            player.playerRightWeaponSlot.SelectWeapon(WeaponType.Bone_Right);
 
             player.playerCombat.SetWeapons(null, player.playerRightWeaponSlot.curWeapon.GetComponent<Weapon>());
 
-            player.playerInfo.weaponType = WeaponType.TwoHand_Sword_Right;
+            player.playerInfo.weaponType = WeaponType.Bone_Right;
             player.playerInfo.attackIndex = 0;
             player.playerAnimation.ChangeMoveTo2Hand();
         }

@@ -28,8 +28,7 @@ public class PlayerAnimation : MonoBehaviour
         animator.SetInteger("AttackIndex", player.playerInfo.attackIndex);  
         switch(player.playerInfo.weaponType) {
             case WeaponType.Fist_Left: animator.SetTrigger("AttackFist"); break;
-            // case WeaponType.Bone: break;
-            case WeaponType.TwoHand_Sword_Right: animator.SetTrigger("Attack2Hand"); break;
+            case WeaponType.Bone_Right: animator.SetTrigger("Attack2Hand"); break;
         }   
     }
 
@@ -37,15 +36,13 @@ public class PlayerAnimation : MonoBehaviour
         if(player.playerInfo.health > 0) {
             switch(player.playerInfo.weaponType) {
                 case WeaponType.Fist_Left: animator.SetTrigger("HitFist"); break;
-                // case WeaponType.Bone: break;
-                case WeaponType.TwoHand_Sword_Right: animator.SetTrigger("Hit2Hand"); break;
+                case WeaponType.Bone_Right: animator.SetTrigger("Hit2Hand"); break;
             }
         }
         else {
             switch(player.playerInfo.weaponType) {
                 case WeaponType.Fist_Left: animator.SetTrigger("DeathFist"); break;
-                // case WeaponType.Bone: break;
-                case WeaponType.TwoHand_Sword_Right: animator.SetTrigger("Death2Hand"); break;
+                case WeaponType.Bone_Right: animator.SetTrigger("Death2Hand"); break;
             }
         }
     }
@@ -53,8 +50,7 @@ public class PlayerAnimation : MonoBehaviour
     public void PlayJumpAnimation() {
         switch(player.playerInfo.weaponType) {
             case WeaponType.Fist_Left: animator.SetTrigger("JumpFist"); break;
-            // case WeaponType.Bone: break;
-            case WeaponType.TwoHand_Sword_Right: animator.SetTrigger("Jump2Hand"); break;
+            case WeaponType.Bone_Right: animator.SetTrigger("Jump2Hand"); break;
         }
     }
     

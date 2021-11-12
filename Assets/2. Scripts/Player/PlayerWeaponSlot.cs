@@ -18,6 +18,12 @@ public class PlayerWeaponSlot : MonoBehaviour
         curWeapon = Instantiate(WeaponManager.instance.weaponPrefabs[((int)weaponType)], player.playerWeaponSpawnPoints[(int)weaponType].transform.position, player.playerWeaponSpawnPoints[(int)weaponType].transform.rotation);
         curWeapon.transform.parent = gameObject.transform;
         curWeapon.transform.localScale = new Vector3(100f, 100f, 100f);
+
+        Weapon weapon = curWeapon.GetComponent<Weapon>();
+        switch(weaponType) {
+            case WeaponType.Fist_Left: weapon.InitializeWeapon(5, 100); break;
+            case WeaponType.Bone_Right: weapon.InitializeWeapon(10, 7); break;
+        }
     }
 
     public void DestroyCurWeapon() {
