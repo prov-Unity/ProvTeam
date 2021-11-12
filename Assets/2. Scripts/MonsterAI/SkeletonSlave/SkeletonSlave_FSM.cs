@@ -7,14 +7,12 @@ using UnityEngine.AI;
 public class SkeletonSlave_FSM : MonoBehaviour
 {
     [Header("SkeletonData")]
-    public MonsterData monsterData;
     public int currentHp;
     public bool isHitting;
     
     private NavMeshAgent _agent;
     private MonsterState monsterState;
     private Animator _animator;
-    private MonsterInfo monsterInfo;
     private readonly int hashHit = Animator.StringToHash("Hit");
     private readonly int hashDeath = Animator.StringToHash("Death");
     private readonly int hashTrace = Animator.StringToHash("Trace");
@@ -24,15 +22,14 @@ public class SkeletonSlave_FSM : MonoBehaviour
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
-        monsterData = Resources.Load<MonsterData>("Datas/MonsterData");
         _animator = GetComponent<Animator>();
     }
     
     private void Start()
     {
-        monsterInfo = monsterData.monsterInfos[0];
-        currentHp = monsterInfo.hp;
         monsterState = GetComponent<MonsterState>();
+        currentHp = monsterState.monsterInfo.hp;
+        _agent.speed = monsterState.monsterInfo.speed;
         StartCoroutine(MonsterAction());
     }
 

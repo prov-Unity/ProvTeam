@@ -12,4 +12,5 @@ public class MonsterInfo
 {
     public int hp;
     public int speed;
+    public float range;
 }
