@@ -5,8 +5,6 @@ public class PlayerAnimation : MonoBehaviour
 {
     private Player player;
     private Animator animator; 
-    private Coroutine comboCoroutineInfo;
-
     private void Awake() {
         player = GetComponent<Player>();
         animator = GetComponent<Animator>();
@@ -27,32 +25,12 @@ public class PlayerAnimation : MonoBehaviour
     }
 
     public void PlayAttackAnimation() {
-        if(comboCoroutineInfo != null) 
-            StopCoroutine("CheckComboLimit");
-        comboCoroutineInfo = StartCoroutine("CheckComboLimit");
-
-        player.playerInfo.attackIndex++;
-        switch(player.playerInfo.weaponType) {
-            case WeaponType.Fist_Left:
-                if(player.playerInfo.attackIndex > 3) 
-                    player.playerInfo.attackIndex = 0;   
-            break;
-            case WeaponType.TwoHand_Sword_Right:
-                if(player.playerInfo.attackIndex > 5) 
-                    player.playerInfo.attackIndex = 0;   
-            break;
-        }
         animator.SetInteger("AttackIndex", player.playerInfo.attackIndex);  
         switch(player.playerInfo.weaponType) {
             case WeaponType.Fist_Left: animator.SetTrigger("AttackFist"); break;
             // case WeaponType.Bone: break;
             case WeaponType.TwoHand_Sword_Right: animator.SetTrigger("Attack2Hand"); break;
         }   
-    }
-
-    private IEnumerator CheckComboLimit() {
-        yield return new WaitForSeconds(player.playerInfo.comboLimitTime);
-        player.playerInfo.attackIndex = 0;
     }
 
     public void PlayHitAnimation() {
