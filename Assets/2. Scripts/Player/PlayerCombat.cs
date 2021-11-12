@@ -7,6 +7,7 @@ public class PlayerCombat : MonoBehaviour
     [ReadOnly, SerializeField] private Weapon leftWeapon;
     [ReadOnly, SerializeField] private Weapon rightWeapon;
     private Player player;
+    private Coroutine comboCoroutineInfo;
 
     private void Awake() {
         player = GetComponentInChildren<Player>();
@@ -22,9 +23,30 @@ public class PlayerCombat : MonoBehaviour
     }
 
     public void Attack() {
-        player.playerInfo.isAttacking = true;     
-        
+        player.playerInfo.isAttacking = true; 
+
+        if(comboCoroutineInfo != null) 
+            StopCoroutine("CheckComboLimit");
+        comboCoroutineInfo = StartCoroutine("CheckComboLimit");
+
         player.playerAnimation.PlayAttackAnimation();
+
+        player.playerInfo.attackIndex++;
+        switch(player.playerInfo.weaponType) {
+            case WeaponType.Fist_Left:
+                if(player.playerInfo.attackIndex > 3) 
+                    player.playerInfo.attackIndex = 0;   
+            break;
+            case WeaponType.TwoHand_Sword_Right:
+                if(player.playerInfo.attackIndex > 5) 
+                    player.playerInfo.attackIndex = 0;   
+            break;
+        }
+    }
+
+    private IEnumerator CheckComboLimit() {
+        yield return new WaitForSeconds(player.playerInfo.comboLimitTime);
+        player.playerInfo.attackIndex = 0;
     }
 
     public void EnableLeftWeaponCollider() {
