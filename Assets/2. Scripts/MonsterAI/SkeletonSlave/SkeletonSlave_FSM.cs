@@ -39,11 +39,13 @@ public class SkeletonSlave_FSM : MonoBehaviour
     
     public IEnumerator MonsterAction()
     {
+        Debug.Log("현재 상태 : " + monsterState.state);
         while (true)
         {
             switch (monsterState.state)
             {
                 case State.IDLE:
+                    Debug.Log("IDLE");
                     _agent.isStopped = true;
                     _animator.SetBool(hashTrace, false);
                     break;
@@ -56,32 +58,42 @@ public class SkeletonSlave_FSM : MonoBehaviour
                     break;
                 case State.DEATH:
                     StartCoroutine(Die());
+                    yield break;
                     break;
             }
 
-            yield return new WaitForSeconds(0.4f);
+            yield return new WaitForSeconds(0.1f);
         }
     }
 
     public IEnumerator Attack()
     {
+        AgentStop();
+        yield return new WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(0)
+                                             .normalizedTime >= 0.8f);
+        if (monsterState.state != State.DEATH)
+            _animator.SetTrigger(hashAttack);
+        monsterState.state = State.IDLE;
+    }
+
+    public void AgentStop()
+    {
         _agent.isStopped = true;
         _agent.updatePosition = false;
         _agent.updateRotation = false;
         _agent.velocity = Vector3.zero;
-        yield return new WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(0)
-                                             .normalizedTime >=
-                                         1.2f);
-        
-        _animator.SetTrigger(hashAttack);
-        monsterState.state = State.IDLE;
     }
 
-    public void MoveToTarget()
+    public void AgentMove()
     {
         _agent.isStopped = false;
         _agent.updatePosition = true;
         _agent.updateRotation = true;
+    }
+
+    public void MoveToTarget()
+    {
+        AgentMove();
         _agent.SetDestination(monsterState.targetTransform.position);
     }
 
@@ -102,13 +114,16 @@ public class SkeletonSlave_FSM : MonoBehaviour
         if (currentHp <= 0)
         {
             monsterState.state = State.DEATH;
-            _animator.SetTrigger(hashDeath);
+            _animator.SetBool(hashDeath, true);
         }
     }
 
     public IEnumerator Die()
     {
         yield return new WaitForSeconds(3.0f);
-        //Destroy(gameObject);
+        GameObject weaponItem = Resources.Load<GameObject>("Weapons/Bone_01");
+        Instantiate(weaponItem, transform.position, Quaternion.identity);
+        AgentStop();
+        Destroy(gameObject);
     }
 }
