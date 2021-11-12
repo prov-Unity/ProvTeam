@@ -14,7 +14,7 @@ public class PlayerWeaponSlot : MonoBehaviour
     public void SelectWeapon(WeaponType weaponType) {
         if(curWeapon != null)
             Destroy(curWeapon);
-        
+            
         curWeapon = Instantiate(WeaponManager.instance.weaponPrefabs[((int)weaponType)], player.playerWeaponSpawnPoints[(int)weaponType].transform.position, Quaternion.identity);
         curWeapon.transform.parent = gameObject.transform;
         curWeapon.transform.localScale = new Vector3(100f, 100f, 100f);

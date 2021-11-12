@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -193,7 +193,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 131557629}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.5, y: -1.5, z: 0}
+  m_LocalPosition: {x: 4, y: 0, z: 11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 164715333}
@@ -383,7 +383,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 433278225}
-  m_LocalRotation: {x: -0.01708971, y: 0.9581542, z: -0.27967972, w: -0.058547605}
+  m_LocalRotation: {x: -0.0170897, y: 0.9581542, z: -0.27967972, w: -0.05854757}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -734,7 +734,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 691597454}
-  m_LocalRotation: {x: -0.018928368, y: 0.9488533, z: -0.30977014, w: -0.057979263}
+  m_LocalRotation: {x: -0.01892838, y: 0.9488533, z: -0.3097702, w: -0.057979293}
   m_LocalPosition: {x: -24.004738, y: 12.03, z: -195.51233}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -841,7 +841,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 764855387}
-  m_LocalRotation: {x: -0.018928364, y: 0.9488533, z: -0.3097701, w: -0.05797926}
+  m_LocalRotation: {x: -0.018928373, y: 0.9488533, z: -0.30977014, w: -0.057979286}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1000,7 +1000,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1161395414}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10, y: 4, z: 0}
+  m_LocalPosition: {x: 3, y: 0.5, z: -11.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1554359665}
@@ -3807,6 +3807,7 @@ MonoBehaviour:
   playerAnimation: {fileID: 0}
   playerLeftWeaponSlot: {fileID: 0}
   playerRightWeaponSlot: {fileID: 0}
+  playerWeaponSpawnPoints: []
   playerCombat: {fileID: 0}
 --- !u!114 &2079817443
 MonoBehaviour:

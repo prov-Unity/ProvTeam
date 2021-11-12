@@ -5,19 +5,19 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [HideInInspector] public Transform neckTransform;
-    [HideInInspector] public PlayerWeaponSpawnPoint[] playerWeaponSpawnPoints;
 
     [HideInInspector] public PlayerInfo playerInfo;
     [HideInInspector] public PlayerInputManager playerInputManager;
     [HideInInspector] public PlayerMovement playerMovement;
     [HideInInspector] public PlayerAnimation playerAnimation;
+
     [HideInInspector] public PlayerWeaponSlot playerLeftWeaponSlot;
     [HideInInspector] public PlayerWeaponSlot playerRightWeaponSlot;
+    [HideInInspector] public List<PlayerWeaponSpawnPoint> playerWeaponSpawnPoints;
     [HideInInspector] public PlayerCombat playerCombat;
 
     private void Awake() {
         neckTransform = FindObjectOfType<PlayerNeck>().transform;
-        playerWeaponSpawnPoints = FindObjectsOfType<PlayerWeaponSpawnPoint>();
 
         playerInfo = GetComponent<PlayerInfo>();
         playerInputManager = GetComponent<PlayerInputManager>();
@@ -27,6 +27,14 @@ public class Player : MonoBehaviour
         PlayerWeaponSlot[] slots = GetComponentsInChildren<PlayerWeaponSlot>();
         playerLeftWeaponSlot = slots[0];
         playerRightWeaponSlot = slots[1];
+        playerWeaponSpawnPoints = new List<PlayerWeaponSpawnPoint>();
+        foreach(PlayerWeaponSpawnPoint curPoint in playerLeftWeaponSlot.GetComponentsInChildren<PlayerWeaponSpawnPoint>()) {
+            playerWeaponSpawnPoints.Add(curPoint);
+        }
+        foreach(PlayerWeaponSpawnPoint curPoint in playerRightWeaponSlot.GetComponentsInChildren<PlayerWeaponSpawnPoint>()) {
+            playerWeaponSpawnPoints.Add(curPoint);
+        }
+
         playerCombat = GetComponent<PlayerCombat>();
     }
 
@@ -35,6 +43,6 @@ public class Player : MonoBehaviour
         playerLeftWeaponSlot.SelectWeapon(WeaponType.Fist_Left);
         playerRightWeaponSlot.SelectWeapon(WeaponType.Fist_Right);
 
-        playerCombat.SetWeapons(playerLeftWeaponSlot.curWeapon.GetComponent<Weapon>(), playerLeftWeaponSlot.curWeapon.GetComponent<Weapon>());
+        playerCombat.SetWeapons(playerLeftWeaponSlot.curWeapon.GetComponent<Weapon>(), playerRightWeaponSlot.curWeapon.GetComponent<Weapon>());
     }
 }
