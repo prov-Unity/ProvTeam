@@ -33,8 +33,5 @@ public class MonsterState : MonoBehaviour
         weapon.EnableCollider(false);
     }
     
-    public void MonsterDestroy()
-    {
-        Destroy(this.gameObject);
-    }
+
 }

@@ -9,6 +9,7 @@ public class SkeletonSlave_FSM : MonoBehaviour
     [Header("SkeletonData")]
     public MonsterData monsterData;
     public int currentHp;
+    public bool isHitting;
     
     private NavMeshAgent _agent;
     private MonsterState monsterState;
@@ -54,7 +55,7 @@ public class SkeletonSlave_FSM : MonoBehaviour
                     StartCoroutine(Attack());
                     break;
                 case State.DEATH:
-                    _animator.SetTrigger(hashDeath);
+                    StartCoroutine(Die());
                     break;
             }
 
@@ -92,22 +93,22 @@ public class SkeletonSlave_FSM : MonoBehaviour
         }
         
     }
-    
 
     public void OnDamage(float damage)
     {
         _animator.SetTrigger(hashHit);
         currentHp -= (int) damage;
+        Debug.Log(currentHp);
         if (currentHp <= 0)
         {
             monsterState.state = State.DEATH;
-            
             _animator.SetTrigger(hashDeath);
         }
     }
 
     public IEnumerator Die()
     {
-        yield return new WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.2f);
+        yield return new WaitForSeconds(3.0f);
+        //Destroy(gameObject);
     }
 }

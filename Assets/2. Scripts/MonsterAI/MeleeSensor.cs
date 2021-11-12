@@ -90,6 +90,8 @@ public class MeleeSensor : MonoBehaviour
                                                             LayerMask.GetMask("Player"));
                 foreach (var checkObj in checkObjs)
                 {
+                    if (!checkObj.CompareTag("Player"))
+                        continue;
                     Player target = checkObj.GetComponent<Player>();
                     Transform targetTransform = target.neckTransform;
                     monsterState.targetTransform = targetTransform;
@@ -118,7 +120,7 @@ public class MeleeSensor : MonoBehaviour
                                     yield break;
                                 else if (distance <= 2f)
                                     monsterState.state = State.ATTACK;
-                                else if (monsterState.state != State.ATTACK)
+                                else if (monsterState.state != State.ATTACK && monsterState.state != State.HIT)
                                     monsterState.state = State.TRACE;
                                 currentTarget.UpdateFindTime();
                             }
