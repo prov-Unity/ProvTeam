@@ -36,7 +36,7 @@ public class FindPlayerInfo
 public class MeleeSensor : MonoBehaviour
 {
         [Header("Sensor Setting")] 
-        public float range = 4f;
+        public float range;
         public float AttackDistance = 2f;
         public Transform sensorTransform;
         public float sensorCheckCycle = 0.1f;
@@ -56,6 +56,7 @@ public class MeleeSensor : MonoBehaviour
         {
             monsterState = GetComponent<MonsterState>();
             StartCoroutine(CheckSensor());
+            range = monsterState.monsterInfo.range;
         }
     
         private void OnDrawGizmos()
