@@ -21,6 +21,7 @@ public class FindPlayerInfo
     /// </summary>
     public void UpdateFindTime()
     {
+        Debug.Log("시간 업데이트 됨");
         lastFindTime = Time.time;
     }
 
@@ -37,9 +38,8 @@ public class MeleeSensor : MonoBehaviour
         [Header("Sensor Setting")] 
         public float range = 4f;
         public float AttackDistance = 2f;
-        public float fov = 65f;
         public Transform sensorTransform;
-        public float sensorCheckCycle = 0.4f;
+        public float sensorCheckCycle = 0.1f;
     
         /// <summary>
         /// FindTargets에 들어간 애들은 해당 시간이 지나면 잊혀진다.
@@ -47,6 +47,8 @@ public class MeleeSensor : MonoBehaviour
         /// </summary>
         public float timeToForget = 3f;
 
+        private Player target;
+        private Transform targetTransform;
         private FindPlayerInfo currentTarget;
         private MonsterState monsterState;
     
@@ -63,12 +65,6 @@ public class MeleeSensor : MonoBehaviour
             Gizmos.color = new Color(0f, 1f, 1f, 0.16f);
             Gizmos.DrawSphere(transform.position, range); 
             
-            Vector3 leftDir = Quaternion.Euler(0f, -fov * 0.5f, 0f) * sensorTransform.forward;
-            Vector3 rightDir = Quaternion.Euler(0f, fov * 0.5f, 0f) * sensorTransform.forward;
-            
-            Gizmos.color = new Color(0.2f, 1f, 0.37f, 1f);
-            Gizmos.DrawRay(sensorTransform.position, leftDir * range);
-            Gizmos.DrawRay(sensorTransform.position, rightDir * range);
         }
 
         private void CheckFindPlayerExpire()
@@ -76,6 +72,7 @@ public class MeleeSensor : MonoBehaviour
             if (currentTarget != null && currentTarget.CheckExpire(timeToForget))
             {
                 currentTarget = null;
+                Debug.Log("TimeToForget IDLE");
                 monsterState.state = State.IDLE;
             }
         }
@@ -84,6 +81,7 @@ public class MeleeSensor : MonoBehaviour
         {
             while (true)
             {
+                if (monsterState.state == State.DEATH) yield break;
                 yield return new WaitForSeconds(sensorCheckCycle);
                 CheckFindPlayerExpire();
                 Collider[] checkObjs = Physics.OverlapSphere(transform.position, range, 
@@ -92,45 +90,34 @@ public class MeleeSensor : MonoBehaviour
                 {
                     if (!checkObj.CompareTag("Player"))
                         continue;
-                    Player target = checkObj.GetComponent<Player>();
-                    Transform targetTransform = target.neckTransform;
+                    target = checkObj.GetComponent<Player>();
+                    targetTransform = target.neckTransform;
                     monsterState.targetTransform = targetTransform;
-                    Vector3 dir = (targetTransform.position - transform.position).normalized;
-                    float dot = Vector3.Dot(dir, transform.forward);
-                    if (dot >= Mathf.Cos(fov * 0.5f))
-                    {
-                        Debug.Log($"{checkObj}를 시야각 안에서 찾았따");
-                        if (Physics.Linecast(sensorTransform.transform.position, targetTransform.position,
-                            LayerMask.GetMask("Default", "Ground"), QueryTriggerInteraction.Ignore))
-                        {
-                            Debug.Log($"{checkObj}를 찾았는데 시야각에 안에 있는데 안보인다.");
-                        }
-                        else
-                        {
-                            if (currentTarget == null)
-                            {
-                                print("aaa");
-                                monsterState.state = State.TRACE;
-                                currentTarget = new FindPlayerInfo(target);
-                            }
-                            else
-                            {
-                                float distance = Vector3.Distance(transform.position, targetTransform.position);
-                                if (monsterState.state == State.DEATH)
-                                    yield break;
-                                else if (distance <= 2f)
-                                    monsterState.state = State.ATTACK;
-                                else if (monsterState.state != State.ATTACK && monsterState.state != State.HIT)
-                                    monsterState.state = State.TRACE;
-                                currentTarget.UpdateFindTime();
-                            }
-                        }
-                    }
-                    else
-                    {
-                        Debug.Log($"{checkObj}를 찾았는데 시야각에 없다.");
-                    }
+                    MonsterAction();
                 }
             }
         }
+
+        public void MonsterAction()
+        {
+            if (currentTarget == null)
+            {
+                print("Trace");
+                monsterState.state = State.TRACE;
+                currentTarget = new FindPlayerInfo(target);
+            }
+            else
+            {
+                float distance = Vector3.Distance(transform.position, targetTransform.position); 
+                if (distance <= AttackDistance)
+                {
+                    Debug.Log("Attack");
+                    monsterState.state = State.ATTACK;
+                }                
+                else if (monsterState.state == State.IDLE)
+                    monsterState.state = State.TRACE;
+                currentTarget.UpdateFindTime();
+            }
+        }
+        
 }
