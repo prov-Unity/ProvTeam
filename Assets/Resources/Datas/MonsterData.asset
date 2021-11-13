@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: MonsterData
   m_EditorClassIdentifier: 
   monsterInfos:
-  - hp: 100
-    damage: 10
-    speed: 5
+  - hp: 50
+    speed: 3
+    range: 7

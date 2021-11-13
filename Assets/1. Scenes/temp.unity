@@ -2629,7 +2629,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62b2bb252a5a74483bf4c7f8edbb9420, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterData: {fileID: 11400000, guid: abc86fe75330b4e05a01bfc12b84e656, type: 2}
   currentHp: 0
   isHitting: 0
 --- !u!114 &4740233476080888841
@@ -2686,6 +2685,11 @@ MonoBehaviour:
   state: 0
   targetTransform: {fileID: 0}
   weapon: {fileID: 0}
+  monsterData: {fileID: 0}
+  monsterInfo:
+    hp: 0
+    speed: 0
+    range: 0
 --- !u!54 &4740233476080888844
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6349,7 +6353,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5412111872953869189}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 45.7, y: 0, z: 43.4}
+  m_LocalPosition: {x: 45.7, y: 0.33, z: 43.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5412111871700900830}
