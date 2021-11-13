@@ -8,8 +8,8 @@ public enum WeaponType {
 
 public class WeaponManager : MonoBehaviour
 {
-    public static WeaponManager instance;
-    public List<GameObject> weaponPrefabs;
+    [ReadOnly] public static WeaponManager instance;
+    [ReadOnly] public List<GameObject> weaponPrefabs;
     private void Awake() {
         instance = this;
 

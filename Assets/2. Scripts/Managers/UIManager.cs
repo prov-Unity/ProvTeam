@@ -4,32 +4,53 @@ using UnityEngine;
 using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
+    [ReadOnly] public static UIManager instance;
+
+    [ReadOnly, SerializeField] private Image playerHealthBar;
+    [ReadOnly, SerializeField] private Image monsterHealthBar;
+
     [ReadOnly, SerializeField] private GameObject popupWeaponSwitch;
-    [ReadOnly, SerializeField] private Image hpUI;
 
     private void Awake()
-    {
+    {        
+        instance = this;
+
+        playerHealthBar = FindObjectOfType<PlayerHealthBar>().GetComponent<Image>();
+        monsterHealthBar = FindObjectOfType<MonsterHealthBar>().GetComponent<Image>();
+        monsterHealthBar.gameObject.SetActive(false);
+
         popupWeaponSwitch = FindObjectOfType<WeaponSelectionPopup>().gameObject;
         popupWeaponSwitch.SetActive(false);
-        
-        hpUI = FindObjectOfType<PlayerHp>().GetComponent<Image>();
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Tab))
-        {
-            popupWeaponSwitch.SetActive(true);
-        }
-
-        if(Input.GetKeyUp(KeyCode.Tab))
-        {
-            popupWeaponSwitch.SetActive(false);
-        }
+        ;
     }
 
-    public void UpdatePlayerHp(int playerHp)
+    public void UpdatePlayerHealthBar(int inputPlayerHealth)
     {
-        hpUI.fillAmount = (float)playerHp/100f;
+        playerHealthBar.fillAmount = (float)inputPlayerHealth/100f;
     }
+
+    public void EnableMonsterHealthBar() {
+        monsterHealthBar.gameObject.SetActive(true);
+    }
+
+    public void UpdateMonsterHealthBar(int inputMonsterHealth, int monsterMaxHealth) {
+        monsterHealthBar.fillAmount = (float)inputMonsterHealth/monsterMaxHealth;
+    }
+
+    public void DisableMonsterHealthBar() {
+        monsterHealthBar.gameObject.SetActive(false);
+    }
+
+    public void EnableWeaponSwitchPopup() {
+        popupWeaponSwitch.SetActive(true);
+    }
+
+    public void DisableWeaponSwitchPopup() {
+        popupWeaponSwitch.SetActive(false);
+    }
+
 }

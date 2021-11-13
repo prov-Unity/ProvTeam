@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerInfo : MonoBehaviour
 {
+    [ReadOnly] public int maxHealth;
     [ReadOnly] public int health;
     [ReadOnly] public float speedMove;
     [ReadOnly] public float speedJump;
@@ -19,7 +20,8 @@ public class PlayerInfo : MonoBehaviour
     private Player player;
     private void Awake() {
         // these codes would be altered after save/load functionality is implemented
-        health = 100;
+        maxHealth = 100;
+        health = maxHealth;
         speedMove = 3f;
         speedJump = 5f;
 
