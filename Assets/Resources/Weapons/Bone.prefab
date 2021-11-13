@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 88224662}
   - component: {fileID: 88224659}
   m_Layer: 0
-  m_Name: Bone_01
-  m_TagString: Untagged
+  m_Name: Bone
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -94,8 +94,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 0.21777938, y: 0.58, z: 0.12670362}
-  m_Center: {x: -0.0000009536748, y: 0.14, z: 2.360785e-13}
+  m_Size: {x: 0.21777938, y: 0.5, z: 0.12670362}
+  m_Center: {x: 0.01, y: 0.19, z: 2.360785e-13}
 --- !u!114 &88224659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,4 +112,5 @@ MonoBehaviour:
   _col: {fileID: 88224662}
   owner: {fileID: 0}
   attackPower: 0
+  durability: 0
   center: {x: 0, y: 0, z: 0}

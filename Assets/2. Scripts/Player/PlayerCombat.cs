@@ -37,7 +37,7 @@ public class PlayerCombat : MonoBehaviour
                 if(player.playerInfo.attackIndex > 3) 
                     player.playerInfo.attackIndex = 0;   
             break;
-            case WeaponType.TwoHand_Sword_Right:
+            case WeaponType.Bone_Right:
                 if(player.playerInfo.attackIndex > 5) 
                     player.playerInfo.attackIndex = 0;   
             break;
@@ -67,7 +67,7 @@ public class PlayerCombat : MonoBehaviour
         player.playerInfo.isAttacking = false;
     }
 
-    public void GetDamaged(float attackPower) {
+    public void GetDamaged(int attackPower) {
         player.playerInfo.health -= attackPower;
 
         player.playerAnimation.PlayHitAnimation();
