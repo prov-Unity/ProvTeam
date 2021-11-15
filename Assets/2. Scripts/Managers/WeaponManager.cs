@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,7 +15,6 @@ public class WeaponManager : MonoBehaviour
         weaponPrefabs = new List<GameObject>();
         weaponPrefabs.Add(Resources.Load<GameObject>("Weapons/Fist"));
         weaponPrefabs.Add(weaponPrefabs[(int)WeaponType.Fist_Left]);
-        //weaponPrefabs.Add(Resources.Load<GameObject>("Weapons/Ornate_Sword"));
         weaponPrefabs.Add(Resources.Load<GameObject>("Weapons/Bone"));
     }
 }

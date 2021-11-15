@@ -22,11 +22,6 @@ public class UIManager : MonoBehaviour
         popupWeaponSelection = FindObjectOfType<WeaponSelectionPopup>();
     }
 
-    private void Update()
-    {
-        ;
-    }
-
     public void UpdatePlayerHealthBar(int inputPlayerHealth)
     {
         playerHealthBar.fillAmount = (float)inputPlayerHealth/100f;

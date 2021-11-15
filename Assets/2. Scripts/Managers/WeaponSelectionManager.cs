@@ -31,6 +31,18 @@ public class WeaponSelectionManager : MonoBehaviour
         UIManager.instance.DisableWeaponSelectionPopup();
     }
 
+    private void Update() {
+        if(Input.GetKeyDown(KeyCode.Tab)) {
+            UIManager.instance.EnableWeaponSelectionPopup();
+            GameManager.instance.SetTimeScale(0.1f);
+        }
+        if(Input.GetKeyUp(KeyCode.Tab)) {
+            UIManager.instance.DisableWeaponSelectionPopup();
+            SelectCurrentWeapon();
+            GameManager.instance.SetTimeScale(1);
+        }
+    }
+
     public void SetWeaponSelectionBox(int boxIndex, WeaponType weaponType) {
         popupWeaponSelection.weaponSelectionBoxes[boxIndex].textWeaponName.text = Regex.Split(weaponType.ToString(), "_")[0];
         popupWeaponSelection.weaponSelectionBoxes[boxIndex].imageWeaponIcon.sprite = weaponIcons[(int)weaponType];
@@ -44,14 +56,42 @@ public class WeaponSelectionManager : MonoBehaviour
         popupWeaponSelection.weaponSelectionBoxes[boxIndex].gameObject.SetActive(false);
     }
 
-    private void Update() {
-        if(Input.GetKeyDown(KeyCode.Tab)) {
-            UIManager.instance.EnableWeaponSelectionPopup();
-            GameManager.instance.SetTimeScale(0.1f);
+    public void SelectCurrentWeapon() {
+        switch(popupWeaponSelection.weaponSelectionBoxes[2].textWeaponName.text) {
+            case "Fist":
+            if(GameManager.instance.player.playerInfo.curWeapon != WeaponType.Fist_Left) {
+                // switch to fist
+                GameManager.instance.player.playerLeftWeaponSlot.SelectWeapon(WeaponType.Fist_Left);
+                GameManager.instance.player.playerRightWeaponSlot.SelectWeapon(WeaponType.Fist_Right);
+
+                GameManager.instance.player.playerCombat.SetWeapons(GameManager.instance.player.playerLeftWeaponSlot.curWeapon.GetComponent<Weapon>(), GameManager.instance.player.playerRightWeaponSlot.curWeapon.GetComponent<Weapon>());
+
+                GameManager.instance.player.playerInfo.curWeapon = WeaponType.Fist_Left;
+                GameManager.instance.player.playerInfo.attackIndex = 0;
+                GameManager.instance.player.playerAnimation.ChangeMoveToFist();
+            }
+            break;
+            case "Bone": 
+            if(GameManager.instance.player.playerInfo.curWeapon != WeaponType.Bone_Right) {
+                // switch to bone
+                GameManager.instance.player.playerLeftWeaponSlot.DestroyCurWeapon();
+                GameManager.instance.player.playerRightWeaponSlot.SelectWeapon(WeaponType.Bone_Right);
+
+                GameManager.instance.player.playerCombat.SetWeapons(null, GameManager.instance.player.playerRightWeaponSlot.curWeapon.GetComponent<Weapon>());
+
+                GameManager.instance.player.playerInfo.curWeapon = WeaponType.Bone_Right;
+                GameManager.instance.player.playerInfo.attackIndex = 0;
+                GameManager.instance.player.playerAnimation.ChangeMoveTo2Hand();
+            }
+            break;
         }
-        if(Input.GetKeyUp(KeyCode.Tab)) {
-            UIManager.instance.DisableWeaponSelectionPopup();
-            GameManager.instance.SetTimeScale(1);
-        }
+    }
+
+    public void MoveWeaponSelectionBoxesLeftOnce() {
+        Debug.Log("move left");
+    }
+
+    public void MoveWeaponSelectionBoxesRightOnce() {
+        Debug.Log("move right");
     }
 }
