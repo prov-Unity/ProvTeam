@@ -9,7 +9,8 @@ public class PlayerInfo : MonoBehaviour
     [ReadOnly] public float speedMove;
     [ReadOnly] public float speedJump;
 
-    [ReadOnly] public WeaponType weaponType;
+    [ReadOnly] public WeaponType curWeapon;
+    [ReadOnly] public List<WeaponType> availableWeapons;
     [ReadOnly] public int attackIndex;
     [ReadOnly] public float comboLimitTime;
 
@@ -25,7 +26,10 @@ public class PlayerInfo : MonoBehaviour
         speedMove = 3f;
         speedJump = 5f;
 
-        weaponType = WeaponType.Fist_Left;
+        curWeapon = WeaponType.Fist_Left;
+        availableWeapons = new List<WeaponType>();
+        availableWeapons.Add(WeaponType.Fist_Left);
+        availableWeapons.Add(WeaponType.Bone_Right);
         attackIndex = 0;
         comboLimitTime = 2f;
 
