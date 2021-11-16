@@ -2,25 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackRange : Node
+public class Range : Node
 {
     private MonsterAI monsterAI;
+    private float range;
 
-    public AttackRange(MonsterAI monsterAI)
+    public Range(MonsterAI monsterAI, float range)
     {
         this.monsterAI = monsterAI;
+        this.range = range;
     }
 
     public override NodeState Evaluate()
     {
         float distance = Vector3.Distance(monsterAI.targetPosition, monsterAI.transform.position);
-        if (monsterAI.attackDistance > distance)
+        if (range > distance)
         {
             return NodeState.FAILURE;
         }
-        else
-        {
-            return NodeState.SUCCESS;
-        }
+        return NodeState.SUCCESS;
     }
 }

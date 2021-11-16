@@ -6,11 +6,11 @@ using UnityEngine.AI;
 public class Attack : Node
 {
     private Animator animator;
-    private Transform target;
+    private Vector3 target;
     private NavMeshAgent agent;
     private static readonly int Attack1 = Animator.StringToHash("Attack");
 
-    public Attack(Animator animator, Transform target,  NavMeshAgent agent)
+    public Attack(Animator animator, Vector3 target,  NavMeshAgent agent)
     {
         this.animator = animator;
         this.target = target;
@@ -20,7 +20,7 @@ public class Attack : Node
     public override NodeState Evaluate()
     {
         agent.isStopped = true;
-        agent.transform.rotation = Quaternion.LookRotation(target.position, Vector3.forward);
+        agent.transform.rotation = Quaternion.LookRotation(target, Vector3.forward);
         animator.SetTrigger(Attack1);
         return NodeState.SUCCESS;
     }
