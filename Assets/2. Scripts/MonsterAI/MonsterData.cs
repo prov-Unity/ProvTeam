@@ -13,7 +13,6 @@ public class MonsterInfo
     public string name;
     public int hp;
     public int speed;
-    public float detectionDistance;
     public float traceDistance;
     public float attackDistance;
 }
