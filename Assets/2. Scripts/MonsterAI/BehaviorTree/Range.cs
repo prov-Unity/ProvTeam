@@ -18,8 +18,8 @@ public class Range : Node
         float distance = Vector3.Distance(monsterAI.targetPosition, monsterAI.transform.position);
         if (range > distance)
         {
-            return NodeState.FAILURE;
+            return NodeState.SUCCESS;
         }
-        return NodeState.SUCCESS;
+        return NodeState.FAILURE;
     }
 }

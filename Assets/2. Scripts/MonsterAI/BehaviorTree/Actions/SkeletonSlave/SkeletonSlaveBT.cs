@@ -2,27 +2,31 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class SkeletonSlaveBT : MonoBehaviour
+public class SkeletonSlaveBT : MonsterAI
 {
-    private MonsterAI monsterAI;
-    private NavMeshAgent _agent;
-    private Animator _animator;
     private Node topNode;
 
-    private void Awake()
+    protected override void Awake()
     {
-        _agent = GetComponent<NavMeshAgent>();
-        _animator = GetComponent<Animator>();
+        base.Awake();
+        monsterTypeIdx = (int)MonsterType.SkeletonSlave;
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+        ConstructBehaviorTree();
     }
 
     private void ConstructBehaviorTree()
     {
-        Attack attackNode = new Attack(_animator, monsterAI.targetPosition, _agent);
-        Range attackRangeNode = new Range(monsterAI, monsterAI.attackDistance);
-        Range traceRangeNode = new Range(monsterAI, monsterAI.traceDistance);
-        Trace traceNode = new Trace(_agent, _animator, monsterAI.targetPosition);
+        print(Agent);
+        print(Anim);
+        Attack attackNode = new Attack(Anim, targetPosition, Agent);
+        Range attackRangeNode = new Range(this, attackDistance);
+        Range traceRangeNode = new Range(this, traceDistance);
+        Trace traceNode = new Trace(Agent, Anim, targetPosition);
         Sequence attackSequence = new Sequence(new List<Node>{attackRangeNode, attackNode});
         Sequence traceSequence = new Sequence(new List<Node> {traceRangeNode, traceNode});
 
@@ -34,7 +38,13 @@ public class SkeletonSlaveBT : MonoBehaviour
         topNode.Evaluate();
         if (topNode.NodeState == NodeState.FAILURE)
         {
-            _agent.isStopped = true;
+            Agent.isStopped = true;
         }
+    }
+
+    public override void Action()
+    {
+        base.Action();
+        
     }
 }

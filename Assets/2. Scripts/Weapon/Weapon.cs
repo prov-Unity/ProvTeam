@@ -15,17 +15,15 @@ public class Weapon : MonoBehaviour
     public AttackCheckMode checkMode = AttackCheckMode.Enable;
     // 콜라이더 활성 비활성화로 공격판정할 떄 쓰임
     [ReadOnly] public Collider _col;
-    [ReadOnly] public Player owner;
+    public WeaponType weaponType;
     [ReadOnly] public int attackPower;
     [ReadOnly] public int durability;
+    [ReadOnly] public bool isSelected;
+
+    [ReadOnly] public string owner;
 
     // OverlapBox로 공격판정할 때 쓰임
     public Vector3 center;
-
-    public void InitializeWeapon(int inputAttackPower, int inputDurability) {
-        attackPower = inputAttackPower;
-        durability = inputDurability;
-    }
 
     private void OnDrawGizmos()
     {
@@ -55,7 +53,6 @@ public class Weapon : MonoBehaviour
     
      private void DrawSolidCapsule(Vector3 center, float height, float radius)
     {
-        
         var upper = center + Vector3.up * (height - 1) * 0.5f;
         var lower = center - Vector3.up * (height - 1) * 0.5f;
         var offsetX = new Vector3(radius, 0f, 0f);
@@ -103,14 +100,26 @@ public class Weapon : MonoBehaviour
         Handles.DrawWireDisc(lower, Vector3.up, radius);
     }
 
-    private void Awake()
+    private void Start()
     {
+        SetOwner();
         _col = GetComponent<Collider>();
+
+        // isSelected is true when player actually selects this weapon
+        isSelected = false;
     }
 
-    public void CheckAttackTarget()
+    public void SetOwner()
     {
-
+        string tagName = transform.parent.tag;
+        if (tagName.Equals("Player")) {
+            owner = "Player";
+            _col.enabled = false;
+        }
+        else if (tagName.Equals("Monster")) {
+            owner = "Monster";
+            _col.enabled = false;
+        }
     }
 
     /// <summary>

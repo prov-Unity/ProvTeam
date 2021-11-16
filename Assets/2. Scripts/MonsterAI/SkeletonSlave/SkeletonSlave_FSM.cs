@@ -118,7 +118,7 @@ public class SkeletonSlave_FSM : MonoBehaviour
     public IEnumerator Die()
     {
         yield return new WaitForSeconds(3.0f);
-        GameObject weaponItem = Resources.Load<GameObject>("Weapons/Bone_01");
+        GameObject weaponItem = Resources.Load<GameObject>("Weapons/Bone");
         Instantiate(weaponItem, transform.position, Quaternion.identity);
         AgentStop();
         Destroy(gameObject);

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerWeaponSlot : MonoBehaviour
@@ -20,10 +18,13 @@ public class PlayerWeaponSlot : MonoBehaviour
         curWeapon.transform.localScale = new Vector3(100f, 100f, 100f);
 
         Weapon weapon = curWeapon.GetComponent<Weapon>();
-        switch(weaponType) {
-            case WeaponType.Fist_Left: weapon.InitializeWeapon(5, 100); break;
-            case WeaponType.Bone_Right: weapon.InitializeWeapon(10, 7); break;
-        }
+        
+        weapon.weaponType = weaponType;
+        weapon.attackPower = WeaponManager.instance.weaponAttackPowers[(int)weaponType];
+        if(weaponType == WeaponType.Fist_Right) 
+            weapon.durability = player.playerInfo.availableWeapons[(int)WeaponType.Fist_Left].durability;
+        else
+            weapon.durability = player.playerInfo.availableWeapons.Find(x => x.weaponType == weaponType).durability;
     }
 
     public void DestroyCurWeapon() {

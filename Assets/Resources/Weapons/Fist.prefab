@@ -50,7 +50,7 @@ SphereCollider:
   m_GameObject: {fileID: 896830795115909888}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.13
   m_Center: {x: 0, y: 0, z: 0}
@@ -68,6 +68,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   checkMode: 0
   _col: {fileID: 896830795115909902}
-  owner: {fileID: 0}
+  weaponType: 0
   attackPower: 0
+  durability: 0
+  isSelected: 0
+  owner: 
   center: {x: 0, y: 0, z: 0}
