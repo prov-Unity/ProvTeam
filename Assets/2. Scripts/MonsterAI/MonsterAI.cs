@@ -12,7 +12,7 @@ public class FindPlayerTime
 
     public FindPlayerTime()
     {
-        lastFindTime = Time.time;
+        lastFindTime = DateTime.Now.Ticks;
     }
     
     /// <summary>
@@ -21,7 +21,7 @@ public class FindPlayerTime
     public void UpdateFindTime()
     {
         Debug.Log("시간 업데이트 됨");
-        lastFindTime = Time.time;
+        lastFindTime = DateTime.Now.Ticks;
     }
 
     /// <summary>
@@ -29,20 +29,25 @@ public class FindPlayerTime
     /// </summary>
     public bool CheckExpire(float forgetTime)
     {
-        return (Time.time - lastFindTime) >= forgetTime;
+        return (DateTime.Now.Ticks - lastFindTime) >= forgetTime;
     }
+}
+
+public enum MonsterType
+{
+    SkeletonSlave,
 }
 
 public class MonsterAI : MonoBehaviour
 {
     [ReadOnly] public string name;
     [ReadOnly] public int hp;
-    [ReadOnly] public float detectionDistance;
     [ReadOnly] public float attackDistance;
     [ReadOnly] public float traceDistance;
     [ReadOnly] public Vector3 targetPosition;
-    public FindPlayerTime findPlayerTime;
-
+    public FindPlayerTime findPlayerTime = new FindPlayerTime();
+    public int monsterTypeIdx;
+    
     private NavMeshAgent _agent;
     private Animator _animator;
     private MonsterData monsterData;
@@ -63,12 +68,22 @@ public class MonsterAI : MonoBehaviour
         set => _animator = value;
     }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         weapon = GetComponentInChildren<Weapon>();
         _animator = GetComponent<Animator>();
+        _agent = GetComponent<NavMeshAgent>();
         monsterData = Resources.Load<MonsterData>("Datas/MonsterData");
-        monsterInfo = monsterData.monsterInfos[0];
+    }
+
+    protected virtual void Start()
+    {
+        monsterInfo = monsterData.monsterInfos[monsterTypeIdx];
+    }
+
+    public virtual void Action()
+    {
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -96,8 +111,20 @@ public class MonsterAI : MonoBehaviour
     {
         _animator.SetTrigger(Dead);
         yield return new WaitForSeconds(3.0f);
-        GameObject weaponItem = Resources.Load<GameObject>("Weapons/Bone");
+        string weaponName = weapon.weaponType.ToString().Split(new char['_'])[0];
+        GameObject weaponItem = Resources.Load<GameObject>("Weapons/"+weaponName);
         Instantiate(weaponItem, transform.position, Quaternion.identity);
         Destroy(gameObject);    
     }
+    
+    public void TurnOnWeaponCollider2()
+    {
+        weapon.EnableCollider(true);
+    }
+
+    public void TurnOffWeaponCollider2()
+    {
+        weapon.EnableCollider(false);
+    }
+
 }

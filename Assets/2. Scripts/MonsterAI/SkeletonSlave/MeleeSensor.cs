@@ -56,7 +56,7 @@ public class MeleeSensor : MonoBehaviour
         {
             monsterState = GetComponent<MonsterState>();
             StartCoroutine(CheckSensor());
-            range = monsterState.monsterInfo.detectionDistance;
+            range = monsterState.monsterInfo.traceDistance;
         }
     
         private void OnDrawGizmos()
