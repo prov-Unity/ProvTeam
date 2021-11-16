@@ -9,9 +9,9 @@ public class PlayerInteractionManager : MonoBehaviour
 
     private Player player;
     private string targetName; 
-    private RaycastHit hitInfo;
+    private Collider [] colliders;
 
-    private float distanceToInteract = 3f;
+    private float distanceToInteract = 0.6f;
 
     private void Awake() {
         targetWeapon = null;
@@ -21,40 +21,46 @@ public class PlayerInteractionManager : MonoBehaviour
     }
 
     private void Update() {
-        if(Physics.Raycast(player.neckTransform.position, (player.neckTransform.position - Camera.main.transform.position), out hitInfo, distanceToInteract, LayerMask.GetMask("Interactable"))) {
-            if(hitInfo.collider.GetComponent<Weapon>().isSelected) {
+        colliders = Physics.OverlapBox(player.transform.position + new Vector3((player.neckTransform.position-Camera.main.transform.position).normalized.x, 0.5f, (player.neckTransform.position-Camera.main.transform.position).normalized.z), new Vector3(distanceToInteract, player.transform.lossyScale.y, distanceToInteract), Quaternion.identity, LayerMask.GetMask("Interactable"));
+        if(colliders.Length > 0) {
+            targetWeapon = colliders[0].GetComponent<Weapon>();
+
+            if(targetWeapon != null && !targetWeapon.isSelected) {
                 UIManager.instance.EnableInteractionPopup();
                 
-                targetName = hitInfo.collider.GetComponent<Weapon>().weaponType.ToString().Split(new char[] {'_'})[0];
-                targetWeapon = hitInfo.collider.GetComponent<Weapon>();
-
+                targetName = targetWeapon.weaponType.ToString().Split(new char[] {'_'})[0];
                 // check whether this weapon is the new weapon for the player
-                // if(player.playerInfo.availableWeapons.Find(x => x.weaponType == hitInfo.collider.GetComponent<Weapon>().weaponType)) {
-                //     ;
-                // }
-
-                // // this branch is for the new weapon
-                // UIManager.instance.SetInteractionPopupText($"Press E to pickup {targetName}");
-                // isNewWeapon = true;
-
-                // // this branch is for the existing weapon
-                // UIManager.instance.SetInteractionPopupText($"Press E to replace {targetName}");
-                // isNewWeapon = false;
+                if(player.playerInfo.availableWeapons.Find(x => x.weaponType == targetWeapon.weaponType) == null) {
+                    // this branch is for the new weapon
+                    UIManager.instance.SetInteractionPopupText($"Press E to pickup {targetName}");
+                    isNewWeapon = true;
+                    // some code to pick up new weapon
+                }
+                else {
+                    // this branch is for the existing weapon
+                    UIManager.instance.SetInteractionPopupText($"Press E to replace {targetName}");
+                    isNewWeapon = false;
+                    // some code to replace existing weapon
+                }
             }
             else {
+                if(!UIManager.instance.isInteractionPopupDisabled) {
+                    UIManager.instance.DisableInteractionPopup();
+                    targetWeapon = null;
+                }
+            }
+        }
+        else {
+            if(!UIManager.instance.isInteractionPopupDisabled) {
                 UIManager.instance.DisableInteractionPopup();
                 targetWeapon = null;
             }
         }
-        else {
-            UIManager.instance.DisableInteractionPopup();
-            targetWeapon = null;
-        }
     }
 
-    // private void OnDrawGizmos() {
-    //     Gizmos.color = Color.blue;
-
-    //     Gizmos.DrawRay(player.neckTransform.position, (player.neckTransform.position - Camera.main.transform.position) * distanceToInteract);
-    // }
+    private void OnDrawGizmos() {
+        Gizmos.color = Color.blue;
+        
+        Gizmos.DrawWireCube(player.transform.position + new Vector3((player.neckTransform.position-Camera.main.transform.position).normalized.x, 0.5f, (player.neckTransform.position-Camera.main.transform.position).normalized.z), new Vector3(distanceToInteract, player.transform.lossyScale.y, distanceToInteract));
+    }    
 }

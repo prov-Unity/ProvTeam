@@ -8,7 +8,7 @@ public class InteractionPopup : MonoBehaviour
     [ReadOnly] private TextMeshProUGUI interactionText;
 
     private void Awake() {
-        interactionText = GetComponent<TextMeshProUGUI>();
+        interactionText = GetComponentInChildren<TextMeshProUGUI>();
     }
 
     private void Update() {

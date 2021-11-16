@@ -19,6 +19,7 @@ public class PlayerWeaponSlot : MonoBehaviour
 
         Weapon weapon = curWeapon.GetComponent<Weapon>();
         
+        weapon.weaponType = weaponType;
         weapon.attackPower = WeaponManager.instance.weaponAttackPowers[(int)weaponType];
         if(weaponType == WeaponType.Fist_Right) 
             weapon.durability = player.playerInfo.availableWeapons[(int)WeaponType.Fist_Left].durability;

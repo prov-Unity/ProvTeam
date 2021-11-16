@@ -12,6 +12,8 @@ public class UIManager : MonoBehaviour
     [ReadOnly] public WeaponSelectionPopup popupWeaponSelection;
     [ReadOnly] private InteractionPopup popupInteraction;
 
+    [ReadOnly] public bool isInteractionPopupDisabled;
+
     private void Awake()
     {        
         instance = this;
@@ -23,6 +25,8 @@ public class UIManager : MonoBehaviour
         popupWeaponSelection = FindObjectOfType<WeaponSelectionPopup>();
         popupInteraction = FindObjectOfType<InteractionPopup>();
         popupInteraction.gameObject.SetActive(false);
+
+        isInteractionPopupDisabled = true;
     }
 
     public void UpdatePlayerHealthBar(int inputPlayerHealth)
@@ -54,6 +58,7 @@ public class UIManager : MonoBehaviour
 
     public void EnableInteractionPopup() {
         popupInteraction.gameObject.SetActive(true);
+        isInteractionPopupDisabled = false;
     }
 
     public void SetInteractionPopupText(string inputText) {
@@ -62,6 +67,7 @@ public class UIManager : MonoBehaviour
 
     public void DisableInteractionPopup() {
         popupInteraction.gameObject.SetActive(false);
+        isInteractionPopupDisabled = true;
     }
 
 }

@@ -15,7 +15,7 @@ public class Weapon : MonoBehaviour
     public AttackCheckMode checkMode = AttackCheckMode.Enable;
     // 콜라이더 활성 비활성화로 공격판정할 떄 쓰임
     [ReadOnly] public Collider _col;
-    [ReadOnly] public WeaponType weaponType;
+    public WeaponType weaponType;
     [ReadOnly] public int attackPower;
     [ReadOnly] public int durability;
     [ReadOnly] public bool isSelected;
@@ -53,7 +53,6 @@ public class Weapon : MonoBehaviour
     
      private void DrawSolidCapsule(Vector3 center, float height, float radius)
     {
-        
         var upper = center + Vector3.up * (height - 1) * 0.5f;
         var lower = center - Vector3.up * (height - 1) * 0.5f;
         var offsetX = new Vector3(radius, 0f, 0f);
@@ -113,10 +112,14 @@ public class Weapon : MonoBehaviour
     public void SetOwner()
     {
         string tagName = transform.parent.tag;
-        if (tagName.Equals("Player"))
+        if (tagName.Equals("Player")) {
             owner = "Player";
-        else if (tagName.Equals("Monster"))
+            _col.enabled = false;
+        }
+        else if (tagName.Equals("Monster")) {
             owner = "Monster";
+            _col.enabled = false;
+        }
     }
 
     /// <summary>
