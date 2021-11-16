@@ -22,11 +22,6 @@ public class Weapon : MonoBehaviour
     // OverlapBox로 공격판정할 때 쓰임
     public Vector3 center;
 
-    public void InitializeWeapon(int inputAttackPower, int inputDurability) {
-        attackPower = inputAttackPower;
-        durability = inputDurability;
-    }
-
     private void OnDrawGizmos()
     {
         if (_col == null)

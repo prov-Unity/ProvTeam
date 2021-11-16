@@ -10,7 +10,7 @@ public class PlayerInfo : MonoBehaviour
     [ReadOnly] public float speedJump;
 
     [ReadOnly] public WeaponType curWeapon;
-    [ReadOnly] public List<WeaponType> availableWeapons;
+    [ReadOnly] public List<AvailableWeapon> availableWeapons;
     [ReadOnly] public int attackIndex;
     [ReadOnly] public float comboLimitTime;
 
@@ -27,9 +27,9 @@ public class PlayerInfo : MonoBehaviour
         speedJump = 5f;
 
         curWeapon = WeaponType.Fist_Left;
-        availableWeapons = new List<WeaponType>();
-        availableWeapons.Add(WeaponType.Fist_Left);
-        availableWeapons.Add(WeaponType.Bone_Right);
+        availableWeapons = new List<AvailableWeapon>();
+        availableWeapons.Add(new AvailableWeapon(WeaponType.Fist_Left, WeaponManager.instance.weaponInitialDurabilities[(int)WeaponType.Fist_Left]));
+        availableWeapons.Add(new AvailableWeapon(WeaponType.Bone_Right, WeaponManager.instance.weaponInitialDurabilities[(int)WeaponType.Bone_Right]));
         attackIndex = 0;
         comboLimitTime = 2f;
 
