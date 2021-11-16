@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerInteractionManager : MonoBehaviour
@@ -34,13 +32,11 @@ public class PlayerInteractionManager : MonoBehaviour
                     // this branch is for the new weapon
                     UIManager.instance.SetInteractionPopupText($"Press E to pickup {targetName}");
                     isNewWeapon = true;
-                    // some code to pick up new weapon
                 }
                 else {
                     // this branch is for the existing weapon
                     UIManager.instance.SetInteractionPopupText($"Press E to replace {targetName}");
                     isNewWeapon = false;
-                    // some code to replace existing weapon
                 }
             }
             else {
@@ -58,9 +54,21 @@ public class PlayerInteractionManager : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos() {
-        Gizmos.color = Color.blue;
+    public void PickupNewWeapon() {
+        Debug.Log("new weapon");
+    }
+
+    public void ReplaceCurrentWeapon() {
+        Debug.Log("existing weapon");
+    }
+
+    public void DropCurrentWeapon() {
+        Debug.Log("drop weapon");
+    }
+
+    // private void OnDrawGizmos() {
+    //     Gizmos.color = Color.blue;
         
-        Gizmos.DrawWireCube(player.transform.position + new Vector3((player.neckTransform.position-Camera.main.transform.position).normalized.x, 0.5f, (player.neckTransform.position-Camera.main.transform.position).normalized.z), new Vector3(distanceToInteract, player.transform.lossyScale.y, distanceToInteract));
-    }    
+    //     Gizmos.DrawWireCube(player.transform.position + new Vector3((player.neckTransform.position-Camera.main.transform.position).normalized.x, 0.5f, (player.neckTransform.position-Camera.main.transform.position).normalized.z), new Vector3(distanceToInteract, player.transform.lossyScale.y, distanceToInteract));
+    // }    
 }
