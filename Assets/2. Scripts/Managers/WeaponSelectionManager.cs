@@ -119,7 +119,6 @@ public class WeaponSelectionManager : MonoBehaviour
 
     private void UpateWeaponSelectionBox() {
         // update currently selected weapon
-        Debug.Log(GameManager.instance.player.playerInfo.availableWeapons[curSelectedWeaponIndex].weaponType);
         SetWeaponSelectionBox(2, GameManager.instance.player.playerInfo.availableWeapons[curSelectedWeaponIndex].weaponType);
 
         // update two left weapon selection boxes
