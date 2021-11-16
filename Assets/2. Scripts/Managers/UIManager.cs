@@ -56,6 +56,10 @@ public class UIManager : MonoBehaviour
         popupInteraction.gameObject.SetActive(true);
     }
 
+    public void SetInteractionPopupText(string inputText) {
+        popupInteraction.SetInteractionText(inputText);
+    }
+
     public void DisableInteractionPopup() {
         popupInteraction.gameObject.SetActive(false);
     }

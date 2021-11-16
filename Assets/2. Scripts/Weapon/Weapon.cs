@@ -101,7 +101,7 @@ public class Weapon : MonoBehaviour
         Handles.DrawWireDisc(lower, Vector3.up, radius);
     }
 
-    private void Awake()
+    private void Start()
     {
         SetOwner();
         _col = GetComponent<Collider>();
