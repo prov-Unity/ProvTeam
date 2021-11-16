@@ -7,10 +7,10 @@ public class Trace : Node
 {
     private NavMeshAgent agent;
     private Animator animator;
-    private Transform target;
+    private Vector3 target;
     private static readonly int Trace1 = Animator.StringToHash("Trace");
 
-    public Trace(NavMeshAgent agent, Animator animator, Transform target)
+    public Trace(NavMeshAgent agent, Animator animator, Vector3 target)
     {
         this.agent = agent;
         this.animator = animator;
@@ -19,7 +19,7 @@ public class Trace : Node
 
     public override NodeState Evaluate()
     {
-        agent.SetDestination(target.position);
+        agent.SetDestination(target);
         animator.SetBool(Trace1, true);
         return NodeState.SUCCESS;
     }
