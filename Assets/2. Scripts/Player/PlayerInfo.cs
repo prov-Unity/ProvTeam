@@ -35,7 +35,9 @@ public class PlayerInfo : MonoBehaviour
         isAttacking = false;
 
         player = GetComponentInChildren<Player>();
+    }
 
+    private void Start() {
         // these codes would be altered after save/load functionality is implemented
         availableWeapons = new List<AvailableWeapon>();
         availableWeapons.Add(new AvailableWeapon(WeaponType.Fist_Left, WeaponManager.instance.weaponInitialDurabilities[(int)WeaponType.Fist_Left]));
