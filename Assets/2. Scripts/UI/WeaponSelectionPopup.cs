@@ -10,9 +10,9 @@ public class WeaponSelectionPopup : MonoBehaviour
 
     private void Update() {
         if(Input.GetAxisRaw("Mouse ScrollWheel") > 0)
-            WeaponSelectionManager.instance.MoveWeaponSelectionBoxesLeftOnce();
+            WeaponSelectionManager.instance.MoveWeaponSelectionBoxesRightOnce();
 
         if(Input.GetAxisRaw("Mouse ScrollWheel") < 0)
-            WeaponSelectionManager.instance.MoveWeaponSelectionBoxesRightOnce();
+            WeaponSelectionManager.instance.MoveWeaponSelectionBoxesLeftOnce();
     }
 }
