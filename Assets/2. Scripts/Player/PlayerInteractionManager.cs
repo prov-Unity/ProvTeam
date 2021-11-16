@@ -56,6 +56,8 @@ public class PlayerInteractionManager : MonoBehaviour
 
     public void PickupNewWeapon() {
         Debug.Log("new weapon");
+        player.playerInfo.availableWeapons.Add(new AvailableWeapon(targetWeapon.weaponType, WeaponManager.instance.weaponInitialDurabilities[(int)targetWeapon.weaponType]));
+        Destroy(targetWeapon.gameObject);
     }
 
     public void ReplaceCurrentWeapon() {

@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     public void Move(float inputX, float inputY) {
         curRigidbody.position += transform.forward * inputY * player.playerInfo.speedMove * Time.deltaTime;
         curRigidbody.position += transform.right * inputX * player.playerInfo.speedMove * Time.deltaTime;
-        if(inputY == 1)
+        if(inputX != 0 || inputY != 0)
             RotateBasedOnCamera();
 
         player.playerAnimation.UpdateMoveInfo(inputX, inputY);
