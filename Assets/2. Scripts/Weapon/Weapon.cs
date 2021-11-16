@@ -18,6 +18,7 @@ public class Weapon : MonoBehaviour
     [ReadOnly] public WeaponType weaponType;
     [ReadOnly] public int attackPower;
     [ReadOnly] public int durability;
+    [ReadOnly] public bool isSelected;
 
     [ReadOnly] public string owner;
 
@@ -104,6 +105,9 @@ public class Weapon : MonoBehaviour
     {
         SetOwner();
         _col = GetComponent<Collider>();
+
+        // isSelected is true when player actually selects this weapon
+        isSelected = false;
     }
 
     public void SetOwner()

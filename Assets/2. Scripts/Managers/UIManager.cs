@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     [ReadOnly, SerializeField] private Image monsterHealthBar;
 
     [ReadOnly] public WeaponSelectionPopup popupWeaponSelection;
+    [ReadOnly] private InteractionPopup popupInteraction;
 
     private void Awake()
     {        
@@ -20,6 +21,8 @@ public class UIManager : MonoBehaviour
         monsterHealthBar.gameObject.SetActive(false);
 
         popupWeaponSelection = FindObjectOfType<WeaponSelectionPopup>();
+        popupInteraction = FindObjectOfType<InteractionPopup>();
+        popupInteraction.gameObject.SetActive(false);
     }
 
     public void UpdatePlayerHealthBar(int inputPlayerHealth)
@@ -39,12 +42,22 @@ public class UIManager : MonoBehaviour
         monsterHealthBar.gameObject.SetActive(false);
     }
 
+
     public void EnableWeaponSelectionPopup() {
         popupWeaponSelection.gameObject.SetActive(true);
     }
 
     public void DisableWeaponSelectionPopup() {
         popupWeaponSelection.gameObject.SetActive(false);
+    }
+
+
+    public void EnableInteractionPopup() {
+        popupInteraction.gameObject.SetActive(true);
+    }
+
+    public void DisableInteractionPopup() {
+        popupInteraction.gameObject.SetActive(false);
     }
 
 }
