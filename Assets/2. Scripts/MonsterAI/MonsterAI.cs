@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 
 [Serializable]
@@ -42,13 +43,29 @@ public class MonsterAI : MonoBehaviour
     [ReadOnly] public Vector3 targetPosition;
     public FindPlayerTime findPlayerTime;
 
+    private NavMeshAgent _agent;
     private Animator _animator;
     private MonsterData monsterData;
     private MonsterInfo monsterInfo;
+    private Weapon weapon;
     private static readonly int Hit1 = Animator.StringToHash("Hit");
+    private static readonly int Dead = Animator.StringToHash("Dead");
+
+    public NavMeshAgent Agent
+    {
+        get => _agent;
+        set => _agent = value;
+    }
+
+    public Animator Anim
+    {
+        get => _animator;
+        set => _animator = value;
+    }
 
     private void Awake()
     {
+        weapon = GetComponentInChildren<Weapon>();
         _animator = GetComponent<Animator>();
         monsterData = Resources.Load<MonsterData>("Datas/MonsterData");
         monsterInfo = monsterData.monsterInfos[0];
@@ -77,6 +94,10 @@ public class MonsterAI : MonoBehaviour
 
     private IEnumerator Die()
     {
-        
+        _animator.SetTrigger(Dead);
+        yield return new WaitForSeconds(3.0f);
+        GameObject weaponItem = Resources.Load<GameObject>("Weapons/Bone");
+        Instantiate(weaponItem, transform.position, Quaternion.identity);
+        Destroy(gameObject);    
     }
 }
