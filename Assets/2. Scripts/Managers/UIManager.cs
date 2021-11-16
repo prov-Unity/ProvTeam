@@ -4,32 +4,47 @@ using UnityEngine;
 using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
-    [ReadOnly, SerializeField] private GameObject popupWeaponSwitch;
-    [ReadOnly, SerializeField] private Image hpUI;
+    [ReadOnly] public static UIManager instance;
+
+    [ReadOnly, SerializeField] private Image playerHealthBar;
+    [ReadOnly, SerializeField] private Image monsterHealthBar;
+
+    [ReadOnly] public WeaponSelectionPopup popupWeaponSelection;
 
     private void Awake()
-    {
-        popupWeaponSwitch = FindObjectOfType<WeaponSelectionPopup>().gameObject;
-        popupWeaponSwitch.SetActive(false);
-        
-        hpUI = FindObjectOfType<PlayerHp>().GetComponent<Image>();
+    {        
+        instance = this;
+
+        playerHealthBar = FindObjectOfType<PlayerHealthBar>().GetComponent<Image>();
+        monsterHealthBar = FindObjectOfType<MonsterHealthBar>().GetComponent<Image>();
+        monsterHealthBar.gameObject.SetActive(false);
+
+        popupWeaponSelection = FindObjectOfType<WeaponSelectionPopup>();
     }
 
-    private void Update()
+    public void UpdatePlayerHealthBar(int inputPlayerHealth)
     {
-        if(Input.GetKeyDown(KeyCode.Tab))
-        {
-            popupWeaponSwitch.SetActive(true);
-        }
-
-        if(Input.GetKeyUp(KeyCode.Tab))
-        {
-            popupWeaponSwitch.SetActive(false);
-        }
+        playerHealthBar.fillAmount = (float)inputPlayerHealth/100f;
     }
 
-    public void UpdatePlayerHp(int playerHp)
-    {
-        hpUI.fillAmount = (float)playerHp/100f;
+    public void EnableMonsterHealthBar() {
+        monsterHealthBar.gameObject.SetActive(true);
     }
+
+    public void UpdateMonsterHealthBar(int inputMonsterHealth, int monsterMaxHealth) {
+        monsterHealthBar.fillAmount = (float)inputMonsterHealth/monsterMaxHealth;
+    }
+
+    public void DisableMonsterHealthBar() {
+        monsterHealthBar.gameObject.SetActive(false);
+    }
+
+    public void EnableWeaponSelectionPopup() {
+        popupWeaponSelection.gameObject.SetActive(true);
+    }
+
+    public void DisableWeaponSelectionPopup() {
+        popupWeaponSelection.gameObject.SetActive(false);
+    }
+
 }

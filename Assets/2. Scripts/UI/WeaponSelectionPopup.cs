@@ -2,5 +2,17 @@ using UnityEngine;
 
 public class WeaponSelectionPopup : MonoBehaviour
 {
-    // this script exists only for using FindObjectOfType method to find player's neck in the script
+    [ReadOnly] public WeaponSelectionBox[] weaponSelectionBoxes;
+
+    private void Awake() {
+        weaponSelectionBoxes = GetComponentsInChildren<WeaponSelectionBox>();
+    }
+
+    private void Update() {
+        if(Input.GetAxisRaw("Mouse ScrollWheel") > 0)
+            WeaponSelectionManager.instance.MoveWeaponSelectionBoxesRightOnce();
+
+        if(Input.GetAxisRaw("Mouse ScrollWheel") < 0)
+            WeaponSelectionManager.instance.MoveWeaponSelectionBoxesLeftOnce();
+    }
 }

@@ -15,31 +15,6 @@ public class PlayerInputManager : MonoBehaviour
         inputY = Input.GetAxisRaw("Vertical");
         player.playerMovement.Move(inputX, inputY);
 
-        // this code section would be gone to different script of which name might be PlayerWeaponSelector or so 
-        if(Input.GetKeyDown(KeyCode.Alpha1) && player.playerInfo.weaponType != WeaponType.Fist_Left) {
-            // switch to fist
-            player.playerLeftWeaponSlot.SelectWeapon(WeaponType.Fist_Left);
-            player.playerRightWeaponSlot.SelectWeapon(WeaponType.Fist_Right);
-
-            player.playerCombat.SetWeapons(player.playerLeftWeaponSlot.curWeapon.GetComponent<Weapon>(), player.playerRightWeaponSlot.curWeapon.GetComponent<Weapon>());
-
-            player.playerInfo.weaponType = WeaponType.Fist_Left;
-            player.playerInfo.attackIndex = 0;
-            player.playerAnimation.ChangeMoveToFist();
-        }
-        if(Input.GetKeyDown(KeyCode.Alpha2) && player.playerInfo.weaponType != WeaponType.Bone_Right) {
-            // switch to bone
-            player.playerLeftWeaponSlot.DestroyCurWeapon();
-            player.playerRightWeaponSlot.SelectWeapon(WeaponType.Bone_Right);
-
-            player.playerCombat.SetWeapons(null, player.playerRightWeaponSlot.curWeapon.GetComponent<Weapon>());
-
-            player.playerInfo.weaponType = WeaponType.Bone_Right;
-            player.playerInfo.attackIndex = 0;
-            player.playerAnimation.ChangeMoveTo2Hand();
-        }
-
-
         if(Input.GetKeyDown(KeyCode.Space))
             player.playerMovement.Jump();
 

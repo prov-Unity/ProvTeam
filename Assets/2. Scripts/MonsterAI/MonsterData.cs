@@ -10,7 +10,10 @@ public class MonsterData : ScriptableObject
 [System.Serializable]
 public class MonsterInfo
 {
+    public string name;
     public int hp;
     public int speed;
-    public float range;
+    public float detectionDistance;
+    public float traceDistance;
+    public float attackDistance;
 }
