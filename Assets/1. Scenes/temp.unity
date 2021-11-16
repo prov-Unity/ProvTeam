@@ -2660,12 +2660,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4740233476080558587}
   - component: {fileID: 4740233476088024103}
-  - component: {fileID: 4740233476080888841}
   - component: {fileID: 4740233476080888842}
   - component: {fileID: 4740233476080888844}
   - component: {fileID: 4740233476080888845}
-  - component: {fileID: 4740233476080888840}
-  - component: {fileID: 4740233476080888843}
   m_Layer: 0
   m_Name: SkeletonSlave_FSM
   m_TagString: Untagged
@@ -2673,37 +2670,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &4740233476080888840
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4740233476080888839}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62b2bb252a5a74483bf4c7f8edbb9420, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHp: 0
-  isHitting: 0
---- !u!114 &4740233476080888841
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4740233476080888839}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2ba6a63e5a01427ebeb5cdbb3db7c3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  range: 4
-  AttackDistance: 3
-  sensorTransform: {fileID: 4740233476080640901}
-  sensorCheckCycle: 0.4
-  timeToForget: 5
 --- !u!195 &4740233476080888842
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2726,29 +2692,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &4740233476080888843
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4740233476080888839}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a27a062df9b546e99d4480832acdfb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  state: 0
-  targetTransform: {fileID: 0}
-  weapon: {fileID: 0}
-  monsterData: {fileID: 0}
-  monsterInfo:
-    name: 
-    hp: 0
-    speed: 0
-    detectionDistance: 0
-    traceDistance: 0
-    attackDistance: 0
 --- !u!54 &4740233476080888844
 Rigidbody:
   m_ObjectHideFlags: 0
