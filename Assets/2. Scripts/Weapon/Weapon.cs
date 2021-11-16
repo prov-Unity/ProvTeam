@@ -15,8 +15,10 @@ public class Weapon : MonoBehaviour
     public AttackCheckMode checkMode = AttackCheckMode.Enable;
     // 콜라이더 활성 비활성화로 공격판정할 떄 쓰임
     [ReadOnly] public Collider _col;
+    [ReadOnly] public WeaponType weaponType;
     [ReadOnly] public int attackPower;
     [ReadOnly] public int durability;
+
     [ReadOnly] public string owner;
 
     // OverlapBox로 공격판정할 때 쓰임

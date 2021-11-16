@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2349206}
   - component: {fileID: 88224662}
   - component: {fileID: 88224659}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bone
   m_TagString: Weapon
   m_Icon: {fileID: 0}
