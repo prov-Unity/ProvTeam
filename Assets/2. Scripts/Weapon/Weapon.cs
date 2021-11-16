@@ -100,25 +100,37 @@ public class Weapon : MonoBehaviour
         Handles.DrawWireDisc(lower, Vector3.up, radius);
     }
 
-    private void Start()
-    {
-        SetOwner();
-        _col = GetComponent<Collider>();
+    private void Awake() {
+        // if the weapon type is set from editor, update attackpower and durability
+        attackPower = WeaponManager.instance.weaponAttackPowers[(int)weaponType];
+        durability = WeaponManager.instance.weaponInitialDurabilities[(int)weaponType];
 
         // isSelected is true when player actually selects this weapon
         isSelected = false;
     }
+    
+    private void Start()
+    {
+        SetOwner();
+        _col = GetComponent<Collider>();
+    }
 
     public void SetOwner()
     {
-        string tagName = transform.parent.tag;
-        if (tagName.Equals("Player")) {
+        string tagName = "";
+        if(transform.parent != null)
+            tagName = transform.parent.tag;
+
+        switch(tagName) {
+            case "Player": 
             owner = "Player";
             _col.enabled = false;
-        }
-        else if (tagName.Equals("Monster")) {
+            break;
+            
+            case "Monster": 
             owner = "Monster";
             _col.enabled = false;
+            break;
         }
     }
 

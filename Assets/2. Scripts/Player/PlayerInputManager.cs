@@ -24,7 +24,7 @@ public class PlayerInputManager : MonoBehaviour
         if(!player.playerInfo.isAttacking && Input.GetMouseButtonDown(0))
             player.playerCombat.Attack();
 
-        if(Input.GetKeyDown(KeyCode.G) && player.playerInfo.curWeapon != WeaponType.Fist_Left)
+        if(Input.GetKeyDown(KeyCode.G) && player.playerInfo.curWeapon.weaponType != WeaponType.Fist_Left)
             player.playerInteractionManager.DropCurrentWeapon();
     }
 }

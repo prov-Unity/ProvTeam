@@ -2,24 +2,35 @@ using UnityEngine;
 
 public class PlayerInteractionManager : MonoBehaviour
 {
-    public Weapon targetWeapon;
-    public bool isNewWeapon;
+    [ReadOnly] public Weapon targetWeapon;
+    [ReadOnly] public bool isNewWeapon;
 
     private Player player;
     private string targetName; 
+    private int tempDurability;
+    private int alteredWeaponIndex;
+    private Vector3 vectorForDroppedWeaponPosition;
     private Collider [] colliders;
 
-    private float distanceToInteract = 0.6f;
+    private float distanceToInteract;
+    private float yValueForInteractionBox;
 
     private void Awake() {
         targetWeapon = null;
         isNewWeapon = true;
+        tempDurability = -1;
+        alteredWeaponIndex = -1;
+        vectorForDroppedWeaponPosition = new Vector3(0, 0.1f, 0);
 
         player = GetComponent<Player>();
+
+
+        distanceToInteract = 0.6f;
+        yValueForInteractionBox = 0.45f;
     }
 
     private void Update() {
-        colliders = Physics.OverlapBox(player.transform.position + new Vector3((player.neckTransform.position-Camera.main.transform.position).normalized.x, 0.5f, (player.neckTransform.position-Camera.main.transform.position).normalized.z), new Vector3(distanceToInteract, player.transform.lossyScale.y, distanceToInteract), Quaternion.identity, LayerMask.GetMask("Interactable"));
+        colliders = Physics.OverlapBox(player.transform.position + new Vector3((player.neckTransform.position-Camera.main.transform.position).normalized.x, yValueForInteractionBox, (player.neckTransform.position-Camera.main.transform.position).normalized.z), new Vector3(distanceToInteract, player.transform.lossyScale.y, distanceToInteract), Quaternion.identity, LayerMask.GetMask("Interactable"));
         if(colliders.Length > 0) {
             targetWeapon = colliders[0].GetComponent<Weapon>();
 
@@ -30,12 +41,12 @@ public class PlayerInteractionManager : MonoBehaviour
                 // check whether this weapon is the new weapon for the player
                 if(player.playerInfo.availableWeapons.Find(x => x.weaponType == targetWeapon.weaponType) == null) {
                     // this branch is for the new weapon
-                    UIManager.instance.SetInteractionPopupText($"Press E to pickup {targetName}");
+                    UIManager.instance.SetInteractionPopupText($"Press E to pickup {targetName}({targetWeapon.durability})");
                     isNewWeapon = true;
                 }
                 else {
                     // this branch is for the existing weapon
-                    UIManager.instance.SetInteractionPopupText($"Press E to replace {targetName}");
+                    UIManager.instance.SetInteractionPopupText($"Press E to replace {targetName}({targetWeapon.durability})");
                     isNewWeapon = false;
                 }
             }
@@ -55,22 +66,41 @@ public class PlayerInteractionManager : MonoBehaviour
     }
 
     public void PickupNewWeapon() {
-        Debug.Log("new weapon");
-        player.playerInfo.availableWeapons.Add(new AvailableWeapon(targetWeapon.weaponType, WeaponManager.instance.weaponInitialDurabilities[(int)targetWeapon.weaponType]));
+        player.playerInfo.availableWeapons.Add(new AvailableWeapon(targetWeapon.weaponType, targetWeapon.durability));
         Destroy(targetWeapon.gameObject);
+
+        UIManager.instance.EnableWeaponSelectionPopup();
+        WeaponSelectionManager.instance.MoveWeaponSelectionBoxesLeftOnce();
+        WeaponSelectionManager.instance.SelectCurrentWeapon();
+        UIManager.instance.DisableWeaponSelectionPopup();
     }
 
     public void ReplaceCurrentWeapon() {
-        Debug.Log("existing weapon");
+        AvailableWeapon replacedWeapon = player.playerInfo.availableWeapons.Find(x => x.weaponType == targetWeapon.weaponType);
+        tempDurability = replacedWeapon.durability;
+        replacedWeapon.durability = targetWeapon.durability;
+        targetWeapon.durability = tempDurability;
     }
 
     public void DropCurrentWeapon() {
-        Debug.Log("drop weapon");
+        AvailableWeapon droppedWeaponInfo = player.playerInfo.curWeapon;
+
+        GameObject droppedWeapon = Instantiate(WeaponManager.instance.weaponPrefabs[((int)droppedWeaponInfo.weaponType)]);
+        droppedWeapon.transform.position = player.transform.position + player.transform.forward.normalized + vectorForDroppedWeaponPosition;
+        droppedWeapon.GetComponent<Weapon>().durability = droppedWeaponInfo.durability;
+
+        player.playerInfo.availableWeapons.Remove(droppedWeaponInfo);
+
+        UIManager.instance.EnableWeaponSelectionPopup();
+        WeaponSelectionManager.instance.MoveWeaponSelectionBoxesRightOnce();
+        WeaponSelectionManager.instance.SelectCurrentWeapon();
+        UIManager.instance.DisableWeaponSelectionPopup();
     }
 
+    // this method would occur error before starting the game because the values which this method uses are initialized after the game begins
     // private void OnDrawGizmos() {
     //     Gizmos.color = Color.blue;
         
-    //     Gizmos.DrawWireCube(player.transform.position + new Vector3((player.neckTransform.position-Camera.main.transform.position).normalized.x, 0.5f, (player.neckTransform.position-Camera.main.transform.position).normalized.z), new Vector3(distanceToInteract, player.transform.lossyScale.y, distanceToInteract));
+    //     Gizmos.DrawWireCube(player.transform.position + new Vector3((player.neckTransform.position-Camera.main.transform.position).normalized.x, yValueForInteractionBox, (player.neckTransform.position-Camera.main.transform.position).normalized.z), new Vector3(distanceToInteract, player.transform.lossyScale.y, distanceToInteract));
     // }    
 }
