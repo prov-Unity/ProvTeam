@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1629,7 +1629,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 691597454}
-  m_LocalRotation: {x: 0.116384625, y: -0.0000000131142945, z: -0.000000001200664, w: 0.99320424}
+  m_LocalRotation: {x: 0.116384625, y: 0.0000000131142945, z: 0.0000000012006641, w: 0.99320424}
   m_LocalPosition: {x: -8.290001, y: 7.2034464, z: -42.564636}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -2292,7 +2292,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 792530477}
-  m_LocalRotation: {x: 0.06595962, y: 0.000000008584456, z: -5.6746313e-10, w: 0.9978223}
+  m_LocalRotation: {x: 0.065959625, y: -0.000000008584456, z: 5.674632e-10, w: 0.9978223}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3941,12 +3941,13 @@ MonoBehaviour:
   health: 0
   speedMove: 0
   speedJump: 0
-  curWeapon: 0
+  speedRoll: 0
   attackIndex: 0
   comboLimitTime: 0
   canJump: 0
   isGrounded: 0
   isAttacking: 0
+  isRolling: 0
 --- !u!114 &1571248587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5952,7 +5953,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2031771669}
-  m_LocalRotation: {x: 0.097407945, y: -0.00000000428114, z: 4.1900966e-10, w: 0.99524456}
+  m_LocalRotation: {x: 0.097407945, y: 0.0000000042811386, z: -4.1900952e-10, w: 0.99524456}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -62893,7 +62894,6 @@ MonoBehaviour:
   weaponType: 2
   attackPower: 0
   durability: 0
-  isSelected: 0
   owner: 
   center: {x: 0, y: 0, z: 0}
 --- !u!23 &9164955187617190410
