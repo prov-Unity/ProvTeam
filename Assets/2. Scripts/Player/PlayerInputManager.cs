@@ -19,9 +19,12 @@ public class PlayerInputManager : MonoBehaviour
             player.playerMovement.Jump();
 
         if(Input.GetKeyDown(KeyCode.LeftShift))
-            player.playerMovement.Roll();
+            player.playerMovement.Roll(inputX, inputY);
 
-        if(!player.playerInfo.isAttacking && Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0))
             player.playerCombat.Attack();
+
+        if(Input.GetKeyDown(KeyCode.G) && player.playerInfo.curWeapon.weaponType != WeaponType.Fist_Left)
+            player.playerInteractionManager.DropCurrentWeapon();
     }
 }

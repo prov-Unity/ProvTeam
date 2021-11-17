@@ -23,24 +23,26 @@ public class PlayerCombat : MonoBehaviour
     }
 
     public void Attack() {
-        player.playerInfo.isAttacking = true; 
+        if(!player.playerInfo.isRolling && player.playerInfo.isGrounded && !player.playerInfo.isAttacking) {
+            player.playerInfo.isAttacking = true; 
 
-        if(comboCoroutineInfo != null) 
-            StopCoroutine("CheckComboLimit");
-        comboCoroutineInfo = StartCoroutine("CheckComboLimit");
+            if(comboCoroutineInfo != null) 
+                StopCoroutine("CheckComboLimit");
+            comboCoroutineInfo = StartCoroutine("CheckComboLimit");
 
-        player.playerAnimation.PlayAttackAnimation();
+            player.playerAnimation.PlayAttackAnimation();
 
-        player.playerInfo.attackIndex++;
-        switch(player.playerInfo.curWeapon) {
-            case WeaponType.Fist_Left:
-                if(player.playerInfo.attackIndex > 3) 
-                    player.playerInfo.attackIndex = 0;   
-            break;
-            case WeaponType.Bone_Right:
-                if(player.playerInfo.attackIndex > 5) 
-                    player.playerInfo.attackIndex = 0;   
-            break;
+            player.playerInfo.attackIndex++;
+            switch(player.playerInfo.curWeapon.weaponType) {
+                case WeaponType.Fist_Left:
+                    if(player.playerInfo.attackIndex > 3) 
+                        player.playerInfo.attackIndex = 0;   
+                break;
+                case WeaponType.Bone_Right:
+                    if(player.playerInfo.attackIndex > 5) 
+                        player.playerInfo.attackIndex = 0;   
+                break;
+            }
         }
     }
 
