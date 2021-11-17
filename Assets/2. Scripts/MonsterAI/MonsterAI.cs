@@ -63,8 +63,9 @@ public abstract class MonsterAI : MonoBehaviour
     private MonsterData monsterData;
     private MonsterInfo monsterInfo;
     private Weapon weapon;
-    private static readonly int Hit1 = Animator.StringToHash("Hit");
+    private static readonly int HitHash = Animator.StringToHash("Hit");
     private static readonly int Dead = Animator.StringToHash("Dead");
+    private static readonly int TraceHash = Animator.StringToHash("Trace");
 
     public NavMeshAgent Agent
     {
@@ -92,15 +93,18 @@ public abstract class MonsterAI : MonoBehaviour
         monsterInfo = monsterData.monsterInfos[(int)monsterType];
         attackDistance = monsterInfo.attackDistance;
         traceDistance = monsterInfo.traceDistance;
+        forgetTime = monsterInfo.forgetTime;
     }
 
-    public virtual void Stop()
+    public void CheckForgetTime()
     {
 
         if (findPlayerTime.CheckExpire(forgetTime))
         {
             StopCoroutine(Action());
             isRunning = false;
+            _animator.SetBool(TraceHash, false);
+            AgentMoveControl(false);
         }
     }
 
@@ -124,7 +128,7 @@ public abstract class MonsterAI : MonoBehaviour
 
     private IEnumerator GetDamage(int damage)
     {
-        _animator.SetTrigger(Hit1);
+        _animator.SetTrigger(HitHash);
         yield return new WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(0)
                                     .normalizedTime >= 0.8f);
         monsterInfo.hp -= damage;

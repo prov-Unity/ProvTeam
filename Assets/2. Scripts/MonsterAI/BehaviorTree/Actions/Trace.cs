@@ -27,6 +27,7 @@ public class Trace : Node
             return NodeState.FAILURE;
         agent.isStopped = false;
         agent.SetDestination(target.position);
+        animator.SetBool("IsAttack", false);
         animator.SetBool(Trace1, true);
         return NodeState.SUCCESS;
     }

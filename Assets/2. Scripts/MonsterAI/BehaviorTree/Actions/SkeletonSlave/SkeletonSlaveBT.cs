@@ -53,11 +53,11 @@ public class SkeletonSlaveBT : MonsterAI
         {
             CheckForgetTime();
             target.position = PPAP.Instance.player.transform.position;
-            yield return new WaitForSeconds(0.4f);
+            yield return new WaitForSeconds(0.2f);
             topNode.Evaluate();
             if (topNode.NodeState == NodeState.FAILURE)
             {
-                Agent.isStopped = true;
+                AgentMoveControl(false);
             }
         }
     }

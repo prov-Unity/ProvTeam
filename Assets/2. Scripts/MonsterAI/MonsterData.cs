@@ -15,4 +15,5 @@ public class MonsterInfo
     public int speed;
     public float traceDistance;
     public float attackDistance;
+    public float forgetTime;
 }
