@@ -99,7 +99,6 @@ public class Weapon : MonoBehaviour
         Handles.DrawWireDisc(upper, Vector3.up, radius);
         Handles.DrawWireDisc(lower, Vector3.up, radius);
     }
-
     
     private void Start()
     {
