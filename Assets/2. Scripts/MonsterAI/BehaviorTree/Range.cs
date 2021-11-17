@@ -15,7 +15,11 @@ public class Range : Node
 
     public override NodeState Evaluate()
     {
-        float distance = Vector3.Distance(monsterAI.targetPosition, monsterAI.transform.position);
+        if (range >= 5f)
+            Debug.Log("AttackRange 실행됨");
+        else
+            Debug.Log("TraceRange 실행됨");
+        float distance = Vector3.Distance(monsterAI.target.position, monsterAI.transform.position);
         if (range > distance)
         {
             return NodeState.SUCCESS;

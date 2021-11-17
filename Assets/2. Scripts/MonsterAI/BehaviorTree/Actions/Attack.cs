@@ -6,22 +6,28 @@ using UnityEngine.AI;
 public class Attack : Node
 {
     private Animator animator;
-    private Vector3 target;
+    private Transform target;
     private NavMeshAgent agent;
+    private MonsterBehaviorState monsterBehaviorState;
+    private bool isAttack;
     private static readonly int Attack1 = Animator.StringToHash("Attack");
 
-    public Attack(Animator animator, Vector3 target,  NavMeshAgent agent)
+    public Attack(Animator animator, Transform target, NavMeshAgent agent, MonsterBehaviorState monsterBehaviorState)
     {
         this.animator = animator;
         this.target = target;
         this.agent = agent;
+        this.monsterBehaviorState = monsterBehaviorState;
     }
 
     public override NodeState Evaluate()
     {
-        agent.isStopped = true;
-        agent.transform.rotation = Quaternion.LookRotation(target, Vector3.forward);
+        if (monsterBehaviorState.isAttack)
+            return NodeState.FAILURE;
+        isAttack = true;
+        Debug.Log("Attack Node 실행됨");
         animator.SetTrigger(Attack1);
         return NodeState.SUCCESS;
     }
+    
 }

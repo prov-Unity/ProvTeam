@@ -38,15 +38,25 @@ public enum MonsterType
     SkeletonSlave,
 }
 
-public class MonsterAI : MonoBehaviour
+[Serializable]
+public class MonsterBehaviorState
 {
-    [ReadOnly] public string name;
-    [ReadOnly] public int hp;
+    public bool isAttack;
+    public bool isDead;
+}
+
+public abstract class MonsterAI : MonoBehaviour
+{
     [ReadOnly] public float attackDistance;
     [ReadOnly] public float traceDistance;
-    [ReadOnly] public Vector3 targetPosition;
+    [ReadOnly] public float forgetTime;
+    [ReadOnly] public Transform target;
     public FindPlayerTime findPlayerTime = new FindPlayerTime();
-    public int monsterTypeIdx;
+    public MonsterType monsterType;
+    public bool isAttack;
+    public MonsterBehaviorState monsterBehaviorState;
+    
+    protected bool isRunning;
     
     private NavMeshAgent _agent;
     private Animator _animator;
@@ -70,6 +80,7 @@ public class MonsterAI : MonoBehaviour
 
     protected virtual void Awake()
     {
+        monsterBehaviorState = new MonsterBehaviorState();
         weapon = GetComponentInChildren<Weapon>();
         _animator = GetComponent<Animator>();
         _agent = GetComponent<NavMeshAgent>();
@@ -78,12 +89,29 @@ public class MonsterAI : MonoBehaviour
 
     protected virtual void Start()
     {
-        monsterInfo = monsterData.monsterInfos[monsterTypeIdx];
+        monsterInfo = monsterData.monsterInfos[(int)monsterType];
+        attackDistance = monsterInfo.attackDistance;
+        traceDistance = monsterInfo.traceDistance;
     }
 
-    public virtual void Action()
+    public virtual void Stop()
     {
-        
+
+        if (findPlayerTime.CheckExpire(forgetTime))
+        {
+            StopCoroutine(Action());
+            isRunning = false;
+        }
+    }
+
+    public virtual void StartAction()
+    {
+        findPlayerTime.UpdateFindTime();
+    }
+
+    public virtual IEnumerator Action()
+    {
+        yield break;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -127,4 +155,27 @@ public class MonsterAI : MonoBehaviour
         weapon.EnableCollider(false);
     }
 
+    public void ChangeAttackState()
+    {
+        monsterBehaviorState.isAttack = !monsterBehaviorState.isAttack;
+        AgentMoveControl(monsterBehaviorState.isAttack);
+    }
+
+    public void ChangeDeadState()
+    {
+        monsterBehaviorState.isDead = !monsterBehaviorState.isDead;
+        AgentMoveControl(monsterBehaviorState.isAttack);
+    }
+
+    public void AgentMoveControl(bool canMove)
+    {
+        if (canMove)
+        {
+            _agent.isStopped = false;
+        }
+        else
+        {
+            _agent.isStopped = true;
+        }
+    }
 }
