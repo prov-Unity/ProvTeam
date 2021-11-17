@@ -45,7 +45,7 @@ public class PlayerInfo : MonoBehaviour
     }
     
         private void Start() {
-        // these codes would be altered after save/load functionality is implemented
+        // these codes would be altered after save/load functionality is implemented 
         availableWeapons = new List<AvailableWeapon>();
         availableWeapons.Add(new AvailableWeapon(WeaponType.Fist_Left, WeaponManager.instance.weaponInitialDurabilities[(int)WeaponType.Fist_Left]));
         availableWeapons.Add(new AvailableWeapon(WeaponType.Bone_Right, WeaponManager.instance.weaponInitialDurabilities[(int)WeaponType.Bone_Right] - 1));
