@@ -8,7 +8,6 @@ public class PlayerInteractionManager : MonoBehaviour
     private Player player;
     private string targetName; 
     private int tempDurability;
-    private int alteredWeaponIndex;
     private Vector3 vectorForDroppedWeaponPosition;
     private Collider [] colliders;
     private int curIndex;
@@ -21,7 +20,6 @@ public class PlayerInteractionManager : MonoBehaviour
         targetWeapon = null;
         isNewWeapon = true;
         tempDurability = -1;
-        alteredWeaponIndex = -1;
         vectorForDroppedWeaponPosition = new Vector3(0, 0.1f, 0);
 
         player = GetComponent<Player>();
