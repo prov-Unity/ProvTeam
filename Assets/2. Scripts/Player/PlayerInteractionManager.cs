@@ -34,7 +34,7 @@ public class PlayerInteractionManager : MonoBehaviour
         if(colliders.Length > 0) {
             targetWeapon = colliders[0].GetComponent<Weapon>();
 
-            if(targetWeapon != null && !targetWeapon.isSelected) {
+            if(targetWeapon != null && targetWeapon.owner == null) {
                 UIManager.instance.EnableInteractionPopup();
                 
                 targetName = targetWeapon.weaponType.ToString().Split(new char[] {'_'})[0];
@@ -102,5 +102,5 @@ public class PlayerInteractionManager : MonoBehaviour
     //     Gizmos.color = Color.blue;
         
     //     Gizmos.DrawWireCube(player.transform.position + new Vector3((player.neckTransform.position-Camera.main.transform.position).normalized.x, yValueForInteractionBox, (player.neckTransform.position-Camera.main.transform.position).normalized.z), new Vector3(distanceToInteract, player.transform.lossyScale.y, distanceToInteract));
-    // }    
+    // }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1523,7 +1523,7 @@ Transform:
   - {fileID: 1864747652}
   - {fileID: 1623471550}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1194316008
 GameObject:
@@ -4973,6 +4973,7 @@ MonoBehaviour:
   speedMove: 0
   canJump: 0
   speedJump: 0
+  canRoll: 0
   isAttacking: 0
   attackIndex: 0
   comboLimitTime: 0
@@ -5363,7 +5364,7 @@ Transform:
   - {fileID: 867882217312188959}
   - {fileID: 867882216837819481}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &867882217421637376
 GameObject:

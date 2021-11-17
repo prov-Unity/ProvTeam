@@ -11,6 +11,7 @@ public class PlayerInfo : MonoBehaviour
     [ReadOnly] public float speedMove;
     [ReadOnly] public bool canJump;
     [ReadOnly] public float speedJump;
+    [ReadOnly] public bool canRoll;
 
     [ReadOnly] public bool isAttacking;
     [ReadOnly] public int attackIndex;
@@ -33,6 +34,7 @@ public class PlayerInfo : MonoBehaviour
         canJump = false;
         isGrounded = false;
         isAttacking = false;
+        canRoll = true;
 
         player = GetComponentInChildren<Player>();
     }
