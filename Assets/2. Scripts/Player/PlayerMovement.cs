@@ -32,14 +32,12 @@ public class PlayerMovement : MonoBehaviour
         if(player.playerInfo.canRoll && player.playerInfo.isGrounded) {
             player.playerAnimation.PlayRollAnimation();
             player.playerInfo.canRoll = false;
-            StartCoroutine("ResetCanRollAfterGivenTime");
         }
     }
-
-    private IEnumerator ResetCanRollAfterGivenTime() {
-        yield return new WaitForSeconds(player.playerInfo.rollRestrictedTime);
-        player.playerInfo.canRoll = true;
+    public void SetCanRollTrue() {
+        player.playerInfo.canRoll = true    ;
     }
+
 
     private void UpdateIsGrounded() {
         RaycastHit hitInfo;
@@ -53,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void Jump() {
-        player.playerInfo.canJump = player.playerInfo.isGrounded && !player.playerInfo.isAttacking; 
+        player.playerInfo.canJump = player.playerInfo.isGrounded && !player.playerInfo.isAttacking && player.playerInfo.canRoll; 
         player.playerAnimation.UpdateCanJump();
         if(player.playerInfo.canJump) {
             player.playerAnimation.PlayJumpAnimation();
