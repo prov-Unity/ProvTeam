@@ -99,15 +99,13 @@ public class Weapon : MonoBehaviour
         Handles.DrawWireDisc(upper, Vector3.up, radius);
         Handles.DrawWireDisc(lower, Vector3.up, radius);
     }
-
-    private void Awake() {
-        // if the weapon type is set from editor, update attackpower and durability
-        attackPower = WeaponManager.instance.weaponAttackPowers[(int)weaponType];
-        durability = WeaponManager.instance.weaponInitialDurabilities[(int)weaponType];
-    }
     
     private void Start()
     {
+        // if the weapon type is set from editor, update attackpower and durability
+        attackPower = WeaponManager.instance.weaponAttackPowers[(int)weaponType];
+        durability = WeaponManager.instance.weaponInitialDurabilities[(int)weaponType];
+
         SetOwner();
         _col = GetComponent<Collider>();
     }
