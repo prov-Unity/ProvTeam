@@ -89,7 +89,6 @@ public class MeleeSensor : MonoBehaviour
                                                             LayerMask.GetMask("Player"));
                 foreach (var checkObj in checkObjs)
                 {
-                    Debug.Log(checkObj.name);
                     if (!checkObj.CompareTag("Player"))
                         continue;
                     target = checkObj.GetComponent<Player>();

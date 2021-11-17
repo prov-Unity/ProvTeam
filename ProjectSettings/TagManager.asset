@@ -7,7 +7,6 @@ TagManager:
   - Collide
   - Weapon
   - Sensor
-  - Monster
   layers:
   - Default
   - TransparentFX

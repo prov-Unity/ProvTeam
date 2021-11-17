@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: MonsterData
   m_EditorClassIdentifier: 
   monsterInfos:
-  - name: 
-    hp: 50
+  - hp: 50
     speed: 3
-    traceDistance: 5
-    attackDistance: 2
+    range: 7

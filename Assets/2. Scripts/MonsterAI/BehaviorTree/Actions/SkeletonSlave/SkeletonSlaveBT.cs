@@ -6,7 +6,6 @@ using UnityEngine;
 public class SkeletonSlaveBT : MonsterAI
 {
     private Node topNode;
-    private float forgetTime;
 
     protected override void Awake()
     {
@@ -33,27 +32,19 @@ public class SkeletonSlaveBT : MonsterAI
 
         topNode = new Selector(new List<Node> {attackSequence, traceSequence});
     }
-    
 
-    public override void StartAction()
+    private void Update()
     {
-        base.StartAction();
-        StartCoroutine(Action());
-        
+        topNode.Evaluate();
+        if (topNode.NodeState == NodeState.FAILURE)
+        {
+            Agent.isStopped = true;
+        }
     }
 
-    public override IEnumerator Action()
+    public override void Action()
     {
-        yield return StartCoroutine(base.Action());
-        while (true)
-        {
-            CheckForgetTime();
-            yield return new WaitForSeconds(0.2f);
-            topNode.Evaluate();
-            if (topNode.NodeState == NodeState.FAILURE)
-            {
-                Agent.isStopped = true;
-            }
-        }
+        base.Action();
+        
     }
 }

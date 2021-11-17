@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -45,7 +44,6 @@ public class MonsterAI : MonoBehaviour
     [ReadOnly] public int hp;
     [ReadOnly] public float attackDistance;
     [ReadOnly] public float traceDistance;
-    [ReadOnly] public float forgetTime;
     [ReadOnly] public Vector3 targetPosition;
     public FindPlayerTime findPlayerTime = new FindPlayerTime();
     public int monsterTypeIdx;
@@ -83,20 +81,9 @@ public class MonsterAI : MonoBehaviour
         monsterInfo = monsterData.monsterInfos[monsterTypeIdx];
     }
 
-    protected void CheckForgetTime()
+    public virtual void Action()
     {
-        if (findPlayerTime.CheckExpire(forgetTime))
-            StopCoroutine(Action());
-    }
-
-    public virtual void StartAction()
-    {
-        findPlayerTime.UpdateFindTime();
-    }
-
-    public virtual IEnumerator Action()
-    {
-        yield break;
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -117,6 +104,7 @@ public class MonsterAI : MonoBehaviour
         {
             StartCoroutine(Die());
         }
+            
     }
 
     private IEnumerator Die()

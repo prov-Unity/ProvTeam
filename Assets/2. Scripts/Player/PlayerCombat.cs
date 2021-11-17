@@ -32,7 +32,7 @@ public class PlayerCombat : MonoBehaviour
         player.playerAnimation.PlayAttackAnimation();
 
         player.playerInfo.attackIndex++;
-        switch(player.playerInfo.curWeapon.weaponType) {
+        switch(player.playerInfo.curWeapon) {
             case WeaponType.Fist_Left:
                 if(player.playerInfo.attackIndex > 3) 
                     player.playerInfo.attackIndex = 0;   

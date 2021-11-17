@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +5,6 @@ public enum WeaponType {
     Fist_Left, Fist_Right, Bone_Right
 }
 
-[Serializable]
 public class AvailableWeapon {
     public WeaponType weaponType;
     public int durability;
