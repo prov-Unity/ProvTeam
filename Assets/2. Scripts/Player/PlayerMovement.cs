@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     public void SetCanRollTrue() {
-        player.playerInfo.canRoll = true    ;
+        player.playerInfo.canRoll = true;
     }
 
 
