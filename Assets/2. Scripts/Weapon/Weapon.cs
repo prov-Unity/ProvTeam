@@ -104,9 +104,6 @@ public class Weapon : MonoBehaviour
         // if the weapon type is set from editor, update attackpower and durability
         attackPower = WeaponManager.instance.weaponAttackPowers[(int)weaponType];
         durability = WeaponManager.instance.weaponInitialDurabilities[(int)weaponType];
-
-        // isSelected is true when player actually selects this weapon
-        isSelected = false;
     }
     
     private void Start()
@@ -130,6 +127,10 @@ public class Weapon : MonoBehaviour
             case "Monster": 
             owner = "Monster";
             _col.enabled = false;
+            break;
+
+            default:
+            owner = null;
             break;
         }
     }

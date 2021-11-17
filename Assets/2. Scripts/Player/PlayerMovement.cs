@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -28,7 +29,16 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void Roll() {
-        player.playerAnimation.PlayRollAnimation();
+        if(player.playerInfo.canRoll && player.playerInfo.isGrounded) {
+            player.playerAnimation.PlayRollAnimation();
+            player.playerInfo.canRoll = false;
+            StartCoroutine("ResetCanRollAfterGivenTime");
+        }
+    }
+
+    private IEnumerator ResetCanRollAfterGivenTime() {
+        yield return new WaitForSeconds(player.playerInfo.rollRestrictedTime);
+        player.playerInfo.canRoll = true;
     }
 
     private void UpdateIsGrounded() {
