@@ -25,6 +25,8 @@ public class PlayerWeaponSlot : MonoBehaviour
             weapon.durability = player.playerInfo.availableWeapons[(int)WeaponType.Fist_Left].durability;
         else
             weapon.durability = player.playerInfo.availableWeapons.Find(x => x.weaponType == weaponType).durability;
+
+        weapon.isSelected = true;
     }
 
     public void DestroyCurWeapon() {

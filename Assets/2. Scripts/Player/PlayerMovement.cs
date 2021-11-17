@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -17,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     public void Move(float inputX, float inputY) {
         curRigidbody.position += transform.forward * inputY * player.playerInfo.speedMove * Time.deltaTime;
         curRigidbody.position += transform.right * inputX * player.playerInfo.speedMove * Time.deltaTime;
-        if(inputY == 1)
+        if(inputX != 0 || inputY != 0)
             RotateBasedOnCamera();
 
         player.playerAnimation.UpdateMoveInfo(inputX, inputY);
@@ -28,8 +29,15 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void Roll() {
-        player.playerAnimation.PlayRollAnimation();
+        if(player.playerInfo.canRoll && player.playerInfo.isGrounded) {
+            player.playerAnimation.PlayRollAnimation();
+            player.playerInfo.canRoll = false;
+        }
     }
+    public void SetCanRollTrue() {
+        player.playerInfo.canRoll = true;
+    }
+
 
     private void UpdateIsGrounded() {
         RaycastHit hitInfo;
@@ -43,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void Jump() {
-        player.playerInfo.canJump = player.playerInfo.isGrounded && !player.playerInfo.isAttacking; 
+        player.playerInfo.canJump = player.playerInfo.isGrounded && !player.playerInfo.isAttacking && player.playerInfo.canRoll; 
         player.playerAnimation.UpdateCanJump();
         if(player.playerInfo.canJump) {
             player.playerAnimation.PlayJumpAnimation();

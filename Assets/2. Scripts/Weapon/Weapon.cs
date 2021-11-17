@@ -93,32 +93,43 @@ public class Weapon : MonoBehaviour
         Handles.DrawWireArc(upper, Vector3.left, Vector3.back, -180, radius);
         Handles.DrawLine(lower + offsetZ, upper + offsetZ);
         Handles.DrawLine(lower - offsetZ, upper - offsetZ);
-        Handles.DrawWireArc(lower, Vector3.left, Vector3.back, 180, radius);
+        Handles.DrawWireArc(lower, Vector3.left, Vector3.back, 18, radius);
         
         //draw center
         Handles.DrawWireDisc(upper, Vector3.up, radius);
         Handles.DrawWireDisc(lower, Vector3.up, radius);
     }
-
+    
     private void Start()
     {
+        // if the weapon type is set from editor, update attackpower and durability
+        attackPower = WeaponManager.instance.weaponAttackPowers[(int)weaponType];
+        durability = WeaponManager.instance.weaponInitialDurabilities[(int)weaponType];
+
         SetOwner();
         _col = GetComponent<Collider>();
-
-        // isSelected is true when player actually selects this weapon
-        isSelected = false;
     }
 
     public void SetOwner()
     {
-        string tagName = transform.parent.tag;
-        if (tagName.Equals("Player")) {
+        string tagName = "";
+        if(transform.parent != null)
+            tagName = transform.parent.tag;
+
+        switch(tagName) {
+            case "Player": 
             owner = "Player";
             _col.enabled = false;
-        }
-        else if (tagName.Equals("Monster")) {
+            break;
+            
+            case "Monster": 
             owner = "Monster";
             _col.enabled = false;
+            break;
+
+            default:
+            owner = null;
+            break;
         }
     }
 

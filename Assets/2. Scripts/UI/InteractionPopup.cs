@@ -14,10 +14,12 @@ public class InteractionPopup : MonoBehaviour
     private void Update() {
         if(Input.GetKeyDown(KeyCode.E) && GameManager.instance.player.playerInteractionManager.targetWeapon != null) {
             if(GameManager.instance.player.playerInteractionManager.isNewWeapon) {
-                ; // code for picking up new weapon
+                // code for picking up new weapon
+                GameManager.instance.player.playerInteractionManager.PickupNewWeapon();
             }
             else {
-                ; // code for replacing existing weapon
+                // code for replacing existing weapon
+                GameManager.instance.player.playerInteractionManager.ReplaceCurrentWeapon();
             }
         }
     }
