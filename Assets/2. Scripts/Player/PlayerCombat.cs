@@ -13,34 +13,32 @@ public class PlayerCombat : MonoBehaviour
         player = GetComponentInChildren<Player>();
     }
 
-    private void Update() {
-        ;
-    }
-
     public void SetWeapons(Weapon inputLeftWeapon, Weapon inputRightWeapon) {
         leftWeapon = inputLeftWeapon;
         rightWeapon = inputRightWeapon;
     }
 
     public void Attack() {
-        player.playerInfo.isAttacking = true; 
+        if(!player.playerInfo.isRolling && player.playerInfo.isGrounded && !player.playerInfo.isAttacking) {
+            player.playerInfo.isAttacking = true; 
 
-        if(comboCoroutineInfo != null) 
-            StopCoroutine("CheckComboLimit");
-        comboCoroutineInfo = StartCoroutine("CheckComboLimit");
+            if(comboCoroutineInfo != null) 
+                StopCoroutine("CheckComboLimit");
+            comboCoroutineInfo = StartCoroutine("CheckComboLimit");
 
-        player.playerAnimation.PlayAttackAnimation();
+            player.playerAnimation.PlayAttackAnimation();
 
-        player.playerInfo.attackIndex++;
-        switch(player.playerInfo.curWeapon) {
-            case WeaponType.Fist_Left:
-                if(player.playerInfo.attackIndex > 3) 
-                    player.playerInfo.attackIndex = 0;   
-            break;
-            case WeaponType.Bone_Right:
-                if(player.playerInfo.attackIndex > 5) 
-                    player.playerInfo.attackIndex = 0;   
-            break;
+            player.playerInfo.attackIndex++;
+            switch(player.playerInfo.curWeapon.weaponType) {
+                case WeaponType.Fist_Left:
+                    if(player.playerInfo.attackIndex > 3) 
+                        player.playerInfo.attackIndex = 0;   
+                break;
+                case WeaponType.Bone_Right:
+                    if(player.playerInfo.attackIndex > 5) 
+                        player.playerInfo.attackIndex = 0;   
+                break;
+            }
         }
     }
 

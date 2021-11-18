@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class TestPlayer : MonoBehaviour
 {
-    private Collider[] colliders;
+    public Collider[] colliders;
     // Start is called before the first frame update
     void Start()
     {
         colliders = new Collider[10];
+        StartCoroutine(Detect());
     }
 
     // Update is called once per frame
@@ -30,8 +31,8 @@ public class TestPlayer : MonoBehaviour
             {
                 if (coll == null)
                     break;
-                coll.GetComponent<MonsterAI>().Action();
-
+                MonsterAI monsterAI = coll.GetComponent<MonsterAI>();
+                monsterAI.StartAction();
             }
             yield return new WaitForSeconds(0.1f);
         }

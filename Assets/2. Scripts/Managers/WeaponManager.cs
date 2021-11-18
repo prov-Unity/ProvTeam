@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum WeaponType {
-    Fist_Left, Fist_Right, Bone_Right
+    Fist_Left, Fist_Right, Bone_Right, No_Weapon
 }
 
 public class AvailableWeapon {

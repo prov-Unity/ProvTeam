@@ -39,12 +39,4 @@ public class Player : MonoBehaviour
         playerCombat = GetComponent<PlayerCombat>();
         playerInteractionManager = GetComponent<PlayerInteractionManager>();
     }
-
-    private void Start() {
-        // these codes would be changed after save/load functionality is implemented
-        playerLeftWeaponSlot.SelectWeapon(WeaponType.Fist_Left);
-        playerRightWeaponSlot.SelectWeapon(WeaponType.Fist_Right);
-
-        playerCombat.SetWeapons(playerLeftWeaponSlot.curWeapon.GetComponent<Weapon>(), playerRightWeaponSlot.curWeapon.GetComponent<Weapon>());
-    }
 }

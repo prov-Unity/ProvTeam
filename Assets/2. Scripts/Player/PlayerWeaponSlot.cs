@@ -15,7 +15,7 @@ public class PlayerWeaponSlot : MonoBehaviour
             
         curWeapon = Instantiate(WeaponManager.instance.weaponPrefabs[((int)weaponType)], player.playerWeaponSpawnPoints[(int)weaponType].transform.position, player.playerWeaponSpawnPoints[(int)weaponType].transform.rotation);
         curWeapon.transform.parent = gameObject.transform;
-        curWeapon.transform.localScale = new Vector3(100f, 100f, 100f);
+        curWeapon.transform.localScale = new Vector3(100f, 170f, 100f);
 
         Weapon weapon = curWeapon.GetComponent<Weapon>();
         

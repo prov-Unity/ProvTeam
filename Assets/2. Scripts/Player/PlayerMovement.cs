@@ -15,20 +15,39 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void Move(float inputX, float inputY) {
-        curRigidbody.position += transform.forward * inputY * player.playerInfo.speedMove * Time.deltaTime;
-        curRigidbody.position += transform.right * inputX * player.playerInfo.speedMove * Time.deltaTime;
-        if(inputY == 1)
-            RotateBasedOnCamera();
+        if(!player.playerInfo.isAttacking) {
+            if(player.playerInfo.isRolling)
+                curRigidbody.position += transform.forward * player.playerInfo.speedRoll * Time.deltaTime;
+            else {
+                curRigidbody.position += transform.forward * inputY * player.playerInfo.speedMove * Time.deltaTime;
+                curRigidbody.position += transform.right * inputX * player.playerInfo.speedMove * Time.deltaTime;
 
-        player.playerAnimation.UpdateMoveInfo(inputX, inputY);
+                if(inputX != 0 || inputY != 0)
+                    RotateBasedOnCamera();
+            }
+            player.playerAnimation.UpdateMoveInfo(inputX, inputY);
+        }
     }
 
-    public void RotateBasedOnCamera() {
+    private void RotateBasedOnCamera() {
         transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
     }
+    
+    private void RotateBasedOnKey(float inputX, float inputY) {
+        transform.forward = transform.forward * inputY + transform.right * inputX; 
+    }
 
-    public void Roll() {
-        player.playerAnimation.PlayRollAnimation();
+    public void Roll(float inputX, float inputY) {
+        if(!player.playerInfo.isRolling && player.playerInfo.isGrounded && !player.playerInfo.isAttacking) {
+            player.playerAnimation.PlayRollAnimation();
+            player.playerInfo.isRolling = true;
+
+            RotateBasedOnKey(inputX, inputY);
+        }
+    }
+    public void SetIsRollingFalse() {
+        player.playerInfo.isRolling = false;
+        RotateBasedOnCamera();
     }
 
     private void UpdateIsGrounded() {
@@ -43,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void Jump() {
-        player.playerInfo.canJump = player.playerInfo.isGrounded && !player.playerInfo.isAttacking; 
+        player.playerInfo.canJump = !player.playerInfo.isRolling && player.playerInfo.isGrounded && !player.playerInfo.isAttacking; 
         player.playerAnimation.UpdateCanJump();
         if(player.playerInfo.canJump) {
             player.playerAnimation.PlayJumpAnimation();
