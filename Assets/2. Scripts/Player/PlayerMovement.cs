@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private Player player;
-    private Rigidbody curRigidbody;
+    public Rigidbody curRigidbody;
 
     private void Awake() {
         player = GetComponent<Player>();

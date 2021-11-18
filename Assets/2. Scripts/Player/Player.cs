@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public List<PlayerWeaponSpawnPoint> playerWeaponSpawnPoints;
     [HideInInspector] public PlayerCombat playerCombat;
     [HideInInspector] public PlayerInteractionManager playerInteractionManager;
-    [HideInInspector] public PlayerMonsterDetector playerMonsterDetector;
+    [HideInInspector] public PlayerDetector playerDetector;
 
 
     private void Awake() {
@@ -40,6 +40,6 @@ public class Player : MonoBehaviour
 
         playerCombat = GetComponent<PlayerCombat>();
         playerInteractionManager = GetComponent<PlayerInteractionManager>();
-        playerMonsterDetector = GetComponent<PlayerMonsterDetector>();
+        playerDetector = GetComponent<PlayerDetector>();
     }
 }

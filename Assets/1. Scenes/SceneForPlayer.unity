@@ -1916,7 +1916,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 691597454}
-  m_LocalRotation: {x: 0.116384625, y: 0.0000000131142945, z: 0.0000000012006641, w: 0.99320424}
+  m_LocalRotation: {x: 0.116384625, y: -0.0000000131142945, z: -0.000000001200664, w: 0.99320424}
   m_LocalPosition: {x: -8.290001, y: 7.2034464, z: -42.564636}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -3748,7 +3748,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.00012207031, y: 0}
+  m_AnchoredPosition: {x: -0.00024414062, y: 0}
   m_SizeDelta: {x: 150.02, y: 145.5}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1194316010
@@ -4472,7 +4472,7 @@ MonoBehaviour:
   playerWeaponSpawnPoints: []
   playerCombat: {fileID: 0}
   playerInteractionManager: {fileID: 0}
-  playerMonsterDetector: {fileID: 0}
+  playerDetector: {fileID: 0}
 --- !u!95 &1571248588
 Animator:
   serializedVersion: 3
@@ -6526,7 +6526,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2031771669}
-  m_LocalRotation: {x: 0.097407945, y: 0.0000000042811386, z: -4.1900952e-10, w: 0.99524456}
+  m_LocalRotation: {x: 0.097407945, y: -0.00000000428114, z: 4.1900966e-10, w: 0.99524456}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -66149,7 +66149,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9164955186296747749}
   - component: {fileID: 9164955186296747748}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: DeadZone1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66413,7 +66413,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9164955187059851539}
   - component: {fileID: 9164955187059851538}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: DeadZone2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66445,7 +66445,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9164955187325673741}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DeadZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
