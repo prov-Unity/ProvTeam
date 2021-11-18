@@ -13,10 +13,6 @@ public class PlayerCombat : MonoBehaviour
         player = GetComponentInChildren<Player>();
     }
 
-    private void Update() {
-        ;
-    }
-
     public void SetWeapons(Weapon inputLeftWeapon, Weapon inputRightWeapon) {
         leftWeapon = inputLeftWeapon;
         rightWeapon = inputRightWeapon;

@@ -7,7 +7,9 @@ public class UIManager : MonoBehaviour
     [ReadOnly] public static UIManager instance;
 
     [ReadOnly, SerializeField] private Image playerHealthBar;
-    [ReadOnly, SerializeField] private Image monsterHealthBar;
+    [ReadOnly, SerializeField] private UIMonsterInfo monsterInfo;
+    [ReadOnly, SerializeField] private UICurWeaponInfo curWeaponInfo;
+
 
     [ReadOnly] public WeaponSelectionPopup popupWeaponSelection;
     [ReadOnly] private InteractionPopup popupInteraction;
@@ -19,8 +21,8 @@ public class UIManager : MonoBehaviour
         instance = this;
 
         playerHealthBar = FindObjectOfType<PlayerHealthBar>().GetComponent<Image>();
-        monsterHealthBar = FindObjectOfType<MonsterHealthBar>().GetComponent<Image>();
-        monsterHealthBar.gameObject.SetActive(false);
+        monsterInfo = FindObjectOfType<UIMonsterInfo>();
+        curWeaponInfo = FindObjectOfType<UICurWeaponInfo>();
 
         popupWeaponSelection = FindObjectOfType<WeaponSelectionPopup>();
         popupInteraction = FindObjectOfType<InteractionPopup>();
@@ -29,21 +31,32 @@ public class UIManager : MonoBehaviour
         isInteractionPopupDisabled = true;
     }
 
+    private void Start() {
+        monsterInfo.gameObject.SetActive(false);
+    }
+
+
     public void UpdatePlayerHealthBar(int inputPlayerHealth)
     {
         playerHealthBar.fillAmount = (float)inputPlayerHealth/100f;
     }
 
-    public void EnableMonsterHealthBar() {
-        monsterHealthBar.gameObject.SetActive(true);
+    public void EnableMonsterInfo() {
+        monsterInfo.gameObject.SetActive(true);
     }
 
     public void UpdateMonsterHealthBar(int inputMonsterHealth, int monsterMaxHealth) {
-        monsterHealthBar.fillAmount = (float)inputMonsterHealth/monsterMaxHealth;
+        monsterInfo.imageMonsterHealth.fillAmount = (float)inputMonsterHealth/monsterMaxHealth;
     }
 
-    public void DisableMonsterHealthBar() {
-        monsterHealthBar.gameObject.SetActive(false);
+    public void DisableMonsterInfo() {
+        monsterInfo.gameObject.SetActive(false);
+    }
+
+
+    public void UpdateCurWeaponInfo() {
+        curWeaponInfo.textWeaponDurability.text = GameManager.instance.player.playerInfo.curWeapon.durability.ToString();
+        curWeaponInfo.imageWeaponIcon.sprite = WeaponSelectionManager.instance.weaponIcons[(int)GameManager.instance.player.playerInfo.curWeapon.weaponType];
     }
 
 
@@ -69,5 +82,4 @@ public class UIManager : MonoBehaviour
         popupInteraction.gameObject.SetActive(false);
         isInteractionPopupDisabled = true;
     }
-
 }

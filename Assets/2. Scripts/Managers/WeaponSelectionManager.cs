@@ -13,8 +13,8 @@ public class WeaponSelectionManager : MonoBehaviour
     hence, this manager would change player's weapon to the one at the index of 2 
     */
     public static WeaponSelectionManager instance;
+    [ReadOnly] public List<Sprite> weaponIcons;
     [ReadOnly, SerializeField] private WeaponSelectionPopup popupWeaponSelection;
-    [ReadOnly, SerializeField] private List<Sprite> weaponIcons;
     
 
     [ReadOnly, SerializeField] private int curSelectedWeaponIndex;
@@ -28,6 +28,7 @@ public class WeaponSelectionManager : MonoBehaviour
         weaponIcons.Add(Resources.Load<Sprite>("UIWeaponsIcon/Bone"));
 
         // this code would be altered after save/load fuctionality is implemented
+        // if the system forces player to start a game with fist at first, then this code good enough
         curSelectedWeaponIndex = 0;
     }
 
@@ -35,12 +36,10 @@ public class WeaponSelectionManager : MonoBehaviour
         popupWeaponSelection = UIManager.instance.popupWeaponSelection;
 
         // these codes would be altered after save/load functionality is implemented
-        DisableWeaponSelectionBox(0);
-        DisableWeaponSelectionBox(1);
-        DisableWeaponSelectionBox(4);
-
-        SetWeaponSelectionBox(2, WeaponType.Fist_Left);
-        SetWeaponSelectionBox(3, WeaponType.Bone_Right);
+        // if the system forces player to start a game with fist at first, then this code good enough
+        GameManager.instance.player.playerLeftWeaponSlot.SelectWeapon(WeaponType.Fist_Left);
+        GameManager.instance.player.playerRightWeaponSlot.SelectWeapon(WeaponType.Fist_Right);
+        GameManager.instance.player.playerCombat.SetWeapons(GameManager.instance.player.playerLeftWeaponSlot.curWeapon.GetComponent<Weapon>(), GameManager.instance.player.playerRightWeaponSlot.curWeapon.GetComponent<Weapon>());
 
         UIManager.instance.DisableWeaponSelectionPopup();
     }
@@ -97,6 +96,8 @@ public class WeaponSelectionManager : MonoBehaviour
                 GameManager.instance.player.playerAnimation.ChangeMoveTo2Hand();
                 break;
             }
+            
+            UIManager.instance.UpdateCurWeaponInfo();
         }
     }
 
@@ -105,7 +106,7 @@ public class WeaponSelectionManager : MonoBehaviour
         if(curSelectedWeaponIndex >= GameManager.instance.player.playerInfo.availableWeapons.Count)
             curSelectedWeaponIndex = (GameManager.instance.player.playerInfo.availableWeapons.Count - 1);
         else
-            UpateWeaponSelectionBox();
+            UpdateWeaponSelectionBox();
     }
 
     public void MoveWeaponSelectionBoxesRightOnce() {
@@ -113,10 +114,10 @@ public class WeaponSelectionManager : MonoBehaviour
         if(curSelectedWeaponIndex < 0)
             curSelectedWeaponIndex = 0;
         else
-            UpateWeaponSelectionBox();
+            UpdateWeaponSelectionBox();
     }
 
-    private void UpateWeaponSelectionBox() {
+    public void UpdateWeaponSelectionBox() {
         // update currently selected weapon
         SetWeaponSelectionBox(2, GameManager.instance.player.playerInfo.availableWeapons[curSelectedWeaponIndex].weaponType);
 

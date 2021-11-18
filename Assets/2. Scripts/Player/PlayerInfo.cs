@@ -41,14 +41,19 @@ public class PlayerInfo : MonoBehaviour
         isAttacking = false;
         isRolling = false;
 
-        player = GetComponentInChildren<Player>();
+        player = GetComponentInChildren<Player>();     
     }
     
-        private void Start() {
-        // these codes would be altered after save/load functionality is implemented 
+    private void Start() {
         availableWeapons = new List<AvailableWeapon>();
         availableWeapons.Add(new AvailableWeapon(WeaponType.Fist_Left, WeaponManager.instance.weaponInitialDurabilities[(int)WeaponType.Fist_Left]));
+
+        // these codes would be altered after save/load functionality is implemented 
         availableWeapons.Add(new AvailableWeapon(WeaponType.Bone_Right, WeaponManager.instance.weaponInitialDurabilities[(int)WeaponType.Bone_Right] - 1));
         curWeapon = availableWeapons[0];
+
+        UIManager.instance.EnableWeaponSelectionPopup();
+        WeaponSelectionManager.instance.UpdateWeaponSelectionBox();
+        UIManager.instance.DisableWeaponSelectionPopup();
     }
 }
