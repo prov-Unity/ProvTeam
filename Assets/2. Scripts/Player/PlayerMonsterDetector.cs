@@ -22,7 +22,7 @@ public class PlayerMonsterDetector : MonoBehaviour
 
     private IEnumerator DetectMonsters() {
         while (true) {
-            Physics.OverlapSphereNonAlloc(transform.position, detectRange, colliders, LayerMask.GetMask("Monster"));
+            colliders = Physics.OverlapSphere(transform.position, detectRange, LayerMask.GetMask("Monster"));
             foreach (Collider curCollider in colliders) {
                 MonsterAI monsterAI = curCollider.GetComponent<MonsterAI>();
                 monsterAI.StartAction();
