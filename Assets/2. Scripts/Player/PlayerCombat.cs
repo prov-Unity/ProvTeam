@@ -77,21 +77,24 @@ public class PlayerCombat : MonoBehaviour
     private void GetDamaged(int attackPower) {
         player.playerInfo.health -= attackPower;
 
-        if(player.playerInfo.health > 0)
+        if(player.playerInfo.health > 0) {
             player.playerAnimation.PlayHitAnimation();
+            UIManager.instance.UpdatePlayerHealthBar();
+        }
         else
             StartCoroutine("Die");
-
-        UIManager.instance.UpdatePlayerHealthBar();
     }
 
     private IEnumerator Die() {
         player.playerInfo.health = 0;
+        UIManager.instance.UpdatePlayerHealthBar();
         player.playerAnimation.PlayDeathAnimation();
 
         curCollider.enabled = false;
         player.playerMovement.curRigidbody.useGravity = false;
         yield return new WaitForSeconds(3f);
         // do something 
+        // probably I will make a method of which name is might be Revive or Respawn from the Game Manager
+        // that method would enable collider and gravity of player again, and do something
     }
 }
