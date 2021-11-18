@@ -6,11 +6,13 @@ using UnityEngine;
 public class SkeletonSlaveBT : MonsterAI
 {
     private Node topNode;
+    public Vector3 pos => target.position;
 
     protected override void Awake()
     {
         base.Awake();
-        monsterTypeIdx = (int)MonsterType.SkeletonSlave;
+        monsterType = MonsterType.SkeletonSlave;
+        target = PPAP.Instance.player.transform;
     }
 
     protected override void Start()
@@ -21,30 +23,43 @@ public class SkeletonSlaveBT : MonsterAI
 
     private void ConstructBehaviorTree()
     {
-        print(Agent);
-        print(Anim);
-        Attack attackNode = new Attack(Anim, targetPosition, Agent);
+        Attack attackNode = new Attack(Anim, target, Agent, monsterBehaviorState);
         Range attackRangeNode = new Range(this, attackDistance);
         Range traceRangeNode = new Range(this, traceDistance);
-        Trace traceNode = new Trace(Agent, Anim, targetPosition);
+        Trace traceNode = new Trace(Agent, Anim, target, monsterBehaviorState);
         Sequence attackSequence = new Sequence(new List<Node>{attackRangeNode, attackNode});
         Sequence traceSequence = new Sequence(new List<Node> {traceRangeNode, traceNode});
 
         topNode = new Selector(new List<Node> {attackSequence, traceSequence});
     }
 
-    private void Update()
+
+    public override void StartAction()
     {
-        topNode.Evaluate();
-        if (topNode.NodeState == NodeState.FAILURE)
+        base.StartAction();
+        if (!isRunning)
+            StartCoroutine(Action());
+
+    }
+
+    public override IEnumerator Action()
+    {
+
+        Debug.Log("코루틴 실행됨");
+        isRunning = true;
+        yield return StartCoroutine(base.Action());
+        while (true)
         {
-            Agent.isStopped = true;
+            CheckForgetTime();
+            target.position = PPAP.Instance.player.transform.position;
+            yield return new WaitForSeconds(0.2f);
+            topNode.Evaluate();
+            if (topNode.NodeState == NodeState.FAILURE)
+            {
+                AgentMoveControl(false);
+            }
         }
     }
 
-    public override void Action()
-    {
-        base.Action();
-        
-    }
+
 }
