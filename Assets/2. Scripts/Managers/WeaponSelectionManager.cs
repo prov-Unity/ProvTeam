@@ -82,7 +82,8 @@ public class WeaponSelectionManager : MonoBehaviour
                 // switch to bone
                 GameManager.instance.player.playerLeftWeaponSlot.DestroyCurWeapon();
                 GameManager.instance.player.playerRightWeaponSlot.SelectWeapon(WeaponType.Bone_Right);
-
+                GameManager.instance.player.playerRightWeaponSlot.curWeapon.GetComponent<Weapon>().durability = GameManager.instance.player.playerInfo.availableWeapons[curSelectedWeaponIndex].durability;
+                
                 GameManager.instance.player.playerCombat.SetWeapons(null, GameManager.instance.player.playerRightWeaponSlot.curWeapon.GetComponent<Weapon>());
 
                 GameManager.instance.player.playerInfo.curWeapon = GameManager.instance.player.playerInfo.availableWeapons.Find(x => x.weaponType == WeaponType.Bone_Right);

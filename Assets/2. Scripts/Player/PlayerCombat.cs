@@ -7,10 +7,12 @@ public class PlayerCombat : MonoBehaviour
     [ReadOnly, SerializeField] private Weapon leftWeapon;
     [ReadOnly, SerializeField] private Weapon rightWeapon;
     private Player player;
+    private Collider curCollider;
     private Coroutine comboCoroutineInfo;
 
     private void Awake() {
-        player = GetComponentInChildren<Player>();
+        player = GetComponent<Player>();
+        curCollider = GetComponent<Collider>();
     }
 
     public void SetWeapons(Weapon inputLeftWeapon, Weapon inputRightWeapon) {
@@ -65,9 +67,28 @@ public class PlayerCombat : MonoBehaviour
         player.playerInfo.isAttacking = false;
     }
 
-    public void GetDamaged(int attackPower) {
+    private void OnTriggerEnter(Collider other) {
+        if(other.CompareTag("Weapon")) {
+            GetDamaged(other.GetComponent<Weapon>().attackPower);
+        }
+    }
+
+    private void GetDamaged(int attackPower) {
         player.playerInfo.health -= attackPower;
 
-        player.playerAnimation.PlayHitAnimation();
+        if(player.playerInfo.health > 0)
+            player.playerAnimation.PlayHitAnimation();
+        else {
+            player.playerAnimation.PlayDeathAnimation();
+            StartCoroutine("Die");
+        }
+
+        UIManager.instance.UpdatePlayerHealthBar();
+    }
+
+    private IEnumerator Die() {
+        curCollider.enabled = false;
+        yield return new WaitForSeconds(3f);
+        // do something 
     }
 }
