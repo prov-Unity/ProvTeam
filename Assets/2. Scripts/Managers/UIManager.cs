@@ -36,9 +36,9 @@ public class UIManager : MonoBehaviour
     }
 
 
-    public void UpdatePlayerHealthBar(int inputPlayerHealth)
+    public void UpdatePlayerHealthBar()
     {
-        playerHealthBar.fillAmount = (float)inputPlayerHealth/100f;
+        playerHealthBar.fillAmount = GameManager.instance.player.playerInfo.health/100f;
     }
 
     public void EnableMonsterInfo() {

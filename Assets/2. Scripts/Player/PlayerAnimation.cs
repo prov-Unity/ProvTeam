@@ -33,17 +33,16 @@ public class PlayerAnimation : MonoBehaviour
     }
 
     public void PlayHitAnimation() {
-        if(player.playerInfo.health > 0) {
-            switch(player.playerInfo.curWeapon.weaponType) {
-                case WeaponType.Fist_Left: animator.SetTrigger("HitFist"); break;
-                case WeaponType.Bone_Right: animator.SetTrigger("Hit2Hand"); break;
-            }
+        switch(player.playerInfo.curWeapon.weaponType) {
+            case WeaponType.Fist_Left: animator.SetTrigger("HitFist"); break;
+            case WeaponType.Bone_Right: animator.SetTrigger("Hit2Hand"); break;
         }
-        else {
-            switch(player.playerInfo.curWeapon.weaponType) {
-                case WeaponType.Fist_Left: animator.SetTrigger("DeathFist"); break;
-                case WeaponType.Bone_Right: animator.SetTrigger("Death2Hand"); break;
-            }
+    }
+
+    public void PlayDeathAnimation() {
+        switch(player.playerInfo.curWeapon.weaponType) {
+            case WeaponType.Fist_Left: animator.SetTrigger("DeathFist"); break;
+            case WeaponType.Bone_Right: animator.SetTrigger("Death2Hand"); break;
         }
     }
 

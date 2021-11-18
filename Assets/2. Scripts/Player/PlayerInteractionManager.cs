@@ -118,6 +118,15 @@ public class PlayerInteractionManager : MonoBehaviour
         UIManager.instance.DisableWeaponSelectionPopup();
     }
 
+    public void DestoryCurrentWeapon() {
+        player.playerInfo.availableWeapons.Remove(player.playerInfo.curWeapon);
+
+        UIManager.instance.EnableWeaponSelectionPopup();
+        WeaponSelectionManager.instance.MoveWeaponSelectionBoxesRightOnce();
+        WeaponSelectionManager.instance.SelectCurrentWeapon();
+        UIManager.instance.DisableWeaponSelectionPopup();
+    }
+
     // this method would occur error before starting the game because the values which this method uses are initialized after the game begins
     // private void OnDrawGizmos() {
     //     Gizmos.color = Color.blue;

@@ -12,10 +12,10 @@ public enum AttackCheckMode
 [RequireComponent(typeof(Collider))]
 public class Weapon : MonoBehaviour
 {
+    public WeaponType weaponType;
     public AttackCheckMode checkMode = AttackCheckMode.Enable;
     // 콜라이더 활성 비활성화로 공격판정할 떄 쓰임
     [ReadOnly] public Collider _col;
-    public WeaponType weaponType;
     [ReadOnly] public int attackPower;
     [ReadOnly] public int durability;
     [ReadOnly] public string owner;
@@ -101,6 +101,7 @@ public class Weapon : MonoBehaviour
     private void Start()
     {
         SetOwner();
+        SetAttackPower();
         _col = GetComponent<Collider>();
     }
 
@@ -127,6 +128,10 @@ public class Weapon : MonoBehaviour
         }
     }
 
+    public void SetAttackPower() {
+        attackPower = WeaponManager.instance.weaponAttackPowers[(int)weaponType];
+    }
+
     /// <summary>
     /// 특정 프레임 구간동안 트리거를 활성화 시켜주기 위한 방법
     /// </summary>
@@ -138,9 +143,13 @@ public class Weapon : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            other.GetComponent<PlayerCombat>().GetDamaged(attackPower);
+        if(weaponType != WeaponType.Fist_Left && weaponType != WeaponType.Fist_Right && owner == "Player" && other.CompareTag("Monster")) {
+            durability--;
+            GameManager.instance.player.playerInfo.curWeapon.durability = durability;
+            if(durability <= 0)
+                GameManager.instance.player.playerInteractionManager.DestoryCurrentWeapon();
+            else
+                UIManager.instance.UpdateCurWeaponInfo();
         }
     }
 }
