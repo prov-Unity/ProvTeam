@@ -10,9 +10,9 @@ public class FindPlayerTime
 {
     [SerializeField, ReadOnly] private float lastFindTime;
 
-    public FindPlayerTime()
+    public FindPlayerTime(float time)
     {
-        lastFindTime = DateTime.Now.Ticks;
+        lastFindTime = time;
     }
     
     /// <summary>
@@ -21,7 +21,7 @@ public class FindPlayerTime
     public void UpdateFindTime()
     {
         Debug.Log("시간 업데이트 됨");
-        lastFindTime = DateTime.Now.Ticks;
+        lastFindTime = Time.time;
     }
 
     /// <summary>
@@ -29,7 +29,7 @@ public class FindPlayerTime
     /// </summary>
     public bool CheckExpire(float forgetTime)
     {
-        return (DateTime.Now.Ticks - lastFindTime) >= forgetTime;
+        return (Time.time - lastFindTime) >= forgetTime;
     }
 }
 
@@ -51,7 +51,7 @@ public abstract class MonsterAI : MonoBehaviour
     [ReadOnly] public float traceDistance;
     [ReadOnly] public float forgetTime;
     [ReadOnly] public Transform target;
-    public FindPlayerTime findPlayerTime = new FindPlayerTime();
+    public FindPlayerTime findPlayerTime;
     public MonsterType monsterType;
     public bool isAttack;
     public MonsterBehaviorState monsterBehaviorState;
@@ -81,6 +81,7 @@ public abstract class MonsterAI : MonoBehaviour
 
     protected virtual void Awake()
     {
+        findPlayerTime = new FindPlayerTime(Time.time);
         monsterBehaviorState = new MonsterBehaviorState();
         weapon = GetComponentInChildren<Weapon>();
         _animator = GetComponent<Animator>();

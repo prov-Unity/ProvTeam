@@ -23,8 +23,6 @@ public class SkeletonSlaveBT : MonsterAI
 
     private void ConstructBehaviorTree()
     {
-        print(Agent);
-        print(Anim);
         Attack attackNode = new Attack(Anim, target, Agent, monsterBehaviorState);
         Range attackRangeNode = new Range(this, attackDistance);
         Range traceRangeNode = new Range(this, traceDistance);
@@ -38,6 +36,7 @@ public class SkeletonSlaveBT : MonsterAI
 
     public override void StartAction()
     {
+        base.StartAction();
         if (!isRunning)
             StartCoroutine(Action());
 
