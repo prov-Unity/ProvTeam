@@ -35,12 +35,6 @@ public class WeaponSelectionManager : MonoBehaviour
     private void Start() {
         popupWeaponSelection = UIManager.instance.popupWeaponSelection;
 
-        // these codes would be altered after save/load functionality is implemented
-        // if the system forces player to start a game with fist at first, then this code good enough
-        GameManager.instance.player.playerLeftWeaponSlot.SelectWeapon(WeaponType.Fist_Left);
-        GameManager.instance.player.playerRightWeaponSlot.SelectWeapon(WeaponType.Fist_Right);
-        GameManager.instance.player.playerCombat.SetWeapons(GameManager.instance.player.playerLeftWeaponSlot.curWeapon.GetComponent<Weapon>(), GameManager.instance.player.playerRightWeaponSlot.curWeapon.GetComponent<Weapon>());
-
         UIManager.instance.DisableWeaponSelectionPopup();
     }
 
@@ -96,7 +90,7 @@ public class WeaponSelectionManager : MonoBehaviour
                 GameManager.instance.player.playerAnimation.ChangeMoveTo2Hand();
                 break;
             }
-            
+
             UIManager.instance.UpdateCurWeaponInfo();
         }
     }

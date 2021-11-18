@@ -45,7 +45,8 @@ public class UIManager : MonoBehaviour
         monsterInfo.gameObject.SetActive(true);
     }
 
-    public void UpdateMonsterHealthBar(int inputMonsterHealth, int monsterMaxHealth) {
+    public void UpdateMonsterInfo(string inputMonsterName, int inputMonsterHealth, int monsterMaxHealth) {
+        monsterInfo.textMonsterName.text = inputMonsterName;
         monsterInfo.imageMonsterHealth.fillAmount = (float)inputMonsterHealth/monsterMaxHealth;
     }
 
@@ -55,7 +56,11 @@ public class UIManager : MonoBehaviour
 
 
     public void UpdateCurWeaponInfo() {
-        curWeaponInfo.textWeaponDurability.text = GameManager.instance.player.playerInfo.curWeapon.durability.ToString();
+        if(GameManager.instance.player.playerInfo.curWeapon.weaponType == WeaponType.Fist_Left)
+            curWeaponInfo.textWeaponDurability.text = "";
+        else
+            curWeaponInfo.textWeaponDurability.text = GameManager.instance.player.playerInfo.curWeapon.durability.ToString();
+
         curWeaponInfo.imageWeaponIcon.sprite = WeaponSelectionManager.instance.weaponIcons[(int)GameManager.instance.player.playerInfo.curWeapon.weaponType];
     }
 

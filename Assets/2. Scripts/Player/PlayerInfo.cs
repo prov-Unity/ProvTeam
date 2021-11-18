@@ -42,6 +42,8 @@ public class PlayerInfo : MonoBehaviour
         isRolling = false;
 
         player = GetComponentInChildren<Player>();     
+
+        curWeapon = new AvailableWeapon(WeaponType.No_Weapon, -1);
     }
     
     private void Start() {
@@ -50,10 +52,10 @@ public class PlayerInfo : MonoBehaviour
 
         // these codes would be altered after save/load functionality is implemented 
         availableWeapons.Add(new AvailableWeapon(WeaponType.Bone_Right, WeaponManager.instance.weaponInitialDurabilities[(int)WeaponType.Bone_Right] - 1));
-        curWeapon = availableWeapons[0];
-
+ 
         UIManager.instance.EnableWeaponSelectionPopup();
         WeaponSelectionManager.instance.UpdateWeaponSelectionBox();
+        WeaponSelectionManager.instance.SelectCurrentWeapon();
         UIManager.instance.DisableWeaponSelectionPopup();
     }
 }
