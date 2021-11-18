@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: MonsterData
   m_EditorClassIdentifier: 
   monsterInfos:
-  - hp: 50
+  - name: SkeletonSlave
+    hp: 50
     speed: 3
-    range: 7
+    traceDistance: 5
+    attackDistance: 2
+    forgetTime: 3

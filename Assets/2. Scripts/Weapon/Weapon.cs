@@ -18,8 +18,6 @@ public class Weapon : MonoBehaviour
     public WeaponType weaponType;
     [ReadOnly] public int attackPower;
     [ReadOnly] public int durability;
-    [ReadOnly] public bool isSelected;
-
     [ReadOnly] public string owner;
 
     // OverlapBox로 공격판정할 때 쓰임
@@ -104,21 +102,28 @@ public class Weapon : MonoBehaviour
     {
         SetOwner();
         _col = GetComponent<Collider>();
-
-        // isSelected is true when player actually selects this weapon
-        isSelected = false;
     }
 
     public void SetOwner()
     {
-        string tagName = transform.parent.tag;
-        if (tagName.Equals("Player")) {
+        string tagName = "";
+        if(transform.parent != null) 
+            tagName = transform.parent.tag;
+
+        switch(tagName) {
+            case "Player": 
             owner = "Player";
             _col.enabled = false;
-        }
-        else if (tagName.Equals("Monster")) {
+            break;
+
+            case "Monster": 
             owner = "Monster";
             _col.enabled = false;
+            break;
+
+            default:
+            owner = null;
+            break;
         }
     }
 

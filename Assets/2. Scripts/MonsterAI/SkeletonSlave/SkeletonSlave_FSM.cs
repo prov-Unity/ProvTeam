@@ -56,7 +56,6 @@ public class SkeletonSlave_FSM : MonoBehaviour
                 case State.DEATH:
                     StartCoroutine(Die());
                     yield break;
-                    break;
             }
 
             yield return new WaitForSeconds(0.1f);
