@@ -12,12 +12,12 @@ public class SkeletonSlaveBT : MonsterAI
     {
         base.Awake();
         monsterType = MonsterType.SkeletonSlave;
-        target = PPAP.Instance.player.transform;
     }
 
     protected override void Start()
     {
         base.Start();
+        target = PPAP.Instance.player.transform;
         ConstructBehaviorTree();
     }
 

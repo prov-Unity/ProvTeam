@@ -133,6 +133,7 @@ public abstract class MonsterAI : MonoBehaviour
         yield return new WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(0)
                                     .normalizedTime >= 0.8f);
         monsterInfo.hp -= damage;
+        Debug.Log(monsterInfo.hp);
         if (monsterInfo.hp <= 0)
         {
             StartCoroutine(Die());
@@ -144,7 +145,8 @@ public abstract class MonsterAI : MonoBehaviour
     {
         _animator.SetTrigger(Dead);
         yield return new WaitForSeconds(3.0f);
-        string weaponName = weapon.weaponType.ToString().Split(new char['_'])[0];
+        string weaponName = weapon.weaponType.ToString().Split('_')[0];
+        Debug.Log(weaponName);
         GameObject weaponItem = Resources.Load<GameObject>("Weapons/"+weaponName);
         Instantiate(weaponItem, transform.position, Quaternion.identity);
         Destroy(gameObject);    

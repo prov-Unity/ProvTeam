@@ -15,8 +15,8 @@ public class TestPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float inputX = Input.GetAxis("Horizontal");
-        float inputY = Input.GetAxis("Vertical");
+        float inputX = Input.GetAxis("Horizontal") * Time.deltaTime * 2f;
+        float inputY = Input.GetAxis("Vertical") * Time.deltaTime * 2f;
 
         transform.position += new Vector3(inputX, 0, inputY);
         transform.rotation = Quaternion.LookRotation(new Vector3(inputX, 0, inputY));
