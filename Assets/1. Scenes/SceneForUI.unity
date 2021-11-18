@@ -376,6 +376,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 600959358670261929, guid: 9683cd9f36fc35540bf114ef68c671b9, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 22.18
+      objectReference: {fileID: 0}
     - target: {fileID: 600959358739604426, guid: 9683cd9f36fc35540bf114ef68c671b9, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -423,6 +427,14 @@ PrefabInstance:
     - target: {fileID: 600959358739604429, guid: 9683cd9f36fc35540bf114ef68c671b9, type: 3}
       propertyPath: m_Name
       value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 600959359214888878, guid: 9683cd9f36fc35540bf114ef68c671b9, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 600959359338004194, guid: 9683cd9f36fc35540bf114ef68c671b9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 17
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9683cd9f36fc35540bf114ef68c671b9, type: 3}
