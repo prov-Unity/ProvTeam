@@ -123,8 +123,10 @@ public abstract class MonsterAI : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!other.CompareTag("Weapon"))
+            return;
         hitWeapon = other.GetComponent<Weapon>();
-        if (hitWeapon.owner.Equals("Player"))
+        if (hitWeapon != null && hitWeapon.owner.Equals("Player"))
         {
             StartCoroutine(GetDamage(hitWeapon.attackPower));
         }
