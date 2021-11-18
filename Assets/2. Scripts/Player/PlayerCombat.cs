@@ -70,7 +70,7 @@ public class PlayerCombat : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         switch(other.tag) {
             case "Weapon": GetDamaged(other.GetComponent<Weapon>().attackPower); break;
-            case "Death": StartCoroutine("Die"); break;
+            case "DeadZone": StartCoroutine("Die"); break;
         }
     }
 
@@ -79,15 +79,16 @@ public class PlayerCombat : MonoBehaviour
 
         if(player.playerInfo.health > 0)
             player.playerAnimation.PlayHitAnimation();
-        else {
-            player.playerAnimation.PlayDeathAnimation();
+        else
             StartCoroutine("Die");
-        }
 
         UIManager.instance.UpdatePlayerHealthBar();
     }
 
     private IEnumerator Die() {
+        player.playerInfo.health = 0;
+        player.playerAnimation.PlayDeathAnimation();
+
         curCollider.enabled = false;
         player.playerMovement.curRigidbody.useGravity = false;
         yield return new WaitForSeconds(3f);
