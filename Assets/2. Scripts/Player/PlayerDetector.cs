@@ -1,18 +1,18 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlayerMonsterDetector : MonoBehaviour
+public class PlayerDetector : MonoBehaviour
 {
     [ReadOnly, SerializeField] private Player player;
     [ReadOnly, SerializeField] private Collider[] colliders;
 
-    [ReadOnly, SerializeField] private float detectRange;
+    [ReadOnly, SerializeField] private float detectMonsterRange;
     [ReadOnly, SerializeField] private float detectCycle;
 
     private void Awake() {
         player = GetComponent<Player>();
 
-        detectRange = 7f;
+        detectMonsterRange = 7f;
         detectCycle = 0.1f;
     }
 
@@ -22,7 +22,7 @@ public class PlayerMonsterDetector : MonoBehaviour
 
     private IEnumerator DetectMonsters() {
         while (true) {
-            colliders = Physics.OverlapSphere(transform.position, detectRange, LayerMask.GetMask("Monster"));
+            colliders = Physics.OverlapSphere(player.neckTransform.position, detectMonsterRange, LayerMask.GetMask("Monster"));
             foreach (Collider curCollider in colliders) {
                 MonsterAI monsterAI = curCollider.GetComponent<MonsterAI>();
                 monsterAI.StartAction();
@@ -35,6 +35,6 @@ public class PlayerMonsterDetector : MonoBehaviour
     // private void OnDrawGizmos() {
     //     Gizmos.color = Color.blue;
 
-    //     Gizmos.DrawWireSphere(transform.position, detectRange);        
+    //     Gizmos.DrawWireSphere(player.neckTransform.position, detectMonsterRange);        
     // }  
 }

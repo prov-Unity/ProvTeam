@@ -68,8 +68,9 @@ public class PlayerCombat : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
-        if(other.CompareTag("Weapon")) {
-            GetDamaged(other.GetComponent<Weapon>().attackPower);
+        switch(other.tag) {
+            case "Weapon": GetDamaged(other.GetComponent<Weapon>().attackPower); break;
+            case "Death": StartCoroutine("Die"); break;
         }
     }
 
@@ -88,6 +89,7 @@ public class PlayerCombat : MonoBehaviour
 
     private IEnumerator Die() {
         curCollider.enabled = false;
+        player.playerMovement.curRigidbody.useGravity = false;
         yield return new WaitForSeconds(3f);
         // do something 
     }
