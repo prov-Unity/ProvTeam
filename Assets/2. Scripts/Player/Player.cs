@@ -16,6 +16,8 @@ public class Player : MonoBehaviour
     [HideInInspector] public List<PlayerWeaponSpawnPoint> playerWeaponSpawnPoints;
     [HideInInspector] public PlayerCombat playerCombat;
     [HideInInspector] public PlayerInteractionManager playerInteractionManager;
+    [HideInInspector] public PlayerMonsterDetector playerMonsterDetector;
+
 
     private void Awake() {
         neckTransform = FindObjectOfType<PlayerNeck>().transform;
@@ -38,5 +40,6 @@ public class Player : MonoBehaviour
 
         playerCombat = GetComponent<PlayerCombat>();
         playerInteractionManager = GetComponent<PlayerInteractionManager>();
+        playerMonsterDetector = GetComponent<PlayerMonsterDetector>();
     }
 }
