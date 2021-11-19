@@ -75,7 +75,6 @@ public class WeaponSelectionManager : MonoBehaviour
 
                 GameManager.instance.player.playerInfo.curWeapon = GameManager.instance.player.playerInfo.availableWeapons.Find(x => x.weaponType == WeaponType.Fist_Left);
                 GameManager.instance.player.playerInfo.attackIndex = 0;
-                GameManager.instance.player.playerAnimation.ChangeMoveToFist();
                 break;
 
                 case WeaponType.Bone_Right:
@@ -88,10 +87,9 @@ public class WeaponSelectionManager : MonoBehaviour
 
                 GameManager.instance.player.playerInfo.curWeapon = GameManager.instance.player.playerInfo.availableWeapons.Find(x => x.weaponType == WeaponType.Bone_Right);
                 GameManager.instance.player.playerInfo.attackIndex = 0;
-                GameManager.instance.player.playerAnimation.ChangeMoveTo2Hand();
                 break;
             }
-
+            GameManager.instance.player.playerAnimation.UpdateCurWeaponIndex();
             UIManager.instance.UpdateCurWeaponInfo();
         }
     }
