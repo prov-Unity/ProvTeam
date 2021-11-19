@@ -13,6 +13,6 @@ public class UIMonsterInfo : MonoBehaviour
 
     public void UpdateMonsterInfo(MonsterAI targetMonster) {
         textMonsterName.text = targetMonster.monsterData.monsterInfos[(int)targetMonster.monsterType].name;
-        imageMonsterHealth.fillAmount = targetMonster.currentHp / targetMonster.monsterData.monsterInfos[(int)targetMonster.monsterType].maxHp;
+        imageMonsterHealth.fillAmount = (float)targetMonster.currentHp / targetMonster.monsterData.monsterInfos[(int)targetMonster.monsterType].maxHp;
     }
 }
