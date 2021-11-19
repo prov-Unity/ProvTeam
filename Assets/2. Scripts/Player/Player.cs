@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [HideInInspector] public Transform neckTransform;
+    [HideInInspector] public Transform cameraTargetTransform;
 
     [HideInInspector] public PlayerInfo playerInfo;
     [HideInInspector] public PlayerInputManager playerInputManager;
@@ -16,9 +16,11 @@ public class Player : MonoBehaviour
     [HideInInspector] public List<PlayerWeaponSpawnPoint> playerWeaponSpawnPoints;
     [HideInInspector] public PlayerCombat playerCombat;
     [HideInInspector] public PlayerInteractionManager playerInteractionManager;
+    [HideInInspector] public PlayerDetector playerDetector;
+
 
     private void Awake() {
-        neckTransform = FindObjectOfType<PlayerNeck>().transform;
+        cameraTargetTransform = FindObjectOfType<PlayerCameraTarget>().transform;
 
         playerInfo = GetComponent<PlayerInfo>();
         playerInputManager = GetComponent<PlayerInputManager>();
@@ -38,5 +40,6 @@ public class Player : MonoBehaviour
 
         playerCombat = GetComponent<PlayerCombat>();
         playerInteractionManager = GetComponent<PlayerInteractionManager>();
+        playerDetector = GetComponent<PlayerDetector>();
     }
 }

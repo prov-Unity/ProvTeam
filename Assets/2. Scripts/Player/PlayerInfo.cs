@@ -31,7 +31,7 @@ public class PlayerInfo : MonoBehaviour
         
         speedMove = 3f;
         speedJump = 5f;
-        speedRoll = 6.5f;
+        speedRoll = 4.7f;
 
         attackIndex = 0;
         comboLimitTime = 2f;
@@ -51,7 +51,7 @@ public class PlayerInfo : MonoBehaviour
         availableWeapons.Add(new AvailableWeapon(WeaponType.Fist_Left, WeaponManager.instance.weaponInitialDurabilities[(int)WeaponType.Fist_Left]));
 
         // these codes would be altered after save/load functionality is implemented 
-        availableWeapons.Add(new AvailableWeapon(WeaponType.Bone_Right, WeaponManager.instance.weaponInitialDurabilities[(int)WeaponType.Bone_Right] - 1));
+        availableWeapons.Add(new AvailableWeapon(WeaponType.Bone_Right, WeaponManager.instance.weaponInitialDurabilities[(int)WeaponType.Bone_Right] - 4));
  
         UIManager.instance.EnableWeaponSelectionPopup();
         WeaponSelectionManager.instance.UpdateWeaponSelectionBox();

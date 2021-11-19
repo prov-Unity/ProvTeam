@@ -7,10 +7,12 @@ public class PlayerCombat : MonoBehaviour
     [ReadOnly, SerializeField] private Weapon leftWeapon;
     [ReadOnly, SerializeField] private Weapon rightWeapon;
     private Player player;
+    private Collider curCollider;
     private Coroutine comboCoroutineInfo;
 
     private void Awake() {
-        player = GetComponentInChildren<Player>();
+        player = GetComponent<Player>();
+        curCollider = GetComponent<Collider>();
     }
 
     public void SetWeapons(Weapon inputLeftWeapon, Weapon inputRightWeapon) {
@@ -65,9 +67,34 @@ public class PlayerCombat : MonoBehaviour
         player.playerInfo.isAttacking = false;
     }
 
-    public void GetDamaged(int attackPower) {
+    private void OnTriggerEnter(Collider other) {
+        switch(other.tag) {
+            case "Weapon": GetDamaged(other.GetComponent<Weapon>().attackPower); break;
+            case "DeadZone": StartCoroutine("Die"); break;
+        }
+    }
+
+    private void GetDamaged(int attackPower) {
         player.playerInfo.health -= attackPower;
 
-        player.playerAnimation.PlayHitAnimation();
+        if(player.playerInfo.health > 0) {
+            player.playerAnimation.PlayHitAnimation();
+            UIManager.instance.UpdatePlayerHealthBar();
+        }
+        else
+            StartCoroutine("Die");
+    }
+
+    private IEnumerator Die() {
+        player.playerInfo.health = 0;
+        UIManager.instance.UpdatePlayerHealthBar();
+        player.playerAnimation.PlayDeathAnimation();
+
+        curCollider.enabled = false;
+        player.playerMovement.curRigidbody.useGravity = false;
+        yield return new WaitForSeconds(3f);
+        // do something 
+        // probably I will make a method of which name is might be Revive or Respawn from the Game Manager
+        // that method would enable collider and gravity of player again, and do something
     }
 }
