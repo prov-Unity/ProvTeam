@@ -162,6 +162,8 @@ public abstract class MonsterAI : MonoBehaviour
         string weaponName = weapon.weaponType.ToString().Split('_')[0];
         Debug.Log(weaponName);
         GameObject weaponItem = Resources.Load<GameObject>("Weapons/"+weaponName);
+        Weapon dropWeapon = weaponItem.GetComponent<Weapon>();
+        dropWeapon.durability = WeaponManager.instance.weaponInitialDurabilities[(int) dropWeapon.weaponType];
         Instantiate(weaponItem, transform.position, Quaternion.identity);
         Destroy(gameObject);    
     }
