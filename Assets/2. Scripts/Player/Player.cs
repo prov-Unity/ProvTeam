@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [HideInInspector] public Transform neckTransform;
+    [HideInInspector] public Transform cameraTargetTransform;
 
     [HideInInspector] public PlayerInfo playerInfo;
     [HideInInspector] public PlayerInputManager playerInputManager;
@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
 
 
     private void Awake() {
-        neckTransform = FindObjectOfType<PlayerNeck>().transform;
+        cameraTargetTransform = FindObjectOfType<PlayerCameraTarget>().transform;
 
         playerInfo = GetComponent<PlayerInfo>();
         playerInputManager = GetComponent<PlayerInputManager>();
