@@ -11,7 +11,7 @@ public class MonsterData : ScriptableObject
 public class MonsterInfo
 {
     public string name;
-    public int hp;
+    public int maxHp;
     public int speed;
     public float traceDistance;
     public float attackDistance;

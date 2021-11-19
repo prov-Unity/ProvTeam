@@ -43,26 +43,27 @@ public enum MonsterType
 public class MonsterBehaviorState
 {
     public bool isAttack;
+    public bool isHitting;
     public bool isDead;
 }
 
 public abstract class MonsterAI : MonoBehaviour
 {
+    [ReadOnly] public int currentHp;
     [ReadOnly] public float attackDistance;
     [ReadOnly] public float traceDistance;
     [ReadOnly] public float forgetTime;
     [ReadOnly] public Transform target;
-    public FindPlayerTime findPlayerTime;
-    public MonsterType monsterType;
-    public bool isAttack;
-    public MonsterBehaviorState monsterBehaviorState;
+    [ReadOnly] public FindPlayerTime findPlayerTime;
+    [ReadOnly] public MonsterType monsterType;
+    [ReadOnly] public MonsterBehaviorState monsterBehaviorState;
+    public MonsterData monsterData;
+    public MonsterInfo monsterInfo;
     
     protected bool isRunning;
     
     private NavMeshAgent _agent;
     private Animator _animator;
-    private MonsterData monsterData;
-    private MonsterInfo monsterInfo;
     private Weapon weapon;
     private Weapon hitWeapon;
     private static readonly int HitHash = Animator.StringToHash("Hit");
@@ -94,6 +95,7 @@ public abstract class MonsterAI : MonoBehaviour
     protected virtual void Start()
     {
         monsterInfo = monsterData.monsterInfos[(int)monsterType];
+        currentHp = monsterInfo.maxHp;
         attackDistance = monsterInfo.attackDistance;
         traceDistance = monsterInfo.traceDistance;
         forgetTime = monsterInfo.forgetTime;
@@ -134,16 +136,20 @@ public abstract class MonsterAI : MonoBehaviour
 
     private IEnumerator GetDamage(int damage)
     {
-        _animator.SetTrigger(HitHash);
+        if (!monsterBehaviorState.isHitting)
+        {
+            _animator.SetTrigger(HitHash);
+            monsterBehaviorState.isHitting = !monsterBehaviorState.isHitting;
+        }
         yield return new WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(0)
-                                    .normalizedTime >= 0.8f);
-        monsterInfo.hp -= damage;
-        Debug.Log(monsterInfo.hp);
-        if (monsterInfo.hp <= 0)
+                                    .normalizedTime >= 0.9f);
+        monsterBehaviorState.isHitting = !monsterBehaviorState.isHitting;
+        currentHp -= damage;
+        Debug.Log(currentHp);
+        if (currentHp <= 0)
         {
             StartCoroutine(Die());
         }
-            
     }
 
     private IEnumerator Die()
@@ -157,12 +163,12 @@ public abstract class MonsterAI : MonoBehaviour
         Destroy(gameObject);    
     }
     
-    public void TurnOnWeaponCollider2()
+    public void TurnOnWeaponCollider()
     {
         weapon.EnableCollider(true);
     }
 
-    public void TurnOffWeaponCollider2()
+    public void TurnOffWeaponCollider()
     {
         weapon.EnableCollider(false);
     }
