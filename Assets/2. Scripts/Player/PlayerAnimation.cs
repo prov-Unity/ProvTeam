@@ -19,6 +19,10 @@ public class PlayerAnimation : MonoBehaviour
         animator.SetFloat("VelocityY", inputY);
     }
 
+    public void UpdateCurWeaponIndex() {
+        animator.SetInteger("CurWeaponIndex", ((int)GameManager.instance.player.playerInfo.curWeapon.weaponType));
+    }
+
     public void UpdateGroundInfo(float groundDistance, bool isGrounded) {
         animator.SetFloat("GroundDistance", groundDistance);
         animator.SetBool("IsGrounded", isGrounded); 
@@ -55,13 +59,5 @@ public class PlayerAnimation : MonoBehaviour
     
     public void PlayRollAnimation() {
         animator.SetTrigger("Roll");
-    }
-
-    public void ChangeMoveTo2Hand() {
-        animator.SetTrigger("ChangeWeaponTo2Hand");
-    }
-
-    public void ChangeMoveToFist() {
-        animator.SetTrigger("ChangeWeaponToFist");
     }
 }

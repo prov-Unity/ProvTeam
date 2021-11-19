@@ -30,7 +30,7 @@ public class PlayerInteractionManager : MonoBehaviour
     }
 
     private void Update() {
-        colliders = Physics.OverlapBox(player.transform.position + new Vector3((player.neckTransform.position-Camera.main.transform.position).normalized.x, yValueForInteractionBox, (player.neckTransform.position-Camera.main.transform.position).normalized.z), new Vector3(distanceToInteract, player.transform.lossyScale.y, distanceToInteract), Quaternion.identity, LayerMask.GetMask("Interactable"));
+        colliders = Physics.OverlapBox(player.transform.position + new Vector3((player.cameraTargetTransform.position-Camera.main.transform.position).normalized.x, yValueForInteractionBox, (player.cameraTargetTransform.position-Camera.main.transform.position).normalized.z), new Vector3(distanceToInteract, player.transform.lossyScale.y, distanceToInteract), Quaternion.identity, LayerMask.GetMask("Interactable"));
         if(colliders.Length > 0) {
             targetWeapon = colliders[0].GetComponent<Weapon>();
 

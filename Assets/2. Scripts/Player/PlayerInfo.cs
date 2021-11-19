@@ -31,7 +31,7 @@ public class PlayerInfo : MonoBehaviour
         
         speedMove = 3f;
         speedJump = 5f;
-        speedRoll = 6.5f;
+        speedRoll = 4.7f;
 
         attackIndex = 0;
         comboLimitTime = 2f;

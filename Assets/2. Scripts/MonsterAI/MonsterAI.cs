@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -63,6 +64,7 @@ public abstract class MonsterAI : MonoBehaviour
     private MonsterData monsterData;
     private MonsterInfo monsterInfo;
     private Weapon weapon;
+    private Weapon hitWeapon;
     private static readonly int HitHash = Animator.StringToHash("Hit");
     private static readonly int Dead = Animator.StringToHash("Dead");
     private static readonly int TraceHash = Animator.StringToHash("Trace");
@@ -121,9 +123,12 @@ public abstract class MonsterAI : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (!other.CompareTag("Weapon"))
+            return;
+        hitWeapon = other.GetComponent<Weapon>();
+        if (hitWeapon != null && hitWeapon.owner.Equals("Player"))
         {
-            StartCoroutine(GetDamage(other.GetComponent<Weapon>().attackPower));
+            StartCoroutine(GetDamage(hitWeapon.attackPower));
         }
     }
 
