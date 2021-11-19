@@ -92,7 +92,7 @@ public class MeleeSensor : MonoBehaviour
                     if (!checkObj.CompareTag("Player"))
                         continue;
                     target = checkObj.GetComponent<Player>();
-                    targetTransform = target.neckTransform;
+                    targetTransform = target.cameraTargetTransform;
                     monsterState.targetTransform = targetTransform;
                     MonsterAction();
                 }
