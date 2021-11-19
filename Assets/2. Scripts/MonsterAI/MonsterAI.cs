@@ -137,10 +137,7 @@ public abstract class MonsterAI : MonoBehaviour
     private IEnumerator GetDamage(int damage)
     {
         if (!monsterBehaviorState.isHitting)
-        {
             _animator.SetTrigger(HitHash);
-            monsterBehaviorState.isHitting = !monsterBehaviorState.isHitting;
-        }
         yield return new WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(0)
                                     .normalizedTime >= 0.9f);
         monsterBehaviorState.isHitting = !monsterBehaviorState.isHitting;
@@ -148,7 +145,13 @@ public abstract class MonsterAI : MonoBehaviour
         Debug.Log(currentHp);
         if (currentHp <= 0)
         {
+            UIManager.instance.DisableMonsterInfo();
             StartCoroutine(Die());
+        }
+        else
+        {
+            UIManager.instance.EnableMonsterInfo();
+            UIManager.instance.UpdateMonsterInfo(this);
         }
     }
 
@@ -179,10 +182,16 @@ public abstract class MonsterAI : MonoBehaviour
         AgentMoveControl(monsterBehaviorState.isAttack);
     }
 
+    public void ChangeHitState()
+    {
+        monsterBehaviorState.isHitting = !monsterBehaviorState.isHitting;
+        AgentMoveControl(monsterBehaviorState.isHitting);
+    }
+
     public void ChangeDeadState()
     {
         monsterBehaviorState.isDead = !monsterBehaviorState.isDead;
-        AgentMoveControl(monsterBehaviorState.isAttack);
+        AgentMoveControl(monsterBehaviorState.isDead);
     }
 
     public void AgentMoveControl(bool canMove)
