@@ -8,7 +8,7 @@ public class UIMonsterInfo : MonoBehaviour
     [ReadOnly] public Image imageMonsterHealth;
     private void Awake() {
         textMonsterName = GetComponentInChildren<TextMeshProUGUI>();
-        imageMonsterHealth = GetComponentInChildren<Image>();
+        imageMonsterHealth = GetComponentsInChildren<Image>()[1];
     }
 
     public void UpdateMonsterInfo(MonsterAI targetMonster) {
