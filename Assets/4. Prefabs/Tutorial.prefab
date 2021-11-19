@@ -56107,9 +56107,9 @@ GameObject:
   m_Component:
   - component: {fileID: 9164955186938492551}
   - component: {fileID: 9164955186938492550}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: DeadZone1
-  m_TagString: Untagged
+  m_TagString: DeadZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -56136,7 +56136,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9164955186938492548}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -56249,12 +56249,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ec82f97c8b4d974983f31b45e1570a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponType: 2
   checkMode: 0
   _col: {fileID: 9164955187266910568}
-  weaponType: 2
   attackPower: 0
   durability: 0
-  isSelected: 0
   owner: 
   center: {x: 0, y: 0, z: 0}
 --- !u!1 &9164955187768672638
@@ -56267,9 +56266,9 @@ GameObject:
   m_Component:
   - component: {fileID: 9164955187768672625}
   - component: {fileID: 9164955187768672624}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: DeadZone2
-  m_TagString: Untagged
+  m_TagString: DeadZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -56296,7 +56295,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9164955187768672638}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -56312,7 +56311,7 @@ GameObject:
   - component: {fileID: 9164955188026106223}
   m_Layer: 0
   m_Name: DeadZone
-  m_TagString: Untagged
+  m_TagString: DeadZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
