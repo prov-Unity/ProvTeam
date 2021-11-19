@@ -45,9 +45,8 @@ public class UIManager : MonoBehaviour
         monsterInfo.gameObject.SetActive(true);
     }
 
-    public void UpdateMonsterInfo(string inputMonsterName, int inputMonsterHealth, int monsterMaxHealth) {
-        monsterInfo.textMonsterName.text = inputMonsterName;
-        monsterInfo.imageMonsterHealth.fillAmount = (float)inputMonsterHealth/monsterMaxHealth;
+    public void UpdateMonsterInfo(MonsterAI targetMonster) {
+        monsterInfo.UpdateMonsterInfo(targetMonster);
     }
 
     public void DisableMonsterInfo() {

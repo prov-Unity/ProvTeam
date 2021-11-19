@@ -28,7 +28,7 @@ public class SkeletonSlave_FSM : MonoBehaviour
     private void Start()
     {
         monsterState = GetComponent<MonsterState>();
-        currentHp = monsterState.monsterInfo.hp;
+        currentHp = monsterState.monsterInfo.maxHp;
         _agent.speed = monsterState.monsterInfo.speed;
         StartCoroutine(MonsterAction());
     }
