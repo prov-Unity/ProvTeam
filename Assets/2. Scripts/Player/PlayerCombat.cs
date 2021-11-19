@@ -6,6 +6,7 @@ public class PlayerCombat : MonoBehaviour
 {
     [ReadOnly, SerializeField] private Weapon leftWeapon;
     [ReadOnly, SerializeField] private Weapon rightWeapon;
+    [ReadOnly, SerializeField] private Weapon monsterWeapon;
     private Player player;
     private Collider curCollider;
     private Coroutine comboCoroutineInfo;
@@ -69,7 +70,11 @@ public class PlayerCombat : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
         switch(other.tag) {
-            case "Weapon": GetDamaged(other.GetComponent<Weapon>().attackPower); break;
+            case "Weapon": 
+            monsterWeapon = other.GetComponent<Weapon>();
+            if(monsterWeapon.owner == "Monster")
+                GetDamaged(monsterWeapon.attackPower); 
+            break;
             case "DeadZone": StartCoroutine("Die"); break;
         }
     }
@@ -79,6 +84,7 @@ public class PlayerCombat : MonoBehaviour
 
         if(player.playerInfo.health > 0) {
             player.playerAnimation.PlayHitAnimation();
+            SetIsAttackingFalse();
             UIManager.instance.UpdatePlayerHealthBar();
         }
         else
@@ -96,5 +102,6 @@ public class PlayerCombat : MonoBehaviour
         // do something 
         // probably I will make a method of which name is might be Revive or Respawn from the Game Manager
         // that method would enable collider and gravity of player again, and do something
+        // do something including reset attack index, reset is attacking, or so
     }
 }

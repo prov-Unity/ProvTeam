@@ -4420,6 +4420,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftWeapon: {fileID: 0}
   rightWeapon: {fileID: 0}
+  monsterWeapon: {fileID: 0}
 --- !u!114 &1571248583
 MonoBehaviour:
   m_ObjectHideFlags: 0
