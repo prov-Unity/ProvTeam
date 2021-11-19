@@ -108,9 +108,16 @@ public class Weapon : MonoBehaviour
     public void SetOwner()
     {
         string tagName = "";
-        if(transform.parent != null) 
+        GameObject parent;
+        if(transform.parent != null)
+        {
             tagName = transform.parent.tag;
-
+            while (tagName.Equals("Weapon"))
+            {
+                parent = transform.parent.gameObject;
+                tagName = parent.transform.parent.tag;
+            }
+        }
         switch(tagName) {
             case "Player": 
             owner = "Player";

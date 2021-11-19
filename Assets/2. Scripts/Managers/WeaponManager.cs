@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum WeaponType {
-    Fist_Left, Fist_Right, Bone_Right, No_Weapon
+    Fist_Left, Fist_Right, Bone_Right, TwoHandedSword, No_Weapon
 }
 
 public class AvailableWeapon {
@@ -38,5 +38,9 @@ public class WeaponManager : MonoBehaviour
         weaponPrefabs.Add(Resources.Load<GameObject>("Weapons/Bone"));
         weaponAttackPowers.Add(10);
         weaponInitialDurabilities.Add(7);
+        
+        weaponPrefabs.Add(Resources.Load<GameObject>("Weapons/TwoHandedSword"));
+        weaponAttackPowers.Add(12);
+        weaponInitialDurabilities.Add(10);
     }
 }

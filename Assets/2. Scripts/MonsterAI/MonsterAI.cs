@@ -37,6 +37,7 @@ public class FindPlayerTime
 public enum MonsterType
 {
     SkeletonSlave,
+    SkeletonKnight
 }
 
 [Serializable]
@@ -130,14 +131,14 @@ public abstract class MonsterAI : MonoBehaviour
         hitWeapon = other.GetComponent<Weapon>();
         if (hitWeapon != null && hitWeapon.owner.Equals("Player"))
         {
-            StartCoroutine(GetDamage(hitWeapon.attackPower));
+            if (!monsterBehaviorState.isHitting)
+                StartCoroutine(GetDamage(hitWeapon.attackPower));
         }
     }
 
     private IEnumerator GetDamage(int damage)
     {
-        if (!monsterBehaviorState.isHitting)
-            _animator.SetTrigger(HitHash);
+        _animator.SetTrigger(HitHash);
         yield return new WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(0)
                                     .normalizedTime >= 0.9f);
         monsterBehaviorState.isHitting = !monsterBehaviorState.isHitting;

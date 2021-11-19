@@ -6,7 +6,6 @@ using UnityEngine;
 public class SkeletonSlaveBT : MonsterAI
 {
     private Node topNode;
-    public Vector3 pos => target.position;
 
     protected override void Awake()
     {
@@ -39,7 +38,6 @@ public class SkeletonSlaveBT : MonsterAI
         base.StartAction();
         if (!isRunning)
             StartCoroutine(Action());
-
     }
 
     public override IEnumerator Action()

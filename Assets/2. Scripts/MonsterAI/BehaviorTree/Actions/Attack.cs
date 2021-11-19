@@ -9,7 +9,7 @@ public class Attack : Node
     private Transform target;
     private NavMeshAgent agent;
     private MonsterBehaviorState monsterBehaviorState;
-    private static readonly int Attack1 = Animator.StringToHash("Attack");
+    private static readonly int AttackHash = Animator.StringToHash("Attack");
 
     public Attack(Animator animator, Transform target, NavMeshAgent agent, MonsterBehaviorState monsterBehaviorState)
     {
@@ -24,7 +24,7 @@ public class Attack : Node
         if (monsterBehaviorState.isAttack)
             return NodeState.FAILURE;
         Debug.Log("Attack Node 실행됨");
-        animator.SetBool("IsAttack", true);
+        animator.SetBool(AttackHash, true);
         return NodeState.SUCCESS;
     }
     

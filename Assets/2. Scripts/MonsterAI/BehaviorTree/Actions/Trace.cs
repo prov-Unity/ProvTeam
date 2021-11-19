@@ -9,7 +9,8 @@ public class Trace : Node
     private Animator animator;
     private Transform target;
     private MonsterBehaviorState monsterBehaviorState;
-    private static readonly int Trace1 = Animator.StringToHash("Trace");
+    private static readonly int TraceHash = Animator.StringToHash("Trace");
+    private static readonly int AttackHash = Animator.StringToHash("Attack");
 
     public Trace(NavMeshAgent agent, Animator animator, Transform target, MonsterBehaviorState monsterBehaviorState)
     {
@@ -27,8 +28,8 @@ public class Trace : Node
             return NodeState.FAILURE;
         agent.isStopped = false;
         agent.SetDestination(target.position);
-        animator.SetBool("IsAttack", false);
-        animator.SetBool(Trace1, true);
+        animator.SetBool(AttackHash, false);
+        animator.SetBool(TraceHash, true);
         return NodeState.SUCCESS;
     }
 }
