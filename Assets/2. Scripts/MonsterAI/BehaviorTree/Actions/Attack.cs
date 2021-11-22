@@ -2,21 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = System.Random;
 
 public class Attack : Node
 {
+    private Random random;
     private Animator animator;
-    private Transform target;
-    private NavMeshAgent agent;
+    private int attackIndex;
+    private int attackPatternLength;
     private MonsterBehaviorState monsterBehaviorState;
     private static readonly int AttackHash = Animator.StringToHash("Attack");
+    private static readonly int AttackIndexHash = Animator.StringToHash("AttackIndex");
 
-    public Attack(Animator animator, Transform target, NavMeshAgent agent, MonsterBehaviorState monsterBehaviorState)
+    public Attack(Animator animator, MonsterBehaviorState monsterBehaviorState, int attackPatternLength)
     {
+        random = new Random();
         this.animator = animator;
-        this.target = target;
-        this.agent = agent;
         this.monsterBehaviorState = monsterBehaviorState;
+        this.attackPatternLength = attackPatternLength;
     }
 
     public override NodeState Evaluate()
@@ -24,6 +27,9 @@ public class Attack : Node
         if (monsterBehaviorState.isAttack)
             return NodeState.FAILURE;
         Debug.Log("Attack Node 실행됨");
+        attackIndex = random.Next(attackPatternLength);
+        Debug.Log(attackIndex);
+        animator.SetFloat(AttackIndexHash, attackIndex);
         animator.SetBool(AttackHash, true);
         return NodeState.SUCCESS;
     }

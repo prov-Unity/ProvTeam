@@ -6,6 +6,7 @@ using UnityEngine;
 public class SkeletonSlaveBT : MonsterAI
 {
     private Node topNode;
+    private const int AttackPatternLength = 1;
 
     protected override void Awake()
     {
@@ -22,7 +23,7 @@ public class SkeletonSlaveBT : MonsterAI
 
     private void ConstructBehaviorTree()
     {
-        Attack attackNode = new Attack(Anim, target, Agent, monsterBehaviorState);
+        Attack attackNode = new Attack(Anim, monsterBehaviorState, AttackPatternLength);
         Range attackRangeNode = new Range(this, attackDistance);
         Range traceRangeNode = new Range(this, traceDistance);
         Trace traceNode = new Trace(Agent, Anim, target, monsterBehaviorState);
