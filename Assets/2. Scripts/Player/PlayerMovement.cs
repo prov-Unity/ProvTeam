@@ -1,13 +1,19 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private Player player;
     [ReadOnly] public Rigidbody curRigidbody;
+
+    private Player player;
+    
+    private float invulnerableResetTime;
 
     private void Awake() {
         player = GetComponent<Player>();
         curRigidbody = GetComponent<Rigidbody>();
+
+        invulnerableResetTime = 0.5f;
     }
 
     private void Update() {
@@ -15,9 +21,9 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void Move(float inputX, float inputY) {
-        if(!player.playerInfo.isAttacking) {
+        if(!player.playerInfo.isAttacking && !player.playerInfo.isGettingHit) {
             if(player.playerInfo.isRolling)
-                curRigidbody.position += transform.forward * player.playerInfo.speedRoll * Time.deltaTime;
+                curRigidbody.position += transform.forward * Time.deltaTime;
             else {
                 curRigidbody.position += transform.forward * inputY * player.playerInfo.speedMove * Time.deltaTime;
                 curRigidbody.position += transform.right * inputX * player.playerInfo.speedMove * Time.deltaTime;
@@ -37,9 +43,16 @@ public class PlayerMovement : MonoBehaviour
         transform.forward = transform.forward * inputY + transform.right * inputX; 
     }
 
+    private IEnumerator ResetIsInvulnerableAfterSomeTime() {
+        yield return new WaitForSeconds(invulnerableResetTime);
+        player.playerInfo.isInvulnerable = false;
+    }
+
     public void Roll(float inputX, float inputY) {
-        if(!player.playerInfo.isRolling && player.playerInfo.isGrounded && !player.playerInfo.isAttacking) {
+        if(!player.playerInfo.isRolling && player.playerInfo.isGrounded && !player.playerInfo.isAttacking && !player.playerInfo.isGettingHit) {
             player.playerAnimation.PlayRollAnimation();
+            player.playerInfo.isInvulnerable = true;
+            StartCoroutine("ResetIsInvulnerableAfterSomeTime");
             player.playerInfo.isRolling = true;
 
             RotateBasedOnKey(inputX, inputY);
@@ -62,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void Jump() {
-        player.playerInfo.canJump = !player.playerInfo.isRolling && player.playerInfo.isGrounded && !player.playerInfo.isAttacking; 
+        player.playerInfo.canJump = !player.playerInfo.isRolling && player.playerInfo.isGrounded && !player.playerInfo.isAttacking && !player.playerInfo.isGettingHit; 
         player.playerAnimation.UpdateCanJump();
         if(player.playerInfo.canJump) {
             player.playerAnimation.PlayJumpAnimation();

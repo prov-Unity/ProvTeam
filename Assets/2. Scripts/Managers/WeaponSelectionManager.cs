@@ -39,7 +39,7 @@ public class WeaponSelectionManager : MonoBehaviour
     }
 
     private void Update() {
-        if(Input.GetKeyDown(KeyCode.Tab)) {
+        if(Input.GetKeyDown(KeyCode.Tab) && GameManager.instance.player.playerInfo.isGettingHit) {
             UIManager.instance.EnableWeaponSelectionPopup();
             GameManager.instance.SetTimeScale(0.01f);
         }

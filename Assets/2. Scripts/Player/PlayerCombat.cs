@@ -11,9 +11,13 @@ public class PlayerCombat : MonoBehaviour
     private Collider curCollider;
     private Coroutine comboCoroutineInfo;
 
+    private float gettingHitResetTime;
+
     private void Awake() {
         player = GetComponent<Player>();
         curCollider = GetComponent<Collider>();
+
+        gettingHitResetTime = 0.8f;
     }
 
     public void SetWeapons(Weapon inputLeftWeapon, Weapon inputRightWeapon) {
@@ -22,7 +26,7 @@ public class PlayerCombat : MonoBehaviour
     }
 
     public void Attack() {
-        if(!player.playerInfo.isRolling && player.playerInfo.isGrounded && !player.playerInfo.isAttacking) {
+        if(!player.playerInfo.isRolling && player.playerInfo.isGrounded && !player.playerInfo.isAttacking && !player.playerInfo.isGettingHit) {
             player.playerInfo.isAttacking = true; 
 
             if(comboCoroutineInfo != null) 
@@ -72,19 +76,30 @@ public class PlayerCombat : MonoBehaviour
         switch(other.tag) {
             case "Weapon": 
             monsterWeapon = other.GetComponent<Weapon>();
-            if(monsterWeapon.owner == "Monster")
+            if(!player.playerInfo.isInvulnerable && monsterWeapon.owner == "Monster" && !player.playerInfo.isGettingHit)
                 GetDamaged(monsterWeapon.attackPower); 
             break;
             case "DeadZone": StartCoroutine("Die"); break;
         }
     }
 
+    private IEnumerator ResetIsGettingHitAfterSomeTime() {
+        yield return new WaitForSeconds(gettingHitResetTime);
+        player.playerInfo.isGettingHit = false;
+    }
+
     private void GetDamaged(int attackPower) {
         player.playerInfo.health -= attackPower;
 
         if(player.playerInfo.health > 0) {
+            player.playerInfo.isGettingHit = true;
+            StartCoroutine("ResetIsGettingHitAfterSomeTime");
+
             player.playerAnimation.PlayHitAnimation();
+
             SetIsAttackingFalse();
+            player.playerMovement.SetIsRollingFalse();
+            
             UIManager.instance.UpdatePlayerHealthBar();
         }
         else

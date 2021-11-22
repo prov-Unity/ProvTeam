@@ -9,7 +9,6 @@ public class PlayerInfo : MonoBehaviour
 
     [ReadOnly] public float speedMove;
     [ReadOnly] public float speedJump;
-    [ReadOnly] public float speedRoll;
 
     [ReadOnly] public int attackIndex;
     [ReadOnly] public float comboLimitTime;
@@ -17,7 +16,9 @@ public class PlayerInfo : MonoBehaviour
     [ReadOnly] public bool canJump;
     [ReadOnly] public bool isGrounded;
     [ReadOnly] public bool isAttacking;
+    [ReadOnly] public bool isGettingHit;
     [ReadOnly] public bool isRolling;
+    [ReadOnly] public bool isInvulnerable;
 
     private Player player;
 
@@ -29,9 +30,8 @@ public class PlayerInfo : MonoBehaviour
         maxHealth = 100;
         health = maxHealth;
         
-        speedMove = 3f;
+        speedMove = 2f;
         speedJump = 5f;
-        speedRoll = 4.7f;
 
         attackIndex = 0;
         comboLimitTime = 2f;
@@ -39,7 +39,9 @@ public class PlayerInfo : MonoBehaviour
         canJump = false;
         isGrounded = false;
         isAttacking = false;
+        isGettingHit = false;
         isRolling = false;
+        isInvulnerable = false;
 
         player = GetComponentInChildren<Player>();     
 
