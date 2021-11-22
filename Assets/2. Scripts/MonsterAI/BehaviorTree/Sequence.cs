@@ -26,8 +26,7 @@ public class Sequence : Node
                 case NodeState.FAILURE:
                     _nodeState = NodeState.FAILURE;
                     return _nodeState;
-                default:
-                    break;
+
             }
         }
 

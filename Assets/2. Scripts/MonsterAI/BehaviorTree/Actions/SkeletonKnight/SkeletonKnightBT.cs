@@ -9,6 +9,7 @@ public class SkeletonKnightBT : MonsterAI
     private Node topNode;
     private bool isAppear;
     private Random random;
+    private const int AttackPatternLength = 1;
     private static readonly int AppearIndex = Animator.StringToHash("AppearIndex");
     private const int MAXAppearIndex = 4;
 
@@ -28,7 +29,7 @@ public class SkeletonKnightBT : MonsterAI
 
     private void ConstructBehaviorTree()
     {
-        Attack attackNode = new Attack(Anim, target, Agent, monsterBehaviorState);
+        Attack attackNode = new Attack(Anim, monsterBehaviorState, AttackPatternLength);
         Range attackRangeNode = new Range(this, attackDistance);
         Range traceRangeNode = new Range(this, traceDistance);
         Trace traceNode = new Trace(Agent, Anim, target, monsterBehaviorState);

@@ -37,7 +37,8 @@ public class FindPlayerTime
 public enum MonsterType
 {
     SkeletonSlave,
-    SkeletonKnight
+    SkeletonKnight,
+    Ghost
 }
 
 [Serializable]
@@ -74,13 +75,11 @@ public abstract class MonsterAI : MonoBehaviour
     public NavMeshAgent Agent
     {
         get => _agent;
-        set => _agent = value;
     }
 
     public Animator Anim
     {
         get => _animator;
-        set => _animator = value;
     }
 
     protected virtual void Awake()
