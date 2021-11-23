@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerInteraction : MonoBehaviour
 {
     [ReadOnly] public Weapon targetWeapon;
+    [ReadOnly] public SavePoint targetSavePoint;
     [ReadOnly] public bool isNewWeapon;
 
     private Player player;
@@ -35,6 +36,7 @@ public class PlayerInteraction : MonoBehaviour
         
         if(colliders.Length > 0) {
             targetWeapon = colliders[0].GetComponent<Weapon>();
+            targetSavePoint = colliders[0].GetComponent<SavePoint>();
 
             if(targetWeapon != null && targetWeapon.owner == null) {
                 UIManager.instance.EnableInteractionPopup();
@@ -52,10 +54,15 @@ public class PlayerInteraction : MonoBehaviour
                     isNewWeapon = false;
                 }
             }
+            else if(targetSavePoint != null) {
+                UIManager.instance.EnableInteractionPopup();
+                UIManager.instance.SetInteractionPopupText("Press E to save");
+            }
             else {
                 if(!UIManager.instance.isInteractionPopupDisabled) {
                     UIManager.instance.DisableInteractionPopup();
                     targetWeapon = null;
+                    targetSavePoint = null;
                 }
             }
         }
@@ -63,6 +70,7 @@ public class PlayerInteraction : MonoBehaviour
             if(!UIManager.instance.isInteractionPopupDisabled) {
                 UIManager.instance.DisableInteractionPopup();
                 targetWeapon = null;
+                targetSavePoint = null;
             }
         }
     }
