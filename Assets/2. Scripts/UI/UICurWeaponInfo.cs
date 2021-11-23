@@ -3,10 +3,10 @@ using UnityEngine.UI;
 
 public class UICurWeaponInfo : MonoBehaviour
 {
-    [ReadOnly] private Image imageWeaponDurabilityBackground;
-    [ReadOnly] private Image imageWeaponDurability;
+    [ReadOnly, SerializeField] private Image imageWeaponDurabilityBackground;
+    [ReadOnly, SerializeField] private Image imageWeaponDurability;
     
-    [ReadOnly] private Image imageWeaponIcon;
+    [ReadOnly, SerializeField] private Image imageWeaponIcon;
 
     private void Awake() {
         Image[] images = GetComponentsInChildren<Image>();

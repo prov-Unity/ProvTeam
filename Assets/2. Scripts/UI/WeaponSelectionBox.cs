@@ -4,9 +4,9 @@ using TMPro;
 
 public class WeaponSelectionBox : MonoBehaviour
 {
-    [ReadOnly] private UIWeaponInfo weaponInfo;
-    [ReadOnly] private TextMeshProUGUI textWeaponName;
-    [ReadOnly] private Image imageWeaponIcon;
+    [ReadOnly, SerializeField] private UIWeaponInfo weaponInfo;
+    [ReadOnly, SerializeField] private TextMeshProUGUI textWeaponName;
+    [ReadOnly, SerializeField] private Image imageWeaponIcon;
 
     private void Awake() {
         weaponInfo = GetComponentInChildren<UIWeaponInfo>();

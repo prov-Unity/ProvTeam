@@ -5,16 +5,16 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [ReadOnly] public static UIManager instance;
+    [ReadOnly] public WeaponSelectionPopup popupWeaponSelection;
+
+    [ReadOnly] public bool isInteractionPopupDisabled;
+
 
     [ReadOnly, SerializeField] private Image playerHealthBar;
     [ReadOnly, SerializeField] private UIMonsterInfo monsterInfo;
     [ReadOnly, SerializeField] private UICurWeaponInfo curWeaponInfo;
 
-
-    [ReadOnly] public WeaponSelectionPopup popupWeaponSelection;
-    [ReadOnly] private InteractionPopup popupInteraction;
-
-    [ReadOnly] public bool isInteractionPopupDisabled;
+    [ReadOnly, SerializeField] private InteractionPopup popupInteraction;
 
     private void Awake()
     {        
