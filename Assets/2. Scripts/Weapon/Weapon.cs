@@ -108,13 +108,12 @@ public class Weapon : MonoBehaviour
     public void SetOwner()
     {
         string tagName = "";
-        GameObject parent;
         if(transform.parent != null)
         {
             tagName = transform.parent.tag;
-            while (tagName.Equals("Weapon"))
+            while (tagName is "Weapon")
             {
-                parent = transform.parent.gameObject;
+                GameObject parent = transform.parent.gameObject;
                 tagName = parent.transform.parent.tag;
             }
         }
@@ -128,9 +127,11 @@ public class Weapon : MonoBehaviour
             owner = "Monster";
             _col.enabled = false;
             break;
-
+            
+            // Ghost 마법의 경우, 소유자가 정해져 있지 않아서 이렇게 구현
             default:
-            owner = null;
+            owner = "Monster";
+            _col.enabled = false;
             break;
         }
     }

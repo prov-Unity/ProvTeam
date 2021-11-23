@@ -113,7 +113,8 @@ public class PlayerCombat : MonoBehaviour
 
         curCollider.enabled = false;
         player.playerMovement.curRigidbody.useGravity = false;
-        yield return new WaitForSeconds(3f);
+        GameManager.instance.DisablePlayerInput(); // -> add enable player input to respawn mehtod
+        yield return new WaitForSeconds(3f); // -> this one also might be changed to waituntil or so
         // do something 
         // probably I will make a method of which name is might be Revive or Respawn from the Game Manager
         // that method would enable collider and gravity of player again, and do something

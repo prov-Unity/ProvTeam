@@ -8,15 +8,14 @@ public class TestPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        colliders = new Collider[10];
         StartCoroutine(Detect());
     }
 
     // Update is called once per frame
     void Update()
     {
-        float inputX = Input.GetAxis("Horizontal") * Time.deltaTime * 2f;
-        float inputY = Input.GetAxis("Vertical") * Time.deltaTime * 2f;
+        float inputX = Input.GetAxis("Horizontal") * Time.deltaTime * 5f;
+        float inputY = Input.GetAxis("Vertical") * Time.deltaTime * 5f;
 
         transform.position += new Vector3(inputX, 0, inputY);
         transform.rotation = Quaternion.LookRotation(new Vector3(inputX, 0, inputY));
@@ -26,6 +25,7 @@ public class TestPlayer : MonoBehaviour
     {
         while (true)
         {
+            colliders = new Collider[10];
             Physics.OverlapSphereNonAlloc(transform.position, 7f, colliders, LayerMask.GetMask("Monster"));
             foreach (Collider coll in colliders)
             {

@@ -10,14 +10,19 @@ public class InteractionPopup : MonoBehaviour
     }
 
     private void Update() {
-        if(Input.GetKeyDown(KeyCode.E) && GameManager.instance.player.playerInteraction.targetWeapon != null) {
-            if(GameManager.instance.player.playerInteraction.isNewWeapon) {
-                GameManager.instance.player.playerInteraction.PickupNewWeapon();
+        if(Input.GetKeyDown(KeyCode.E)) {
+            if(GameManager.instance.player.playerInteraction.targetWeapon != null) {
+                if(GameManager.instance.player.playerInteraction.isNewWeapon) {
+                    GameManager.instance.player.playerInteraction.PickupNewWeapon();
+                }
+                else {
+                    GameManager.instance.player.playerInteraction.ReplaceCurrentWeapon();
+                }
             }
-            else {
-                GameManager.instance.player.playerInteraction.ReplaceCurrentWeapon();
+            else if(GameManager.instance.player.playerInteraction.targetSavePoint != null) {
+                UIManager.instance.EnableSavePopup();
             }
-        }
+        }    
     }
 
     public void SetInteractionText(string inputText) {

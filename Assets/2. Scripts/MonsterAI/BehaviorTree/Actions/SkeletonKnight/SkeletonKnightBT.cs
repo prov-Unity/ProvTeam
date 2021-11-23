@@ -43,7 +43,6 @@ public class SkeletonKnightBT : MonsterAI
     public override void StartAction()
     {
         base.StartAction();
-        Debug.Log("aa");
         if (!isAppear)
         {
             Anim.SetInteger(AppearIndex, random.Next(MAXAppearIndex));
@@ -61,7 +60,6 @@ public class SkeletonKnightBT : MonsterAI
     public override IEnumerator Action()
     {
 
-        Debug.Log("코루틴 실행됨");
         isRunning = true;
         yield return StartCoroutine(base.Action());
         while (true)

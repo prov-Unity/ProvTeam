@@ -31,3 +31,9 @@ MonoBehaviour:
     traceDistance: 7
     attackDistance: 4
     forgetTime: 4
+  - name: Spider
+    maxHp: 100
+    speed: 3
+    traceDistance: 7
+    attackDistance: 3
+    forgetTime: 4
