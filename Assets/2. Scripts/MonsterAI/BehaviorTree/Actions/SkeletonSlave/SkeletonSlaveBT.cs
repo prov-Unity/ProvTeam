@@ -49,6 +49,7 @@ public class SkeletonSlaveBT : MonsterAI
         yield return StartCoroutine(base.Action());
         while (true)
         {
+            Debug.Log("aaa");
             CheckForgetTime();
             target.position = PPAP.Instance.player.transform.position;
             yield return new WaitForSeconds(0.2f);

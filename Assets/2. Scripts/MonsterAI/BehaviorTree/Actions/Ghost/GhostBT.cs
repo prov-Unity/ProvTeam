@@ -62,5 +62,18 @@ public class GhostBT : MonsterAI
         }
     }
 
+    public void AttackBlackHole()
+    {
+        GameObject blackHole = Resources.Load<GameObject>("Weapons/BlackHole");
+        Instantiate(blackHole, transform.position + transform.forward * 3, Quaternion.identity);
+    }
 
+    public void AttackIceWheel()
+    {
+        Vector3 originPos = transform.position;
+        GameObject iceWheel = Resources.Load<GameObject>("Weapons/IceWheel");
+        Vector3 dir = PPAP.Instance.player.transform.position - originPos;
+        Instantiate(iceWheel, originPos + transform.forward * 3, Quaternion.identity);
+        
+    }
 }

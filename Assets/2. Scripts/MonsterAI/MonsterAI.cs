@@ -103,10 +103,11 @@ public abstract class MonsterAI : MonoBehaviour
 
     public void CheckForgetTime()
     {
-
+        Debug.Log("forgetTime : " + forgetTime);
         if (findPlayerTime.CheckExpire(forgetTime))
         {
-            StopCoroutine(Action());
+            Debug.Log("모두 멈춰!");
+            StopAllCoroutines();
             isRunning = false;
             _animator.SetBool(TraceHash, false);
             AgentMoveControl(false);
