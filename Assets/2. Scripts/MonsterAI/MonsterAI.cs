@@ -38,7 +38,8 @@ public enum MonsterType
 {
     SkeletonSlave,
     SkeletonKnight,
-    Ghost
+    Ghost,
+    Spider
 }
 
 [Serializable]
@@ -103,7 +104,6 @@ public abstract class MonsterAI : MonoBehaviour
 
     public void CheckForgetTime()
     {
-        Debug.Log("forgetTime : " + forgetTime);
         if (findPlayerTime.CheckExpire(forgetTime))
         {
             Debug.Log("모두 멈춰!");
@@ -160,6 +160,9 @@ public abstract class MonsterAI : MonoBehaviour
     {
         _animator.SetTrigger(Dead);
         yield return new WaitForSeconds(3.0f);
+        if (monsterType == MonsterType.Ghost || 
+            monsterType == MonsterType.Spider)
+            yield break;
         string weaponName = weapon.weaponType.ToString().Split('_')[0];
         Debug.Log(weaponName);
         GameObject weaponItem = Resources.Load<GameObject>("Weapons/"+weaponName);

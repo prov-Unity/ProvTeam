@@ -46,7 +46,6 @@ public class GhostBT : MonsterAI
     public override IEnumerator Action()
     {
 
-        Debug.Log("코루틴 실행됨");
         isRunning = true;
         yield return StartCoroutine(base.Action());
         while (true)

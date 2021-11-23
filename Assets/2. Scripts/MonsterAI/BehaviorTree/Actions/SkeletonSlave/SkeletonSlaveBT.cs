@@ -44,12 +44,10 @@ public class SkeletonSlaveBT : MonsterAI
     public override IEnumerator Action()
     {
 
-        Debug.Log("코루틴 실행됨");
         isRunning = true;
         yield return StartCoroutine(base.Action());
         while (true)
         {
-            Debug.Log("aaa");
             CheckForgetTime();
             target.position = PPAP.Instance.player.transform.position;
             yield return new WaitForSeconds(0.2f);
