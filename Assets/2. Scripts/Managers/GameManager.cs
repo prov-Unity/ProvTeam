@@ -18,4 +18,12 @@ public class GameManager : MonoBehaviour
         Time.timeScale = timeScale;
         Time.fixedDeltaTime = 0.02f * timeScale;
     }
+
+    public void EnablePlayerInput() {
+        player.playerInput.enabled = true;
+    }
+
+    public void DisablePlayerInput() {
+        player.playerInput.enabled = false;
+    }
 }

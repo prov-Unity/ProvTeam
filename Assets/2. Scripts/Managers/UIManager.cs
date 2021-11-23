@@ -96,6 +96,7 @@ public class UIManager : MonoBehaviour
     }
 
     public void EnableSavePopup() {
+        GameManager.instance.SetTimeScale(0.01f);
         popupSave.gameObject.SetActive(true);
     }
 }

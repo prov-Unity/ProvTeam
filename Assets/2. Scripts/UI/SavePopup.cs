@@ -38,6 +38,7 @@ public class SavePopup : MonoBehaviour
             SaveToCurrentSaveSlot();
         }
         else if(Input.GetKeyDown(KeyCode.Escape)) {
+            GameManager.instance.SetTimeScale(1f);
             gameObject.SetActive(false);
         }
     }

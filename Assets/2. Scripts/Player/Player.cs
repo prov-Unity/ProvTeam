@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public Transform cameraTargetTransform;
 
     [HideInInspector] public PlayerInfo playerInfo;
-    [HideInInspector] public PlayerInput playerInputManager;
+    [HideInInspector] public PlayerInput playerInput;
     [HideInInspector] public PlayerMovement playerMovement;
     [HideInInspector] public PlayerAnimation playerAnimation;
 
@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public PlayerWeaponSlot playerRightWeaponSlot;
     [HideInInspector] public List<PlayerWeaponSpawnPoint> playerWeaponSpawnPoints;
     [HideInInspector] public PlayerCombat playerCombat;
-    [HideInInspector] public PlayerInteraction playerInteractionManager;
+    [HideInInspector] public PlayerInteraction playerInteraction;
     [HideInInspector] public PlayerDetector playerDetector;
 
 
@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
         cameraTargetTransform = FindObjectOfType<PlayerCameraTarget>().transform;
 
         playerInfo = GetComponent<PlayerInfo>();
-        playerInputManager = GetComponent<PlayerInput>();
+        playerInput = GetComponent<PlayerInput>();
         playerMovement = GetComponent<PlayerMovement>();
         playerAnimation = GetComponent<PlayerAnimation>();
 
@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
         }
 
         playerCombat = GetComponent<PlayerCombat>();
-        playerInteractionManager = GetComponent<PlayerInteraction>();
+        playerInteraction = GetComponent<PlayerInteraction>();
         playerDetector = GetComponent<PlayerDetector>();
     }
 }
