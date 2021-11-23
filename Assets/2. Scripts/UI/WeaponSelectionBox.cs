@@ -4,11 +4,34 @@ using TMPro;
 
 public class WeaponSelectionBox : MonoBehaviour
 {
-    [ReadOnly] public TextMeshProUGUI textWeaponName;
-    [ReadOnly] public Image imageWeaponIcon;
+    [ReadOnly] private UIWeaponInfo weaponInfo;
+    [ReadOnly] private TextMeshProUGUI textWeaponName;
+    [ReadOnly] private Image imageWeaponIcon;
 
     private void Awake() {
-        textWeaponName = GetComponentInChildren<TextMeshProUGUI>();
-        imageWeaponIcon = GetComponentsInChildren<Image>()[1];
+        weaponInfo = GetComponentInChildren<UIWeaponInfo>();
+        textWeaponName = GetComponentsInChildren<TextMeshProUGUI>()[1];
+        imageWeaponIcon = GetComponentsInChildren<Image>()[3];
+    }
+
+    public void UpdateWeaponSelectionBox(string inputTextWeaponName, Sprite inputImageWeaponIcon) {
+        textWeaponName.text = inputTextWeaponName;
+        imageWeaponIcon.sprite = inputImageWeaponIcon;
+    }
+
+    public void UpdateWeaponInfo(AvailableWeapon targetWeapon) {
+        weaponInfo.UpdateWeaponInfo(targetWeapon);
+    } 
+
+    public void EnableWeaponInfo() {
+        weaponInfo.gameObject.SetActive(true);
+    }
+
+    public bool IsWeaponInfoActive() {
+        return weaponInfo.gameObject.activeInHierarchy;
+    }
+
+    public void DisableWeaponInfo() {
+        weaponInfo.gameObject.SetActive(false);
     }
 }

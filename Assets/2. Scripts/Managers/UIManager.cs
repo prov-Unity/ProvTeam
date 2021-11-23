@@ -55,12 +55,17 @@ public class UIManager : MonoBehaviour
 
 
     public void UpdateCurWeaponInfo() {
-        if(GameManager.instance.player.playerInfo.curWeapon.weaponType == WeaponType.Fist_Left)
-            curWeaponInfo.textWeaponDurability.text = "";
-        else
-            curWeaponInfo.textWeaponDurability.text = GameManager.instance.player.playerInfo.curWeapon.durability.ToString();
+        if(GameManager.instance.player.playerInfo.curWeapon.weaponType == WeaponType.Fist_Left) {
+            if(curWeaponInfo.IsWeaponDurabilityActive()) 
+                curWeaponInfo.DisableWeaponDurability();
+        }
+        else {
+            if(curWeaponInfo.IsWeaponDurabilityActive() == false) 
+                curWeaponInfo.EnableWeaponDurability();
 
-        curWeaponInfo.imageWeaponIcon.sprite = WeaponSelectionManager.instance.weaponIcons[(int)GameManager.instance.player.playerInfo.curWeapon.weaponType];
+            curWeaponInfo.UpdateWeaponDurability(GameManager.instance.player.playerInfo.curWeapon);
+        }
+        curWeaponInfo.UpdatecurWeaponIcon(WeaponSelectionManager.instance.weaponIcons[(int)GameManager.instance.player.playerInfo.curWeapon.weaponType]);
     }
 
 
