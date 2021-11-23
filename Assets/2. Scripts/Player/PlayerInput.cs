@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerInputManager : MonoBehaviour
+public class PlayerInput : MonoBehaviour
 {
     [ReadOnly, SerializeField] private float inputX;
     [ReadOnly, SerializeField] private float inputY;

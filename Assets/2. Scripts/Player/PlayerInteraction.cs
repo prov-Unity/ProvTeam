@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerInteractionManager : MonoBehaviour
+public class PlayerInteraction : MonoBehaviour
 {
     [ReadOnly] public Weapon targetWeapon;
     [ReadOnly] public bool isNewWeapon;
