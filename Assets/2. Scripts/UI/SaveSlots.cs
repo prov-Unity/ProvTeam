@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class SaveSlots : MonoBehaviour
 {
-    [ReadOnly] public SaveSlot [] saveSlots;
+    [ReadOnly] public SaveSlot [] slots;
 
     private void Awake() {
-        saveSlots = GetComponentsInChildren<SaveSlot>();
+        slots = GetComponentsInChildren<SaveSlot>();
     }
 }

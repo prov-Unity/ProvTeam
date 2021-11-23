@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     [ReadOnly, SerializeField] private UICurWeaponInfo curWeaponInfo;
 
     [ReadOnly, SerializeField] private InteractionPopup popupInteraction;
+    [ReadOnly, SerializeField] private SavePopup popupSave;
 
     private void Awake()
     {        
@@ -27,6 +28,8 @@ public class UIManager : MonoBehaviour
         popupWeaponSelection = FindObjectOfType<WeaponSelectionPopup>();
         popupInteraction = FindObjectOfType<InteractionPopup>();
         popupInteraction.gameObject.SetActive(false);
+        popupSave = FindObjectOfType<SavePopup>();
+        popupSave.gameObject.SetActive(false);
 
         isInteractionPopupDisabled = true;
     }
@@ -90,5 +93,9 @@ public class UIManager : MonoBehaviour
     public void DisableInteractionPopup() {
         popupInteraction.gameObject.SetActive(false);
         isInteractionPopupDisabled = true;
+    }
+
+    public void EnableSavePopup() {
+        popupSave.gameObject.SetActive(true);
     }
 }
