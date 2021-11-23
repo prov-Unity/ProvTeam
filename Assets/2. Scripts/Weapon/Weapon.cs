@@ -154,7 +154,7 @@ public class Weapon : MonoBehaviour
             durability--;
             GameManager.instance.player.playerInfo.curWeapon.durability = durability;
             if(durability <= 0)
-                GameManager.instance.player.playerInteractionManager.DestoryCurrentWeapon();
+                GameManager.instance.player.playerInteraction.DestoryCurrentWeapon();
             else
                 UIManager.instance.UpdateCurWeaponInfo();
         }

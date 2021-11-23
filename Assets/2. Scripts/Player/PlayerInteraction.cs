@@ -131,6 +131,6 @@ public class PlayerInteraction : MonoBehaviour
     // private void OnDrawGizmos() {
     //     Gizmos.color = Color.blue;
         
-        // Gizmos.DrawWireCube(player.transform.position + new Vector3((player.neckTransform.position-Camera.main.transform.position).normalized.x, 0.5f, (player.neckTransform.position-Camera.main.transform.position).normalized.z), new Vector3(distanceToInteract, player.transform.lossyScale.y, distanceToInteract));
+    //     Gizmos.DrawWireCube(player.transform.position + new Vector3((player.cameraTargetTransform.position-Camera.main.transform.position).normalized.x, 0.5f, (player.cameraTargetTransform.position-Camera.main.transform.position).normalized.z), new Vector3(distanceToInteract, player.transform.lossyScale.y, distanceToInteract));
     // }    
 }

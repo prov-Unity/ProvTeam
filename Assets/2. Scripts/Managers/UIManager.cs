@@ -5,16 +5,17 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [ReadOnly] public static UIManager instance;
+    [ReadOnly] public WeaponSelectionPopup popupWeaponSelection;
+
+    [ReadOnly] public bool isInteractionPopupDisabled;
+
 
     [ReadOnly, SerializeField] private Image playerHealthBar;
     [ReadOnly, SerializeField] private UIMonsterInfo monsterInfo;
     [ReadOnly, SerializeField] private UICurWeaponInfo curWeaponInfo;
 
-
-    [ReadOnly] public WeaponSelectionPopup popupWeaponSelection;
-    [ReadOnly] private InteractionPopup popupInteraction;
-
-    [ReadOnly] public bool isInteractionPopupDisabled;
+    [ReadOnly, SerializeField] private InteractionPopup popupInteraction;
+    [ReadOnly, SerializeField] private SavePopup popupSave;
 
     private void Awake()
     {        
@@ -27,6 +28,8 @@ public class UIManager : MonoBehaviour
         popupWeaponSelection = FindObjectOfType<WeaponSelectionPopup>();
         popupInteraction = FindObjectOfType<InteractionPopup>();
         popupInteraction.gameObject.SetActive(false);
+        popupSave = FindObjectOfType<SavePopup>();
+        popupSave.gameObject.SetActive(false);
 
         isInteractionPopupDisabled = true;
     }
@@ -55,12 +58,17 @@ public class UIManager : MonoBehaviour
 
 
     public void UpdateCurWeaponInfo() {
-        if(GameManager.instance.player.playerInfo.curWeapon.weaponType == WeaponType.Fist_Left)
-            curWeaponInfo.textWeaponDurability.text = "";
-        else
-            curWeaponInfo.textWeaponDurability.text = GameManager.instance.player.playerInfo.curWeapon.durability.ToString();
+        if(GameManager.instance.player.playerInfo.curWeapon.weaponType == WeaponType.Fist_Left) {
+            if(curWeaponInfo.IsWeaponDurabilityActive()) 
+                curWeaponInfo.DisableWeaponDurability();
+        }
+        else {
+            if(curWeaponInfo.IsWeaponDurabilityActive() == false) 
+                curWeaponInfo.EnableWeaponDurability();
 
-        curWeaponInfo.imageWeaponIcon.sprite = WeaponSelectionManager.instance.weaponIcons[(int)GameManager.instance.player.playerInfo.curWeapon.weaponType];
+            curWeaponInfo.UpdateWeaponDurability(GameManager.instance.player.playerInfo.curWeapon);
+        }
+        curWeaponInfo.UpdatecurWeaponIcon(WeaponSelectionManager.instance.weaponIcons[(int)GameManager.instance.player.playerInfo.curWeapon.weaponType]);
     }
 
 
@@ -85,5 +93,10 @@ public class UIManager : MonoBehaviour
     public void DisableInteractionPopup() {
         popupInteraction.gameObject.SetActive(false);
         isInteractionPopupDisabled = true;
+    }
+
+    public void EnableSavePopup() {
+        GameManager.instance.SetTimeScale(0.01f);
+        popupSave.gameObject.SetActive(true);
     }
 }

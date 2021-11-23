@@ -50,9 +50,19 @@ public class WeaponSelectionManager : MonoBehaviour
         }
     }
 
-    public void SetWeaponSelectionBox(int boxIndex, WeaponType weaponType) {
-        popupWeaponSelection.weaponSelectionBoxes[boxIndex].textWeaponName.text = weaponType.ToString().Split(new char[] {'_'})[0];
-        popupWeaponSelection.weaponSelectionBoxes[boxIndex].imageWeaponIcon.sprite = weaponIcons[(int)weaponType];
+    public void SetWeaponSelectionBox(int boxIndex, AvailableWeapon targetWeapon) {
+        if(targetWeapon.weaponType == WeaponType.Fist_Left) {
+            if(popupWeaponSelection.weaponSelectionBoxes[boxIndex].IsWeaponInfoActive()) 
+                popupWeaponSelection.weaponSelectionBoxes[boxIndex].DisableWeaponInfo();
+        }
+        else {
+            if(popupWeaponSelection.weaponSelectionBoxes[boxIndex].IsWeaponInfoActive() == false) 
+                popupWeaponSelection.weaponSelectionBoxes[boxIndex].EnableWeaponInfo();
+
+            popupWeaponSelection.weaponSelectionBoxes[boxIndex].UpdateWeaponInfo(targetWeapon);
+        }
+
+        popupWeaponSelection.weaponSelectionBoxes[boxIndex].UpdateWeaponSelectionBox(targetWeapon.weaponType.ToString().Split(new char[] {'_'})[0], weaponIcons[(int)targetWeapon.weaponType]);
     }
 
     public void EnableWeaponSelectionBox(int boxIndex) {
@@ -112,21 +122,21 @@ public class WeaponSelectionManager : MonoBehaviour
 
     public void UpdateWeaponSelectionBox() {
         // update currently selected weapon
-        SetWeaponSelectionBox(2, GameManager.instance.player.playerInfo.availableWeapons[curSelectedWeaponIndex].weaponType);
+        SetWeaponSelectionBox(2, GameManager.instance.player.playerInfo.availableWeapons[curSelectedWeaponIndex]);
 
         // update two left weapon selection boxes
         if(curSelectedWeaponIndex == 1) {
             DisableWeaponSelectionBox(0);
 
             EnableWeaponSelectionBox(1);
-            SetWeaponSelectionBox(1, GameManager.instance.player.playerInfo.availableWeapons[curSelectedWeaponIndex - 1].weaponType);
+            SetWeaponSelectionBox(1, GameManager.instance.player.playerInfo.availableWeapons[curSelectedWeaponIndex - 1]);
         }
         else if(curSelectedWeaponIndex >= 2) {
             EnableWeaponSelectionBox(0);
-            SetWeaponSelectionBox(0, GameManager.instance.player.playerInfo.availableWeapons[curSelectedWeaponIndex - 2].weaponType);
+            SetWeaponSelectionBox(0, GameManager.instance.player.playerInfo.availableWeapons[curSelectedWeaponIndex - 2]);
 
             EnableWeaponSelectionBox(1);
-            SetWeaponSelectionBox(1, GameManager.instance.player.playerInfo.availableWeapons[curSelectedWeaponIndex - 1].weaponType);
+            SetWeaponSelectionBox(1, GameManager.instance.player.playerInfo.availableWeapons[curSelectedWeaponIndex - 1]);
         }
         else {
             DisableWeaponSelectionBox(0);
@@ -136,16 +146,16 @@ public class WeaponSelectionManager : MonoBehaviour
         // update two right weapon selection boxes
         if((GameManager.instance.player.playerInfo.availableWeapons.Count - curSelectedWeaponIndex) == 2) {
             EnableWeaponSelectionBox(3);
-            SetWeaponSelectionBox(3, GameManager.instance.player.playerInfo.availableWeapons[curSelectedWeaponIndex + 1].weaponType);
+            SetWeaponSelectionBox(3, GameManager.instance.player.playerInfo.availableWeapons[curSelectedWeaponIndex + 1]);
 
             DisableWeaponSelectionBox(4);
         }
         else if((GameManager.instance.player.playerInfo.availableWeapons.Count - curSelectedWeaponIndex) >= 3) {
             EnableWeaponSelectionBox(3);
-            SetWeaponSelectionBox(3, GameManager.instance.player.playerInfo.availableWeapons[curSelectedWeaponIndex + 1].weaponType);
+            SetWeaponSelectionBox(3, GameManager.instance.player.playerInfo.availableWeapons[curSelectedWeaponIndex + 1]);
 
             EnableWeaponSelectionBox(4);
-            SetWeaponSelectionBox(4, GameManager.instance.player.playerInfo.availableWeapons[curSelectedWeaponIndex + 2].weaponType);
+            SetWeaponSelectionBox(4, GameManager.instance.player.playerInfo.availableWeapons[curSelectedWeaponIndex + 2]);
         }
         else {
             DisableWeaponSelectionBox(3);
