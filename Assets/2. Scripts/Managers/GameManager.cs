@@ -9,9 +9,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake() {
         instance = this;
-    }
-    private void Start() {
         player = FindObjectOfType<Player>();
+
     }
 
     public void SetTimeScale(float timeScale) {

@@ -74,10 +74,12 @@ public class UIManager : MonoBehaviour
 
     public void EnableWeaponSelectionPopup() {
         popupWeaponSelection.gameObject.SetActive(true);
+        GameManager.instance.DisablePlayerInput();
     }
 
     public void DisableWeaponSelectionPopup() {
         popupWeaponSelection.gameObject.SetActive(false);
+        GameManager.instance.EnablePlayerInput();
     }
 
 
@@ -96,7 +98,9 @@ public class UIManager : MonoBehaviour
     }
 
     public void EnableSavePopup() {
+        GameManager.instance.DisablePlayerInput();
         GameManager.instance.SetTimeScale(0.01f);
         popupSave.gameObject.SetActive(true);
+        popupSave.LoadSaveFiles();
     }
 }

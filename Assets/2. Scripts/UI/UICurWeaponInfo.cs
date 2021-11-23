@@ -30,8 +30,6 @@ public class UICurWeaponInfo : MonoBehaviour
     }
 
     public void UpdateWeaponDurability(AvailableWeapon curWeapon) {
-        Debug.Log(curWeapon.durability);
-
         imageWeaponDurability.fillAmount = (float)curWeapon.durability / WeaponManager.instance.weaponInitialDurabilities[(int)curWeapon.weaponType];
     }
 

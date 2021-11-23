@@ -19,8 +19,6 @@ public class SavePopup : MonoBehaviour
     }
 
     private void Start() {
-        LoadSaveFiles();
-
         for(; slotIndex < maxSlotCount; slotIndex++) {
             DisableCurrentSaveSlot();
         }
@@ -39,6 +37,7 @@ public class SavePopup : MonoBehaviour
         }
         else if(Input.GetKeyDown(KeyCode.Escape)) {
             GameManager.instance.SetTimeScale(1f);
+            GameManager.instance.EnablePlayerInput();
             gameObject.SetActive(false);
         }
     }
@@ -68,7 +67,7 @@ public class SavePopup : MonoBehaviour
             saveSlots.slots[slotIndex].EnableSelected();
     }
 
-    private void LoadSaveFiles() {
+    public void LoadSaveFiles() {
         // do something -> this would be implemented right after understanding the usage of easy save
         Debug.Log("Save data loading is done (not done actually)");
         for(int curIndex = 0; curIndex < maxSlotCount; curIndex++) {
