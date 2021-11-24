@@ -26,10 +26,5 @@ public class PlayerInput : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.G) && player.playerInfo.curWeapon.weaponType != WeaponType.Fist_Left)
             player.playerInteraction.DropCurrentWeapon();
-
-        // this code would be deleted right after implementing the interaction between savepoint and player
-        if(Input.GetKeyDown(KeyCode.K))
-            UIManager.instance.EnableSavePopup();
-
     }
 }

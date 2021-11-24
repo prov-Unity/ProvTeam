@@ -36,7 +36,7 @@ public class PlayerInteraction : MonoBehaviour
         
         if(colliders.Length > 0) {
             targetWeapon = colliders[0].GetComponent<Weapon>();
-            targetSavePoint = colliders[0].GetComponent<SavePoint>();
+            targetSavePoint = colliders[0].GetComponentInParent<SavePoint>();
 
             if(targetWeapon != null && targetWeapon.owner == null) {
                 UIManager.instance.EnableInteractionPopup();
