@@ -119,5 +119,18 @@ public class PlayerCombat : MonoBehaviour
         // probably I will make a method of which name is might be Revive or Respawn from the Game Manager
         // that method would enable collider and gravity of player again, and do something
         // do something including reset attack index, reset is attacking, or so
+
+        Respawn();
+    }
+
+    private void Respawn() {
+        curCollider.enabled = true;
+        player.playerMovement.curRigidbody.useGravity = true;
+        GameManager.instance.EnablePlayerInput();
+
+        SaveData latestData = SaveLoadManager.instance.GetLatestData();
+        player.transform.position = latestData.respawnPoint;
+        player.playerInfo.health = latestData.savedHealth;
+        player.playerInfo.availableWeapons = latestData.savedAvailableWeapons;
     }
 }

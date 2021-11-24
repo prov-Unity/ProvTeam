@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,7 +30,7 @@ public class SaveLoadManager : MonoBehaviour
         }
     }
 
-    public void LoadData() {
+    public void LoadAllData() {
         if(Directory.Exists(defaultSavePath)) {
             for(int curIndex = 0; curIndex < maxSaveSlot; curIndex++) {
                 if(Directory.Exists(defaultSavePath + curIndex + ".es3")) {
@@ -37,6 +38,16 @@ public class SaveLoadManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public SaveData GetLatestData() {
+        int latestDataIndex = 0;
+        for(int curIndex = 1; curIndex < maxSaveSlot; curIndex++) {
+            if(DateTime.Compare(data[latestDataIndex].saveDateTime, data[curIndex].saveDateTime) < 0) {
+                latestDataIndex = curIndex;
+            }
+        }
+        return data[latestDataIndex];
     }
 
     public void SaveData(int slotIndex, SaveData inputData) {

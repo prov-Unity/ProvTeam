@@ -22,7 +22,7 @@ public struct SaveData
         savedHealth = inputSavedHealth;
     }
 
-    public SaveData(bool isDefault) {
+    public SaveData(bool trashValue) {
         isLoaded = false;
 
         stageName = "";
