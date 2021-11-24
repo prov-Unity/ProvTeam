@@ -25,7 +25,7 @@ public class SaveLoadManager : MonoBehaviour
             if(Directory.Exists(defaultSavePath + curIndex + ".es3"))
                 data.Add(ES3.Load<SaveData>(curIndex.ToString(), defaultSavePath + curIndex + ".es3"));
             else
-                data.Add(new SaveData());
+                data.Add(new SaveData(true));
         }
     }
 
