@@ -1,5 +1,4 @@
 using System;
-using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,7 +22,7 @@ public class SaveLoadManager : MonoBehaviour
 
     private void InitialLoad() {
         for(int curIndex = 0; curIndex < maxSaveSlot; curIndex++) {
-            if(Directory.Exists(defaultSavePath + curIndex + ".es3"))
+            if(ES3.KeyExists(curIndex.ToString(), defaultSavePath + curIndex + ".es3"))
                 data.Add(ES3.Load<SaveData>(curIndex.ToString(), defaultSavePath + curIndex + ".es3"));
             else
                 data.Add(new SaveData(true));
@@ -31,11 +30,9 @@ public class SaveLoadManager : MonoBehaviour
     }
 
     public void LoadAllData() {
-        if(Directory.Exists(defaultSavePath)) {
-            for(int curIndex = 0; curIndex < maxSaveSlot; curIndex++) {
-                if(Directory.Exists(defaultSavePath + curIndex + ".es3")) {
-                    data[curIndex].SetSaveData(ES3.Load<SaveData>(curIndex.ToString(), defaultSavePath + curIndex + ".es3"));
-                }
+        for(int curIndex = 0; curIndex < maxSaveSlot; curIndex++) {
+            if(ES3.KeyExists(curIndex.ToString(), defaultSavePath + curIndex + ".es3")) {
+                data[curIndex].SetSaveData(ES3.Load<SaveData>(curIndex.ToString(), defaultSavePath + curIndex + ".es3"));
             }
         }
     }

@@ -132,5 +132,6 @@ public class PlayerCombat : MonoBehaviour
         player.transform.position = latestData.respawnPoint;
         player.playerInfo.health = latestData.savedHealth;
         player.playerInfo.availableWeapons = latestData.savedAvailableWeapons;
+        UIManager.instance.UpdatePlayerHealthBar();
     }
 }

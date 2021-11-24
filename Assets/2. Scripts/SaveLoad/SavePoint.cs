@@ -8,6 +8,6 @@ public class SavePoint : MonoBehaviour
     [ReadOnly] public Vector3 respawnPoint;
 
     private void Awake() {
-        respawnPoint = transform.position + new Vector3(0, 5f, 0);
+        respawnPoint = transform.position + new Vector3(0, 40f, 0);
     }
 }

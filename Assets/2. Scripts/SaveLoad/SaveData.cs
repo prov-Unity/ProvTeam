@@ -33,11 +33,15 @@ public struct SaveData
     }
 
     public void SetSaveData(SaveData inputSaveData) {
+        isLoaded = true;
+
         stageName = inputSaveData.stageName;
         saveDateTime = inputSaveData.saveDateTime;
         respawnPoint = inputSaveData.respawnPoint;
         savedAvailableWeapons = inputSaveData.savedAvailableWeapons;
         savedHealth = inputSaveData.savedHealth;
+
+        Debug.Log(isLoaded);
     }
 
     public string GetSaveSlotName() {
