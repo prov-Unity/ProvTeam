@@ -113,7 +113,7 @@ public class PlayerCombat : MonoBehaviour
 
         curCollider.enabled = false;
         player.playerMovement.curRigidbody.useGravity = false;
-        GameManager.instance.DisablePlayerInput(); // -> add enable player input to respawn mehtod
+        GameManager.instance.DisablePlayerInput();
         yield return new WaitForSeconds(3f); // -> this one also might be changed to waituntil or so
         // do something 
         // probably I will make a method of which name is might be Revive or Respawn from the Game Manager
@@ -133,5 +133,14 @@ public class PlayerCombat : MonoBehaviour
         player.playerInfo.health = latestData.savedHealth;
         player.playerInfo.availableWeapons = latestData.savedAvailableWeapons;
         UIManager.instance.UpdatePlayerHealthBar();
+
+        player.playerInfo.isAttacking = false;
+
+        // force the player to select fist right after being respawned
+        UIManager.instance.EnableWeaponSelectionPopup();
+        WeaponSelectionManager.instance.ResetSelectedWeaponIndex();
+        WeaponSelectionManager.instance.UpdateWeaponSelectionBox();
+        WeaponSelectionManager.instance.SelectCurrentWeapon();
+        UIManager.instance.DisableWeaponSelectionPopup();
     }
 }

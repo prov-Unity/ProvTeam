@@ -68,28 +68,12 @@ public class SavePopup : MonoBehaviour
     }
 
     public void LoadFiles() {
-        // do something -> this would be implemented right after understanding the usage of easy save
-        // Debug.Log("Save data loading is done (not done actually)");
-        // for(int curIndex = 0; curIndex < SaveLoadManager.instance.maxSaveSlot; curIndex++) {
-        //     tempSlotName = (curIndex + 1) + ": ";
-        //     // file existence check
-        //     // currently it's not implemented
-        //     tempSlotName += "empty";
-
-        //     saveSlots.slots[curIndex].UpdateSaveName(tempSlotName);
-        // }
-
-
         SaveLoadManager.instance.LoadAllData();
         for(int curIndex = 0; curIndex < SaveLoadManager.instance.maxSaveSlot; curIndex++) {
             saveSlots.slots[curIndex].UpdateSaveName(curIndex + ": " + SaveLoadManager.instance.data[curIndex].GetSaveSlotName());
-            Debug.Log(curIndex + " " + SaveLoadManager.instance.data[curIndex].isLoaded);
         }
     }
     private void SaveToCurrentSlot() {
-        // do something -> this would be implemented right after understanding the usage of easy save
-        // Debug.Log("Save is done (not done actually)");
-
         SavePoint targetSavePoint = GameManager.instance.player.playerInteraction.targetSavePoint;
         SaveLoadManager.instance.SaveData(slotIndex, new SaveData(targetSavePoint.stageName, DateTime.Now, targetSavePoint.respawnPoint, GameManager.instance.player.playerInfo.availableWeapons, GameManager.instance.player.playerInfo.health));
     }

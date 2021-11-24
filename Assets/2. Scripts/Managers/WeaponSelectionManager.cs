@@ -50,6 +50,10 @@ public class WeaponSelectionManager : MonoBehaviour
         }
     }
 
+    public void ResetSelectedWeaponIndex() {
+        curSelectedWeaponIndex = 0;
+    }
+
     public void SetWeaponSelectionBox(int boxIndex, AvailableWeapon targetWeapon) {
         if(targetWeapon.weaponType == WeaponType.Fist_Left) {
             if(popupWeaponSelection.weaponSelectionBoxes[boxIndex].IsWeaponInfoActive()) 

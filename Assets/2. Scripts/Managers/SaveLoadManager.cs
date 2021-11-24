@@ -6,34 +6,29 @@ public class SaveLoadManager : MonoBehaviour
 {
     [ReadOnly] public static SaveLoadManager instance;
 
-    [ReadOnly] public List<SaveData> data;
+    public List<SaveData> data;
     [ReadOnly] public int maxSaveSlot;
 
     private string defaultSavePath;
 
     private void Awake() {
         instance = this;
-        defaultSavePath = "SaveData/";
 
+        defaultSavePath = "SaveData/";
+        data = new List<SaveData>();
         maxSaveSlot = 5;
 
-        InitialLoad();
+        LoadAllData();
     }
 
-    private void InitialLoad() {
+    public void LoadAllData() {
+        data.Clear();
+
         for(int curIndex = 0; curIndex < maxSaveSlot; curIndex++) {
             if(ES3.KeyExists(curIndex.ToString(), defaultSavePath + curIndex + ".es3"))
                 data.Add(ES3.Load<SaveData>(curIndex.ToString(), defaultSavePath + curIndex + ".es3"));
             else
                 data.Add(new SaveData(true));
-        }
-    }
-
-    public void LoadAllData() {
-        for(int curIndex = 0; curIndex < maxSaveSlot; curIndex++) {
-            if(ES3.KeyExists(curIndex.ToString(), defaultSavePath + curIndex + ".es3")) {
-                data[curIndex].SetSaveData(ES3.Load<SaveData>(curIndex.ToString(), defaultSavePath + curIndex + ".es3"));
-            }
         }
     }
 
