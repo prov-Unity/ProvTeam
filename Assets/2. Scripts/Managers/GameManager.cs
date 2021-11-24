@@ -25,4 +25,8 @@ public class GameManager : MonoBehaviour
     public void DisablePlayerInput() {
         player.playerInput.enabled = false;
     }
+
+    public void RespawnPlayer() {
+        
+    }
 }
