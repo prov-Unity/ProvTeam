@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class SavePoint : MonoBehaviour
 {
-    [ReadOnly, SerializeField] private Vector3 spawnPoint;
+    public string stageName;
+    [ReadOnly] public Vector3 respawnPoint;
 
     private void Awake() {
-        spawnPoint = transform.position + new Vector3(0, 5f, 0);
+        respawnPoint = transform.position + new Vector3(0, 5f, 0);
     }
 }

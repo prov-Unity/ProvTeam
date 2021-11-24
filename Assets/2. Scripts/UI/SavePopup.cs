@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,18 +9,15 @@ public class SavePopup : MonoBehaviour
 
     [ReadOnly, SerializeField] private string tempSlotName;
     [ReadOnly, SerializeField] private int slotIndex;
-    [ReadOnly, SerializeField] private int maxSlotCount;
-
 
     private void Awake() {
         saveSlots = GetComponentInChildren<SaveSlots>();
 
         slotIndex = 0;
-        maxSlotCount = 5;
     }
 
     private void Start() {
-        for(; slotIndex < maxSlotCount; slotIndex++) {
+        for(; slotIndex < SaveLoadManager.instance.maxSaveSlot; slotIndex++) {
             DisableCurrentSaveSlot();
         }
 
@@ -33,7 +31,7 @@ public class SavePopup : MonoBehaviour
         else if(Input.GetKeyDown(KeyCode.DownArrow)) 
             MoveCurrentSaveSlotDown();
         else if(Input.GetKeyDown(KeyCode.Return)) {
-            SaveToCurrentSaveSlot();
+            SaveToCurrentSlot();
         }
         else if(Input.GetKeyDown(KeyCode.Escape)) {
             GameManager.instance.SetTimeScale(1f);
@@ -46,13 +44,13 @@ public class SavePopup : MonoBehaviour
         DisableCurrentSaveSlot();
         slotIndex--;
         if(slotIndex < 0)
-            slotIndex = maxSlotCount-1;
+            slotIndex = SaveLoadManager.instance.maxSaveSlot-1;
         EnableCurrentSaveSlot();
     }
     private void MoveCurrentSaveSlotDown() {
         DisableCurrentSaveSlot();
         slotIndex++;
-        if(slotIndex >= maxSlotCount)
+        if(slotIndex >= SaveLoadManager.instance.maxSaveSlot)
             slotIndex = 0;
         EnableCurrentSaveSlot();
     }
@@ -67,20 +65,29 @@ public class SavePopup : MonoBehaviour
             saveSlots.slots[slotIndex].EnableSelected();
     }
 
-    public void LoadSaveFiles() {
+    public void LoadFiles() {
         // do something -> this would be implemented right after understanding the usage of easy save
-        Debug.Log("Save data loading is done (not done actually)");
-        for(int curIndex = 0; curIndex < maxSlotCount; curIndex++) {
-            tempSlotName = (curIndex + 1) + ": ";
-            // file existence check
-            // currently it's not implemented
-            tempSlotName += "empty";
+        // Debug.Log("Save data loading is done (not done actually)");
+        // for(int curIndex = 0; curIndex < SaveLoadManager.instance.maxSaveSlot; curIndex++) {
+        //     tempSlotName = (curIndex + 1) + ": ";
+        //     // file existence check
+        //     // currently it's not implemented
+        //     tempSlotName += "empty";
 
-            saveSlots.slots[curIndex].UpdateSaveName(tempSlotName);
+        //     saveSlots.slots[curIndex].UpdateSaveName(tempSlotName);
+        // }
+
+
+        SaveLoadManager.instance.LoadData();
+        for(int curIndex = 0; curIndex < SaveLoadManager.instance.maxSaveSlot; curIndex++) {
+            saveSlots.slots[curIndex].UpdateSaveName(curIndex + ": " + SaveLoadManager.instance.data[curIndex].GetSaveSlotName());
         }
     }
-    private void SaveToCurrentSaveSlot() {
+    private void SaveToCurrentSlot() {
         // do something -> this would be implemented right after understanding the usage of easy save
-        Debug.Log("Save is done (not done actually)");
+        // Debug.Log("Save is done (not done actually)");
+
+        SavePoint targetSavePoint =  GameManager.instance.player.playerInteraction.targetSavePoint;
+        SaveLoadManager.instance.SaveData(slotIndex, new SaveData(targetSavePoint.stageName, DateTime.Now, targetSavePoint.respawnPoint, GameManager.instance.player.playerInfo.availableWeapons, GameManager.instance.player.playerInfo.health));
     }
 }

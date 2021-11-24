@@ -101,6 +101,6 @@ public class UIManager : MonoBehaviour
         GameManager.instance.DisablePlayerInput();
         GameManager.instance.SetTimeScale(0.01f);
         popupSave.gameObject.SetActive(true);
-        popupSave.LoadSaveFiles();
+        popupSave.LoadFiles();
     }
 }
