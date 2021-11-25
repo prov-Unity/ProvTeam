@@ -21,7 +21,7 @@ public class PlayerAnimation : MonoBehaviour
 
     public void UpdateCurWeaponIndex() {
         int curWeaponTypeIndex = ((int)GameManager.instance.player.playerInfo.curWeapon.weaponType);
-        if(curWeaponTypeIndex <= (int)WeaponType.TwoHandSword_01)
+        if(curWeaponTypeIndex < (int)WeaponType.TwoHandSword_01)
             animator.SetInteger("CurWeaponIndex", 0);
         else
             animator.SetInteger("CurWeaponIndex", 1);
@@ -38,7 +38,8 @@ public class PlayerAnimation : MonoBehaviour
             case WeaponType.Fist_Left: animator.SetTrigger("AttackFist"); break;
             case WeaponType.Dagger_01:
             case WeaponType.Dagger_02: animator.SetTrigger("AttackDagger"); break;
-            //case WeaponType.Bone_Right: animator.SetTrigger("Attack2Hand"); break;
+            case WeaponType.TwoHandSword_01:
+            case WeaponType.TwoHandSword_02: animator.SetTrigger("Attack2Hand"); break;
         }   
     }
 
