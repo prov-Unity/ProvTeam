@@ -17,7 +17,7 @@ public class SkeletonSlaveBT : MonsterAI
     protected override void Start()
     {
         base.Start();
-        target = PPAP.Instance.player.transform;
+        target = GameManager.instance.player.transform;
         ConstructBehaviorTree();
     }
 

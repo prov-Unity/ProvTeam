@@ -2,19 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = System.Random;
 
-public class GolemBT : MonsterAI
+public class GhostMiniBT : MonsterAI
 {
     private Node _topNode;
-    private static readonly int RoarHash = Animator.StringToHash("Roar");
-    private static readonly int HpHash = Animator.StringToHash("Hp");
     private const int AttackPatternLength = 2;
 
     protected override void Awake()
     {
         base.Awake();
-        monsterType = MonsterType.Golem;
+        monsterType = MonsterType.GhostMini;
     }
 
     protected override void Start()
@@ -53,8 +50,8 @@ public class GolemBT : MonsterAI
         while (true)
         {
             CheckForgetTime();
-            yield return new WaitForSeconds(0.2f);
             target.position = GameManager.instance.player.transform.position;
+            yield return new WaitForSeconds(0.2f);
             _topNode.Evaluate();
             if (_topNode.NodeState == NodeState.FAILURE)
             {
@@ -63,20 +60,18 @@ public class GolemBT : MonsterAI
         }
     }
 
-    public void IncreaseAttackPower()
+    public void AttackBlackHole()
     {
-        Anim.SetInteger(HpHash, currentHp);
-        if (currentHp > 50)
-            return;
-        Anim.SetBool(RoarHash, true);
-        for (int i = 0; i < weapon.Length; i++)
-        {
-            weapon[i].attackPower += 10;
-        }
+        GameObject blackHole = Resources.Load<GameObject>("Weapons/BlackHole");
+        Instantiate(blackHole, transform.position + transform.forward * 3, Quaternion.identity);
     }
 
-    public void RoarStateChange()
+    public void AttackIceWheel()
     {
-        Anim.SetBool(RoarHash, false);
+        Vector3 originPos = transform.position;
+        GameObject iceWheel = Resources.Load<GameObject>("Weapons/IceWheel");
+        Vector3 dir = PPAP.Instance.player.transform.position - originPos;
+        Instantiate(iceWheel, originPos + transform.forward * 3, Quaternion.identity);
+        
     }
 }

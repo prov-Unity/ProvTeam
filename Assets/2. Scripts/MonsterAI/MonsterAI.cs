@@ -39,7 +39,9 @@ public enum MonsterType
     SkeletonSlave,
     SkeletonKnight,
     Ghost,
+    GhostMini,
     Spider,
+    SpiderMini,
     Golem
 }
 
