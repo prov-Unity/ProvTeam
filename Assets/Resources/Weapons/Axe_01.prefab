@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ec82f97c8b4d974983f31b45e1570a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponType: 6
+  weaponType: 8
   checkMode: 0
   _col: {fileID: 4724927359198376939}
   attackPower: 0
