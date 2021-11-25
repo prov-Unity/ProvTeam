@@ -29,7 +29,6 @@ public class Trace : Node
         animator.SetBool(AttackHash, false);
         agent.isStopped = false;
         animator.SetBool(TraceHash, true);
-        agent.SetDestination(target.position);
         return NodeState.SUCCESS;
     }
 }

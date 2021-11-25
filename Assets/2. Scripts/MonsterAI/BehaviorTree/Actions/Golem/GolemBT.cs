@@ -54,7 +54,7 @@ public class GolemBT : MonsterAI
         {
             CheckForgetTime();
             yield return new WaitForSeconds(0.2f);
-            target.position = PPAP.Instance.player.transform.position;
+            target.position = GameManager.instance.player.transform.position;
             topNode.Evaluate();
             if (topNode.NodeState == NodeState.FAILURE)
             {
