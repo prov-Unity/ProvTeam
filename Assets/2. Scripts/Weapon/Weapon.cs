@@ -100,9 +100,9 @@ public class Weapon : MonoBehaviour
 
     private void Start()
     {
+        _col = GetComponent<Collider>();
         SetOwner();
         SetAttackPower();
-        _col = GetComponent<Collider>();
     }
 
     public void SetOwner()

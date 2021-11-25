@@ -4,7 +4,7 @@ using UnityEngine;
 
 [Serializable]
 public enum WeaponType {
-    Fist_Left, Fist_Right, Bone_Right, TwoHandedSword, BlackHole, IceWheel, Spider, No_Weapon
+    Fist_Left, Fist_Right, Bone_Right, TwoHandedSword, BlackHole, IceWheel, Spider, GolemWeapon, No_Weapon
 }
 
 [Serializable]
