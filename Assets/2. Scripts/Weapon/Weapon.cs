@@ -129,9 +129,12 @@ public class Weapon : MonoBehaviour
             break;
             
             // Ghost 마법의 경우, 소유자가 정해져 있지 않아서 이렇게 구현
+            // default:
+            // owner = "Monster";
+            // _col.enabled = false;
+            // break;
             default:
-            owner = "Monster";
-            _col.enabled = false;
+            owner = null;
             break;
         }
     }
