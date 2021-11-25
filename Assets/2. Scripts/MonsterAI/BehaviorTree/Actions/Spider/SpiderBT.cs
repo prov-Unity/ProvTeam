@@ -49,7 +49,7 @@ public class SpiderBT : MonsterAI
         while (true)
         {
             CheckForgetTime();
-            target.position = PPAP.Instance.player.transform.position;
+            target.position = GameManager.instance.player.transform.position;
             yield return new WaitForSeconds(0.2f);
             topNode.Evaluate();
             if (topNode.NodeState == NodeState.FAILURE)
