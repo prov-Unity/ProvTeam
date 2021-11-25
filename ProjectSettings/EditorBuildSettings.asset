@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/1. Scenes/MainMenu.unity
+    guid: fd2f5d4a70ba93a41873709d99d3a1e6
+  - enabled: 1
+    path: Assets/1. Scenes/Yumo(Game)/Tutorial.unity
+    guid: d12082aff2c287d43b6e37948dd1d98a
+  - enabled: 1
+    path: Assets/1. Scenes/Yumo(Game)/PlayScene.unity
+    guid: 01431943609265144941272374f59208
   m_configObjects: {}
