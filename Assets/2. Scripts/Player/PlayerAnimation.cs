@@ -10,10 +10,6 @@ public class PlayerAnimation : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    // public float GetCurAnimationNormalizedTime() {
-    //     return animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-    // }
-
     public void UpdateCanJump() {
         animator.SetBool("CanJump", player.playerInfo.canJump);
     }
@@ -41,24 +37,15 @@ public class PlayerAnimation : MonoBehaviour
     }
 
     public void PlayHitAnimation() {
-        switch(player.playerInfo.curWeapon.weaponType) {
-            case WeaponType.Fist_Left: animator.SetTrigger("HitFist"); break;
-            case WeaponType.Bone_Right: animator.SetTrigger("Hit2Hand"); break;
-        }
+        animator.SetTrigger("Hit"); 
     }
 
     public void PlayDeathAnimation() {
-        switch(player.playerInfo.curWeapon.weaponType) {
-            case WeaponType.Fist_Left: animator.SetTrigger("DeathFist"); break;
-            case WeaponType.Bone_Right: animator.SetTrigger("Death2Hand"); break;
-        }
+        animator.SetTrigger("Death");
     }
 
     public void PlayJumpAnimation() {
-        switch(player.playerInfo.curWeapon.weaponType) {
-            case WeaponType.Fist_Left: animator.SetTrigger("JumpFist"); break;
-            case WeaponType.Bone_Right: animator.SetTrigger("Jump2Hand"); break;
-        }
+        animator.SetTrigger("Jump");
     }
     
     public void PlayRollAnimation() {

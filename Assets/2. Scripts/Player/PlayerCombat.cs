@@ -17,6 +17,7 @@ public class PlayerCombat : MonoBehaviour
         player = GetComponent<Player>();
         curCollider = GetComponent<Collider>();
 
+
         gettingHitResetTime = 0.8f;
     }
 
@@ -40,16 +41,8 @@ public class PlayerCombat : MonoBehaviour
             player.playerAnimation.PlayAttackAnimation();
 
             player.playerInfo.attackIndex++;
-            switch(player.playerInfo.curWeapon.weaponType) {
-                case WeaponType.Fist_Left:
-                    if(player.playerInfo.attackIndex > 3) 
-                        player.playerInfo.attackIndex = 0;   
-                break;
-                case WeaponType.Bone_Right:
-                    if(player.playerInfo.attackIndex > 5) 
-                        player.playerInfo.attackIndex = 0;   
-                break;
-            }
+            if(player.playerInfo.attackIndex > WeaponManager.instance.maxComboIndexOfWeapons[(int)player.playerInfo.curWeapon.weaponType]) 
+                player.playerInfo.attackIndex = 0;   
         }
     }
 
@@ -120,10 +113,6 @@ public class PlayerCombat : MonoBehaviour
         player.playerMovement.DisableGravity();
         GameManager.instance.DisablePlayerInput();
         yield return new WaitForSeconds(2.5f); // -> this one also might be changed to waituntil or so
-        // do something 
-        // probably I will make a method of which name is might be Revive or Respawn from the Game Manager
-        // that method would enable collider and gravity of player again, and do something
-        // do something including reset attack index, reset is attacking, or so
 
         UIManager.instance.EnableGameOverPopup();
     }
