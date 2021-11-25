@@ -1,10 +1,13 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public enum WeaponType {
     Fist_Left, Fist_Right, Bone_Right, TwoHandedSword, BlackHole, IceWheel, Spider, No_Weapon
 }
 
+[Serializable]
 public class AvailableWeapon {
     public WeaponType weaponType;
     public int durability;
@@ -12,6 +15,11 @@ public class AvailableWeapon {
     public AvailableWeapon(WeaponType inputType, int inputDurability) {
         weaponType = inputType;
         durability = inputDurability;
+    }
+
+    public AvailableWeapon() {
+        weaponType = WeaponType.No_Weapon;
+        durability = -1;
     }
 }
 
