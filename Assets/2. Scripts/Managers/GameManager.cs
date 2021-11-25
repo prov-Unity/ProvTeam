@@ -49,13 +49,27 @@ public class GameManager : MonoBehaviour
         player = instantiatedPlayerAndCameraObject.GetComponentInChildren<Player>();
 
         switch(sceneName) {
-            case "Tutorial": player.transform.position = tutorialStartPoint.position; break;
-            case "PlayScene": player.transform.position = stageOneStartPoint.position; break;
+            case "Tutorial":
+            player.transform.position = tutorialStartPoint.position;
+            
+            player.playerInfo.health = 100;
+            player.playerInfo.availableWeapons = new List<AvailableWeapon>();
+            player.playerInfo.availableWeapons.Add(new AvailableWeapon(WeaponType.Fist_Left, WeaponManager.instance.weaponInitialDurabilities[(int)WeaponType.Fist_Left]));
+            player.playerInfo.curWeapon = player.playerInfo.availableWeapons[0];
+            break;
+
+            case "PlayScene":
+            player.transform.position = stageOneStartPoint.position;
+            
+            SaveData latestData = SaveLoadManager.instance.GetLatestData();
+            player.playerInfo.health = latestData.savedHealth;
+            player.playerInfo.availableWeapons = new List<AvailableWeapon>();
+            foreach(AvailableWeapon curWeapon in latestData.savedAvailableWeapons) {
+                player.playerInfo.availableWeapons.Add(curWeapon);
+            }
+            player.playerInfo.curWeapon = player.playerInfo.availableWeapons[0];
+            break;
         }
-        player.playerInfo.health = 100;
-        player.playerInfo.availableWeapons = new List<AvailableWeapon>();
-        player.playerInfo.availableWeapons.Add(new AvailableWeapon(WeaponType.Fist_Left, WeaponManager.instance.weaponInitialDurabilities[(int)WeaponType.Fist_Left]));
-        player.playerInfo.curWeapon = player.playerInfo.availableWeapons[0];
 
         SaveLoadManager.instance.SaveData(0, new SaveData(sceneName, DateTime.Now, player.transform.position, player.playerInfo.availableWeapons, player.playerInfo.health));
     }
