@@ -135,6 +135,7 @@ public class Weapon : MonoBehaviour
             // break;
             default:
             owner = null;
+            durability = WeaponManager.instance.weaponInitialDurabilities[(int)weaponType];
             break;
         }
     }
