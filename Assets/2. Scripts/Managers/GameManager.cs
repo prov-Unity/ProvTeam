@@ -6,10 +6,13 @@ public class GameManager : MonoBehaviour
 {
     [ReadOnly] public static GameManager instance;
     [ReadOnly] public Player player;
+    public Transform initSpawnPoint;
 
     private void Awake() {
         instance = this;
         player = FindObjectOfType<Player>();
+
+        //initSpawnPoint = FindObjectOfType<>();
     }
 
     public void SetTimeScale(float timeScale) {
@@ -25,12 +28,16 @@ public class GameManager : MonoBehaviour
         player.playerInput.enabled = false;
     }
 
-    public void EnablePlayer() {
-        player.gameObject.SetActive(true);
-    }
+    // public void EnablePlayer() {
+    //     player.gameObject.SetActive(true);
+    // }
 
-    public void DisablePlayer() {
-        player.gameObject.SetActive(false);
+    // public void DisablePlayer() {
+    //     player.gameObject.SetActive(false);
+    // }
+
+    public void InitSpawnPlayer() {
+
     }
 
     public void RespawnPlayer() {
