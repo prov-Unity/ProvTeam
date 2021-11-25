@@ -1,18 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     [ReadOnly] public static GameManager instance;
     [ReadOnly] public Player player;
-    public Transform initSpawnPoint;
+    [ReadOnly] public Transform tutorialStartPoint;
+    [ReadOnly] public Transform stageOneStartPoint;
+
+    [ReadOnly] public GameObject playerAndCameraPrefab;
 
     private void Awake() {
         instance = this;
         player = FindObjectOfType<Player>();
 
-        initSpawnPoint = FindObjectOfType<TutorialStartPoint>().transform;
+        tutorialStartPoint = FindObjectOfType<TutorialStartPoint>().transform;
+        stageOneStartPoint = FindObjectOfType<StageOneStartPoint>().transform;
+
+        playerAndCameraPrefab = Resources.Load<GameObject>("Player_And_Camera");
     }
 
     public void SetTimeScale(float timeScale) {
@@ -36,8 +40,16 @@ public class GameManager : MonoBehaviour
     //     player.gameObject.SetActive(false);
     // }
 
-    public void InitSpawnPlayer() {
+    public void InitSpawnPlayer(string stageName) {
+        if(player != null) {}
+            Destroy(player);
+        GameObject instantiatedPlayerAndCameraObject = Instantiate(playerAndCameraPrefab);
+        player = instantiatedPlayerAndCameraObject.GetComponentInChildren<Player>();
 
+        switch(stageName) {
+            case "Tutorial": player.transform.position = tutorialStartPoint.position; break;
+            case "PlayScene": player.transform.position = stageOneStartPoint.position; break;
+        }
     }
 
     public void RespawnPlayer() {
