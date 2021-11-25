@@ -14,6 +14,13 @@ public class GameManager : MonoBehaviour
         player = FindObjectOfType<Player>();
 
         playerAndCameraPrefab = Resources.Load<GameObject>("Player_And_Camera");
+        
+        DontDestroyOnLoad(gameObject);
+    }
+
+    private void Start() {
+        if(MySceneManager.instance.curSceneName != "MainMenu")
+            InitSpawnPlayer(MySceneManager.instance.curSceneName);
     }
 
     public void SetTimeScale(float timeScale) {
@@ -29,21 +36,20 @@ public class GameManager : MonoBehaviour
         player.playerInput.enabled = false;
     }
 
-    // public void EnablePlayer() {
-    //     player.gameObject.SetActive(true);
-    // }
+    public void InitSpawnPlayer(string sceneName) {
+        switch(sceneName) {
+            case "Tutorial": tutorialStartPoint = FindObjectOfType<TutorialStartPoint>().transform; break;
+            case "PlayScene": stageOneStartPoint = FindObjectOfType<StageOneStartPoint>().transform; break;
+        }
 
-    // public void DisablePlayer() {
-    //     player.gameObject.SetActive(false);
-    // }
-
-    public void InitSpawnPlayer(string stageName) {
         if(player != null) {}
             Destroy(player);
         GameObject instantiatedPlayerAndCameraObject = Instantiate(playerAndCameraPrefab);
         player = instantiatedPlayerAndCameraObject.GetComponentInChildren<Player>();
 
-        switch(stageName) {
+        Debug.Log("Worked");
+
+        switch(sceneName) {
             case "Tutorial": player.transform.position = tutorialStartPoint.position; break;
             case "PlayScene": player.transform.position = stageOneStartPoint.position; break;
         }

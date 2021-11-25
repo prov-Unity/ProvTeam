@@ -1,24 +1,21 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MySceneManager : MonoBehaviour
 {
     public static MySceneManager instance;
+    public string curSceneName;
 
     private void Awake() {
         instance = this;
+        curSceneName = "MainMenu";
+
+        DontDestroyOnLoad(gameObject);
     }
 
     public void LoadScene(string sceneName) {
+        curSceneName = sceneName;
         SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
-
-        switch(sceneName) {
-            case "Tutorial": GameManager.instance.tutorialStartPoint = FindObjectOfType<TutorialStartPoint>().transform; break;
-            case "PlayScene": GameManager.instance.stageOneStartPoint = FindObjectOfType<StageOneStartPoint>().transform; break;
-        }
-
-        if(sceneName != "MainMenu")
-            GameManager.instance.InitSpawnPlayer(sceneName);
-        
     }
 }
