@@ -55,26 +55,30 @@ public class WeaponSelectionManager : MonoBehaviour
     }
 
     public void SetWeaponSelectionBox(int boxIndex, AvailableWeapon targetWeapon) {
-        if(targetWeapon.weaponType == WeaponType.Fist_Left) {
-            if(popupWeaponSelection.weaponSelectionBoxes[boxIndex].IsWeaponInfoActive()) 
-                popupWeaponSelection.weaponSelectionBoxes[boxIndex].DisableWeaponInfo();
-        }
-        else {
-            if(popupWeaponSelection.weaponSelectionBoxes[boxIndex].IsWeaponInfoActive() == false) 
-                popupWeaponSelection.weaponSelectionBoxes[boxIndex].EnableWeaponInfo();
+        if(popupWeaponSelection != null) {
+            if(targetWeapon.weaponType == WeaponType.Fist_Left) {
+                if(popupWeaponSelection.weaponSelectionBoxes[boxIndex].IsWeaponInfoActive()) 
+                    popupWeaponSelection.weaponSelectionBoxes[boxIndex].DisableWeaponInfo();
+            }
+            else {
+                if(popupWeaponSelection.weaponSelectionBoxes[boxIndex].IsWeaponInfoActive() == false) 
+                    popupWeaponSelection.weaponSelectionBoxes[boxIndex].EnableWeaponInfo();
 
-            popupWeaponSelection.weaponSelectionBoxes[boxIndex].UpdateWeaponInfo(targetWeapon);
-        }
+                popupWeaponSelection.weaponSelectionBoxes[boxIndex].UpdateWeaponInfo(targetWeapon);
+            }
 
-        popupWeaponSelection.weaponSelectionBoxes[boxIndex].UpdateWeaponSelectionBox(targetWeapon.weaponType.ToString().Split(new char[] {'_'})[0], weaponIcons[(int)targetWeapon.weaponType]);
+            popupWeaponSelection.weaponSelectionBoxes[boxIndex].UpdateWeaponSelectionBox(targetWeapon.weaponType.ToString().Split(new char[] {'_'})[0], weaponIcons[(int)targetWeapon.weaponType]);
+        }
     }
 
     public void EnableWeaponSelectionBox(int boxIndex) {
-        popupWeaponSelection.weaponSelectionBoxes[boxIndex].gameObject.SetActive(true);
+        if(popupWeaponSelection != null)
+            popupWeaponSelection.weaponSelectionBoxes[boxIndex].gameObject.SetActive(true);
     }
 
     public void DisableWeaponSelectionBox(int boxIndex) {
-        popupWeaponSelection.weaponSelectionBoxes[boxIndex].gameObject.SetActive(false);
+        if(popupWeaponSelection != null)
+            popupWeaponSelection.weaponSelectionBoxes[boxIndex].gameObject.SetActive(false);
     }
 
     public void SelectCurrentWeapon() {
@@ -112,7 +116,7 @@ public class WeaponSelectionManager : MonoBehaviour
         curSelectedWeaponIndex++;
         if(curSelectedWeaponIndex >= GameManager.instance.player.playerInfo.availableWeapons.Count)
             curSelectedWeaponIndex = (GameManager.instance.player.playerInfo.availableWeapons.Count - 1);
-        else
+        else 
             UpdateWeaponSelectionBox();
     }
 

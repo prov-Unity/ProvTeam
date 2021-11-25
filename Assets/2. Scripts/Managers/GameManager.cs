@@ -70,6 +70,7 @@ public class GameManager : MonoBehaviour
             player.playerInfo.curWeapon = player.playerInfo.availableWeapons[0];
             break;
         }
+        WeaponSelectionManager.instance.SelectCurrentWeapon();
 
         SaveLoadManager.instance.SaveData(0, new SaveData(sceneName, DateTime.Now, player.transform.position, player.playerInfo.availableWeapons, player.playerInfo.health));
     }
