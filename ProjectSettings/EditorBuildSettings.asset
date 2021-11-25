@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/1. Scenes/MainMenu.unity
+    path: Assets/1. Scenes/Yumo(Game)/MainMenu.unity
     guid: fd2f5d4a70ba93a41873709d99d3a1e6
   - enabled: 1
     path: Assets/1. Scenes/Yumo(Game)/Tutorial.unity
