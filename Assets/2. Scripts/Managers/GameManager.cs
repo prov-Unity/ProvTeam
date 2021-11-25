@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
         instance = this;
         player = FindObjectOfType<Player>();
 
-        //initSpawnPoint = FindObjectOfType<>();
+        initSpawnPoint = FindObjectOfType<TutorialStartPoint>().transform;
     }
 
     public void SetTimeScale(float timeScale) {
