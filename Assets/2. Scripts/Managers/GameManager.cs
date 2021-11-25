@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
     private void Awake() {
         instance = this;
         player = FindObjectOfType<Player>();
-
     }
 
     public void SetTimeScale(float timeScale) {
@@ -24,6 +23,14 @@ public class GameManager : MonoBehaviour
 
     public void DisablePlayerInput() {
         player.playerInput.enabled = false;
+    }
+
+    public void EnablePlayer() {
+        player.gameObject.SetActive(true);
+    }
+
+    public void DisablePlayer() {
+        player.gameObject.SetActive(false);
     }
 
     public void RespawnPlayer() {
