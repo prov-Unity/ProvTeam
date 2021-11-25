@@ -83,30 +83,23 @@ public class WeaponSelectionManager : MonoBehaviour
 
     public void SelectCurrentWeapon() {
         if(GameManager.instance.player.playerInfo.curWeapon != GameManager.instance.player.playerInfo.availableWeapons[curSelectedWeaponIndex]) {
-            switch(GameManager.instance.player.playerInfo.availableWeapons[curSelectedWeaponIndex].weaponType) {
-                case WeaponType.Fist_Left: 
-                // switch to fist
+            WeaponType curWeaponType = GameManager.instance.player.playerInfo.availableWeapons[curSelectedWeaponIndex].weaponType;
+            if(curWeaponType == WeaponType.Fist_Left) {
                 GameManager.instance.player.playerLeftWeaponSlot.SelectWeapon(WeaponType.Fist_Left);
                 GameManager.instance.player.playerRightWeaponSlot.SelectWeapon(WeaponType.Fist_Right);
 
                 GameManager.instance.player.playerCombat.SetWeapons(GameManager.instance.player.playerLeftWeaponSlot.curWeapon.GetComponent<Weapon>(), GameManager.instance.player.playerRightWeaponSlot.curWeapon.GetComponent<Weapon>());
-
-                GameManager.instance.player.playerInfo.curWeapon = GameManager.instance.player.playerInfo.availableWeapons.Find(x => x.weaponType == WeaponType.Fist_Left);
-                GameManager.instance.player.playerInfo.attackIndex = 0;
-                break;
-
-                case WeaponType.Bone_Right:
-                // switch to bone
-                GameManager.instance.player.playerLeftWeaponSlot.DestroyCurWeapon();
-                GameManager.instance.player.playerRightWeaponSlot.SelectWeapon(WeaponType.Bone_Right);
-                GameManager.instance.player.playerRightWeaponSlot.curWeapon.GetComponent<Weapon>().durability = GameManager.instance.player.playerInfo.availableWeapons[curSelectedWeaponIndex].durability;
-                
-                GameManager.instance.player.playerCombat.SetWeapons(null, GameManager.instance.player.playerRightWeaponSlot.curWeapon.GetComponent<Weapon>());
-
-                GameManager.instance.player.playerInfo.curWeapon = GameManager.instance.player.playerInfo.availableWeapons.Find(x => x.weaponType == WeaponType.Bone_Right);
-                GameManager.instance.player.playerInfo.attackIndex = 0;
-                break;
             }
+            else {
+                GameManager.instance.player.playerLeftWeaponSlot.DestroyCurWeapon();
+                GameManager.instance.player.playerRightWeaponSlot.SelectWeapon(curWeaponType);
+
+                GameManager.instance.player.playerRightWeaponSlot.curWeapon.GetComponent<Weapon>().durability = GameManager.instance.player.playerInfo.availableWeapons[curSelectedWeaponIndex].durability;
+                GameManager.instance.player.playerCombat.SetWeapons(null, GameManager.instance.player.playerRightWeaponSlot.curWeapon.GetComponent<Weapon>());
+            }
+            GameManager.instance.player.playerInfo.curWeapon = GameManager.instance.player.playerInfo.availableWeapons.Find(x => x.weaponType == curWeaponType);
+            GameManager.instance.player.playerInfo.attackIndex = 0;
+
             GameManager.instance.player.playerAnimation.UpdateCurWeaponIndex();
             UIManager.instance.UpdateCurWeaponInfo();
         }
