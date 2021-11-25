@@ -4,7 +4,7 @@ using UnityEngine;
 
 [Serializable]
 public enum WeaponType {
-    Fist_Left, Fist_Right, Bone, Dagger_01, Dagger_02, TwoHandSword_01, TwoHandSword_02, BlackHole, IceWheel, Spider, GolemWeapon, No_Weapon
+    Fist_Left, Fist_Right, Bone, Sword_02, Dagger_01, Dagger_02, TwoHandSword_01, TwoHandSword_02, BlackHole, IceWheel, Spider, GolemWeapon, No_Weapon
 }
 
 [Serializable]
@@ -54,15 +54,25 @@ public class WeaponManager : MonoBehaviour
         weaponAttackPowers.Add(5);
         weaponInitialDurabilities.Add(100);
         maxComboIndexOfWeapons.Add(3);
+
         // Bone
         weaponPrefabs.Add(Resources.Load<GameObject>("Weapons/Bone"));
         weaponIcons.Add(Resources.Load<Sprite>("UIWeaponsIcon/Bone"));
         weaponAttackPowers.Add(10);
         weaponInitialDurabilities.Add(7);
-        maxComboIndexOfWeapons.Add(5);
+        maxComboIndexOfWeapons.Add(1);
+
 
 
         // the powers and durabilities of weapons below must be changed based on the table
+        weaponPrefabs.Add(Resources.Load<GameObject>("Weapons/Sword_02"));
+        weaponIcons.Add(Resources.Load<Sprite>("UIWeaponsIcon/Sword_02"));
+        weaponAttackPowers.Add(20);
+        weaponInitialDurabilities.Add(25);
+        maxComboIndexOfWeapons.Add(1);
+
+
+
         // Dagger_01
         weaponPrefabs.Add(Resources.Load<GameObject>("Weapons/Dagger_01"));
         weaponIcons.Add(Resources.Load<Sprite>("UIWeaponsIcon/Dagger_01"));

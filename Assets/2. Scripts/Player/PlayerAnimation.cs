@@ -36,6 +36,8 @@ public class PlayerAnimation : MonoBehaviour
         animator.SetInteger("AttackIndex", player.playerInfo.attackIndex);  
         switch(player.playerInfo.curWeapon.weaponType) {
             case WeaponType.Fist_Left: animator.SetTrigger("AttackFist"); break;
+            case WeaponType.Bone:
+            case WeaponType.Sword_02: animator.SetTrigger("AttackSword"); break;
             case WeaponType.Dagger_01:
             case WeaponType.Dagger_02: animator.SetTrigger("AttackDagger"); break;
             case WeaponType.TwoHandSword_01:
