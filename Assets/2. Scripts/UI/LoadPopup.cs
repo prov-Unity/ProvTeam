@@ -61,7 +61,6 @@ public class LoadPopup : MonoBehaviour
     }
 
     public void LoadFiles() {
-        SaveLoadManager.instance.LoadAllData();
         for(int curIndex = 0; curIndex < SaveLoadManager.instance.maxSaveSlot; curIndex++) {
             saveSlots.slots[curIndex].UpdateSaveName(curIndex + ": " + SaveLoadManager.instance.data[curIndex].GetSaveSlotName());
         }

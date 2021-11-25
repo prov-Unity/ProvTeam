@@ -8,6 +8,8 @@ public class GameOverPopup : MonoBehaviour
     }
 
     public void OnClickMainMenu() {
-        // do something to load main menu
+        Destroy(MySceneManager.instance.gameObject);
+        GameManager.instance.SetTimeScale(1f);
+        MySceneManager.instance.LoadScene("MainMenu");
     }
 }
