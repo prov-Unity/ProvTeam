@@ -65474,6 +65474,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5209710628894662214}
   - component: {fileID: 1954479357102234220}
+  - component: {fileID: 8550232500220824089}
   m_Layer: 0
   m_Name: Warp
   m_TagString: Warp
@@ -65508,6 +65509,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8550232500220824089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6888176178315800809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fe0d9efee8c7524eb456f2d01cefcb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  warpDestination: PlayScene
 --- !u!1 &6893006115080293660
 GameObject:
   m_ObjectHideFlags: 0
