@@ -13,7 +13,6 @@ public class WeaponSelectionManager : MonoBehaviour
     hence, this manager would change player's weapon to the one at the index of 2 
     */
     public static WeaponSelectionManager instance;
-    [ReadOnly] public List<Sprite> weaponIcons;
     [ReadOnly, SerializeField] private WeaponSelectionPopup popupWeaponSelection;
     
 
@@ -22,13 +21,6 @@ public class WeaponSelectionManager : MonoBehaviour
     private void Awake() {
         instance = this;
 
-        weaponIcons = new List<Sprite>();
-        weaponIcons.Add(Resources.Load<Sprite>("UIWeaponsIcon/Fist"));
-        weaponIcons.Add(weaponIcons[(int)WeaponType.Fist_Left]);
-        weaponIcons.Add(Resources.Load<Sprite>("UIWeaponsIcon/Bone"));
-
-        // this code would be altered after save/load fuctionality is implemented
-        // if the system forces player to start a game with fist at first, then this code good enough
         curSelectedWeaponIndex = 0;
     }
 
@@ -67,7 +59,7 @@ public class WeaponSelectionManager : MonoBehaviour
                 popupWeaponSelection.weaponSelectionBoxes[boxIndex].UpdateWeaponInfo(targetWeapon);
             }
 
-            popupWeaponSelection.weaponSelectionBoxes[boxIndex].UpdateWeaponSelectionBox(targetWeapon.weaponType.ToString().Split(new char[] {'_'})[0], weaponIcons[(int)targetWeapon.weaponType]);
+            popupWeaponSelection.weaponSelectionBoxes[boxIndex].UpdateWeaponSelectionBox(targetWeapon.weaponType.ToString().Split(new char[] {'_'})[0], WeaponManager.instance.weaponIcons[(int)targetWeapon.weaponType]);
         }
     }
 

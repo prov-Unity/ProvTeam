@@ -69,7 +69,7 @@ public class UIManager : MonoBehaviour
 
             curWeaponInfo.UpdateWeaponDurability(GameManager.instance.player.playerInfo.curWeapon);
         }
-        curWeaponInfo.UpdatecurWeaponIcon(WeaponSelectionManager.instance.weaponIcons[(int)GameManager.instance.player.playerInfo.curWeapon.weaponType]);
+        curWeaponInfo.UpdatecurWeaponIcon(WeaponManager.instance.weaponIcons[(int)GameManager.instance.player.playerInfo.curWeapon.weaponType]);
     }
 
     public void EnableWeaponSelectionPopup() {
