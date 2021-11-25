@@ -13,9 +13,6 @@ public class GameManager : MonoBehaviour
         instance = this;
         player = FindObjectOfType<Player>();
 
-        tutorialStartPoint = FindObjectOfType<TutorialStartPoint>().transform;
-        stageOneStartPoint = FindObjectOfType<StageOneStartPoint>().transform;
-
         playerAndCameraPrefab = Resources.Load<GameObject>("Player_And_Camera");
     }
 

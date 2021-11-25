@@ -28426,7 +28426,6 @@ Transform:
   - {fileID: 736801938954525244}
   - {fileID: 736801938790469960}
   - {fileID: 736801938962229696}
-  - {fileID: 2107235140076857677}
   m_Father: {fileID: 736801939585776956}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -65464,50 +65463,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stageName: Stage_Tutorial
   respawnPoint: {x: 0, y: 0, z: 0}
---- !u!1 &6614916609201772089
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2107235140076857677}
-  - component: {fileID: 4813425760386290439}
-  m_Layer: 0
-  m_Name: Warp
-  m_TagString: Warp
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2107235140076857677
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6614916609201772089}
-  m_LocalRotation: {x: 0.34701425, y: 0.11986947, z: -0.06700793, w: -0.92775124}
-  m_LocalPosition: {x: -70.036, y: -30.016, z: -37.788}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 736801939359500023}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: -38.89, y: -20.212, z: 15.463}
---- !u!65 &4813425760386290439
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6614916609201772089}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6893006115080293660
 GameObject:
   m_ObjectHideFlags: 0

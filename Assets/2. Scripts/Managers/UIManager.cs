@@ -14,7 +14,6 @@ public class UIManager : MonoBehaviour
     [ReadOnly, SerializeField] private UIMonsterInfo monsterInfo;
     [ReadOnly, SerializeField] private UICurWeaponInfo curWeaponInfo;
 
-    [ReadOnly, SerializeField] private MainMenuPopup popupMainMenu;
     [ReadOnly, SerializeField] private InteractionPopup popupInteraction;
     [ReadOnly, SerializeField] private SavePopup popupSave;
     [ReadOnly, SerializeField] private GameOverPopup popupGameOver;
@@ -28,7 +27,6 @@ public class UIManager : MonoBehaviour
         curWeaponInfo = FindObjectOfType<UICurWeaponInfo>();
 
         popupWeaponSelection = FindObjectOfType<WeaponSelectionPopup>();
-        popupMainMenu = FindObjectOfType<MainMenuPopup>();
         popupInteraction = FindObjectOfType<InteractionPopup>();
         popupInteraction.gameObject.SetActive(false);
         popupSave = FindObjectOfType<SavePopup>();
@@ -75,14 +73,6 @@ public class UIManager : MonoBehaviour
         }
         curWeaponInfo.UpdatecurWeaponIcon(WeaponSelectionManager.instance.weaponIcons[(int)GameManager.instance.player.playerInfo.curWeapon.weaponType]);
     }
-
-    public void EnableMainMenuPopup() {
-        popupMainMenu.gameObject.SetActive(true);
-    }
-    public void DisableMainMenuPopup() {
-        popupMainMenu.gameObject.SetActive(false);
-    }
-
 
     public void EnableWeaponSelectionPopup() {
         popupWeaponSelection.gameObject.SetActive(true);
