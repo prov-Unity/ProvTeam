@@ -84,6 +84,7 @@ public class PlayerCombat : MonoBehaviour
                 GetDamaged(monsterWeapon.attackPower); 
             break;
             case "DeadZone": StartCoroutine("Die"); break;
+            case "Warp": MySceneManager.instance.LoadScene(other.GetComponent<WarpPoint>().warpDestination); break;
         }
     }
 
