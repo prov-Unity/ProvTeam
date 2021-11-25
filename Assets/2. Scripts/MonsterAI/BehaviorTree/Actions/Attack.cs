@@ -29,7 +29,8 @@ public class Attack : Node
         Debug.Log("Attack Node 실행됨");
         attackIndex = random.Next(attackPatternLength);
         Debug.Log(attackIndex);
-        animator.SetFloat(AttackIndexHash, attackIndex);
+        if (attackPatternLength > 1)
+            animator.SetFloat(AttackIndexHash, attackIndex);
         animator.SetBool(AttackHash, true);
         return NodeState.SUCCESS;
     }

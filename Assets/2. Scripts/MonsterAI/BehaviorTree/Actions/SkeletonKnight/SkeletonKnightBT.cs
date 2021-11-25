@@ -8,6 +8,7 @@ public class SkeletonKnightBT : MonsterAI
 {
     private Node topNode;
     private bool isAppear;
+    private bool AppearEnd;
     private Random random;
     private const int AttackPatternLength = 1;
     private static readonly int AppearIndex = Animator.StringToHash("AppearIndex");
@@ -45,16 +46,17 @@ public class SkeletonKnightBT : MonsterAI
         base.StartAction();
         if (!isAppear)
         {
-            Anim.SetInteger(AppearIndex, random.Next(MAXAppearIndex));
+            Anim.SetFloat(AppearIndex, random.Next(MAXAppearIndex));
             Debug.Log(isAppear);
+            isAppear = true;
         }        
-        if (!isRunning && isAppear)
+        if (!isRunning && AppearEnd)
             StartCoroutine(Action());
     }
 
     public void ChangeAppearState()
     {
-        isAppear = !isAppear;
+        AppearEnd = !AppearEnd;
     }
 
     public override IEnumerator Action()

@@ -24481,8 +24481,8 @@ MonoBehaviour:
   m_rightMove: 0
   m_upMove: 0
   m_changedFactor: 1
-  target: {x: 0, y: 0, z: 0}
   dir: {x: 0, y: 0, z: 0}
+  target: {x: 0, y: 0, z: 0}
 --- !u!135 &6017923418876013123
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -24508,7 +24508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ec82f97c8b4d974983f31b45e1570a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponType: 0
+  weaponType: 5
   checkMode: 0
   _col: {fileID: 6017923418876013123}
   attackPower: 0
@@ -48979,7 +48979,7 @@ GameObject:
   - component: {fileID: 868569516}
   m_Layer: 0
   m_Name: IceWheel
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

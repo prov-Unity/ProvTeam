@@ -18,32 +18,24 @@ public struct SaveData
         stageName = inputStageName;
         saveDateTime = inputSaveDateTime;
         respawnPoint = inputRespawnPoint;
+
         savedAvailableWeapons = inputSavedAvailableWeapon;
         savedHealth = inputSavedHealth;
     }
 
-    public SaveData(bool isDefault) {
+    public SaveData(bool trashValue) {
         isLoaded = false;
 
         stageName = "";
-        saveDateTime = new DateTime();
-        respawnPoint = new Vector3();
+        saveDateTime = DateTime.MinValue;
+        respawnPoint = Vector3.one;
         savedAvailableWeapons = null;
         savedHealth = -1;
     }
 
-    public void SetSaveData(SaveData inputSaveData) {
-        stageName = inputSaveData.stageName;
-        saveDateTime = inputSaveData.saveDateTime;
-        respawnPoint = inputSaveData.respawnPoint;
-        savedAvailableWeapons = inputSaveData.savedAvailableWeapons;
-        savedHealth = inputSaveData.savedHealth;
-    }
-
     public string GetSaveSlotName() {
-        if(isLoaded) {
+        if(isLoaded) 
             return stageName + " " + saveDateTime.ToString("yyyy/mm/dd  hh/mm/ss");
-        }
         else 
             return "empty";
     }

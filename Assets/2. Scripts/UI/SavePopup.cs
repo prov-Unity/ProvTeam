@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SavePopup : MonoBehaviour
@@ -23,6 +21,7 @@ public class SavePopup : MonoBehaviour
 
         slotIndex = 0;
         EnableCurrentSaveSlot();
+        LoadFiles();
     }
 
     private void Update() {
@@ -32,6 +31,7 @@ public class SavePopup : MonoBehaviour
             MoveCurrentSaveSlotDown();
         else if(Input.GetKeyDown(KeyCode.Return)) {
             SaveToCurrentSlot();
+            LoadFiles();
         }
         else if(Input.GetKeyDown(KeyCode.Escape)) {
             GameManager.instance.SetTimeScale(1f);
@@ -66,28 +66,13 @@ public class SavePopup : MonoBehaviour
     }
 
     public void LoadFiles() {
-        // do something -> this would be implemented right after understanding the usage of easy save
-        // Debug.Log("Save data loading is done (not done actually)");
-        // for(int curIndex = 0; curIndex < SaveLoadManager.instance.maxSaveSlot; curIndex++) {
-        //     tempSlotName = (curIndex + 1) + ": ";
-        //     // file existence check
-        //     // currently it's not implemented
-        //     tempSlotName += "empty";
-
-        //     saveSlots.slots[curIndex].UpdateSaveName(tempSlotName);
-        // }
-
-
-        SaveLoadManager.instance.LoadData();
+        SaveLoadManager.instance.LoadAllData();
         for(int curIndex = 0; curIndex < SaveLoadManager.instance.maxSaveSlot; curIndex++) {
             saveSlots.slots[curIndex].UpdateSaveName(curIndex + ": " + SaveLoadManager.instance.data[curIndex].GetSaveSlotName());
         }
     }
     private void SaveToCurrentSlot() {
-        // do something -> this would be implemented right after understanding the usage of easy save
-        // Debug.Log("Save is done (not done actually)");
-
-        SavePoint targetSavePoint =  GameManager.instance.player.playerInteraction.targetSavePoint;
+        SavePoint targetSavePoint = GameManager.instance.player.playerInteraction.targetSavePoint;
         SaveLoadManager.instance.SaveData(slotIndex, new SaveData(targetSavePoint.stageName, DateTime.Now, targetSavePoint.respawnPoint, GameManager.instance.player.playerInfo.availableWeapons, GameManager.instance.player.playerInfo.health));
     }
 }

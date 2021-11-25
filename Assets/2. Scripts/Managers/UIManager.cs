@@ -14,8 +14,10 @@ public class UIManager : MonoBehaviour
     [ReadOnly, SerializeField] private UIMonsterInfo monsterInfo;
     [ReadOnly, SerializeField] private UICurWeaponInfo curWeaponInfo;
 
+    [ReadOnly, SerializeField] private MainMenuPopup popupMainMenu;
     [ReadOnly, SerializeField] private InteractionPopup popupInteraction;
     [ReadOnly, SerializeField] private SavePopup popupSave;
+    [ReadOnly, SerializeField] private GameOverPopup popupGameOver;
 
     private void Awake()
     {        
@@ -26,10 +28,13 @@ public class UIManager : MonoBehaviour
         curWeaponInfo = FindObjectOfType<UICurWeaponInfo>();
 
         popupWeaponSelection = FindObjectOfType<WeaponSelectionPopup>();
+        popupMainMenu = FindObjectOfType<MainMenuPopup>();
         popupInteraction = FindObjectOfType<InteractionPopup>();
         popupInteraction.gameObject.SetActive(false);
         popupSave = FindObjectOfType<SavePopup>();
         popupSave.gameObject.SetActive(false);
+        popupGameOver = FindObjectOfType<GameOverPopup>();
+        popupGameOver.gameObject.SetActive(false);
 
         isInteractionPopupDisabled = true;
     }
@@ -71,6 +76,13 @@ public class UIManager : MonoBehaviour
         curWeaponInfo.UpdatecurWeaponIcon(WeaponSelectionManager.instance.weaponIcons[(int)GameManager.instance.player.playerInfo.curWeapon.weaponType]);
     }
 
+    public void EnableMainMenuPopup() {
+        popupMainMenu.gameObject.SetActive(true);
+    }
+    public void DisableMainMenuPopup() {
+        popupMainMenu.gameObject.SetActive(false);
+    }
+
 
     public void EnableWeaponSelectionPopup() {
         popupWeaponSelection.gameObject.SetActive(true);
@@ -102,5 +114,17 @@ public class UIManager : MonoBehaviour
         GameManager.instance.SetTimeScale(0.01f);
         popupSave.gameObject.SetActive(true);
         popupSave.LoadFiles();
+    }
+
+    public void EnableGameOverPopup() {
+        GameManager.instance.DisablePlayerInput();
+        GameManager.instance.SetTimeScale(0);
+        popupGameOver.gameObject.SetActive(true);
+    }
+
+    public void DisableGameOverPopup() {
+        GameManager.instance.EnablePlayerInput();
+        GameManager.instance.SetTimeScale(1f);
+        popupGameOver.gameObject.SetActive(false);
     }
 }

@@ -20,6 +20,10 @@ public class PlayerCombat : MonoBehaviour
         gettingHitResetTime = 0.8f;
     }
 
+    public void EnablePlayerCollider() {
+        curCollider.enabled = true;
+    }
+
     public void SetWeapons(Weapon inputLeftWeapon, Weapon inputRightWeapon) {
         leftWeapon = inputLeftWeapon;
         rightWeapon = inputRightWeapon;
@@ -112,12 +116,14 @@ public class PlayerCombat : MonoBehaviour
         player.playerAnimation.PlayDeathAnimation();
 
         curCollider.enabled = false;
-        player.playerMovement.curRigidbody.useGravity = false;
-        GameManager.instance.DisablePlayerInput(); // -> add enable player input to respawn mehtod
-        yield return new WaitForSeconds(3f); // -> this one also might be changed to waituntil or so
+        player.playerMovement.DisableGravity();
+        GameManager.instance.DisablePlayerInput();
+        yield return new WaitForSeconds(2.5f); // -> this one also might be changed to waituntil or so
         // do something 
         // probably I will make a method of which name is might be Revive or Respawn from the Game Manager
         // that method would enable collider and gravity of player again, and do something
         // do something including reset attack index, reset is attacking, or so
+
+        UIManager.instance.EnableGameOverPopup();
     }
 }

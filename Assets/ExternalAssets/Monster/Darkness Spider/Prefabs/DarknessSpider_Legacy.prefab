@@ -1,5 +1,69 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1916996956
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1916996957}
+  - component: {fileID: 1916996959}
+  - component: {fileID: 1916996958}
+  m_Layer: 7
+  m_Name: SpiderWeapon
+  m_TagString: Weapon
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1916996957
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916996956}
+  m_LocalRotation: {x: 0.62044847, y: -0.41912282, z: -0.35989368, w: 0.5566475}
+  m_LocalPosition: {x: -0.146, y: -0.062, z: -0.019}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1800330014648977660}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1916996959
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916996956}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.3, y: 0.1, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1916996958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916996956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ec82f97c8b4d974983f31b45e1570a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponType: 0
+  checkMode: 0
+  _col: {fileID: 1916996959}
+  attackPower: 0
+  durability: 0
+  owner: 
+  center: {x: 0, y: 0, z: 0}
 --- !u!1 &1800330014649472128
 GameObject:
   m_ObjectHideFlags: 0
@@ -9,7 +73,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977568}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_R_1_e
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +103,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977570}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_R_1_d
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +134,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977572}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_R_1_c
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +165,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977574}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_R_1_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +196,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977576}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_R_2_d
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +227,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977578}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_R_2_c
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,7 +258,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977580}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_R_2_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -225,9 +289,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977582}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_R_2_a
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -256,7 +320,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977584}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_R_0_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -287,9 +351,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977586}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_R_0_a
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -318,7 +382,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977588}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_L_3_e
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -348,7 +412,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977590}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_L_3_d
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -379,9 +443,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977592}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_R_1_a
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -410,7 +474,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977594}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_R_0_e
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -440,7 +504,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977596}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_R_0_d
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -471,7 +535,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977598}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_R_0_c
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -502,7 +566,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977600}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_L_2_d
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -533,7 +597,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977602}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_L_2_c
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -564,7 +628,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977604}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_L_2_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -595,9 +659,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977606}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_L_2_a
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -626,7 +690,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977608}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_L_3_c
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -657,7 +721,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977610}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_L_3_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -688,9 +752,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977612}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_L_3_a
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -719,7 +783,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977614}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_L_2_e
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -749,9 +813,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977616}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_L_1_a
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -780,7 +844,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977618}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_L_0_e
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -810,7 +874,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977620}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_L_0_d
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -841,7 +905,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977622}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_L_0_c
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -872,7 +936,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977624}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_L_1_e
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -902,7 +966,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977626}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_L_1_d
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -933,7 +997,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977628}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_L_1_c
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -964,7 +1028,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977630}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_L_1_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -995,9 +1059,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977632}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dummy025
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1037,9 +1101,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977634}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DARKNESS_SPIDER_ROOT
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1068,7 +1132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977638}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: chelicere_R_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1098,7 +1162,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977640}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_L_0_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1129,9 +1193,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977642}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_L_0_a
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1160,7 +1224,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977644}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: hook_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1190,7 +1254,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977646}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: hook_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1220,7 +1284,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977648}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Abdomen_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1252,9 +1316,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977650}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Abdomen_2
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1283,9 +1347,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977652}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Abdomen_1
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1314,9 +1378,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977654}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Abdomen_0
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1346,9 +1410,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977656}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: chelicere_R_a
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1377,9 +1441,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977658}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: chelicere_L_b
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1407,9 +1471,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977660}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: chelicere_L_a
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1426,6 +1490,7 @@ Transform:
   m_LocalScale: {x: 1.0000014, y: 1.0000007, z: 0.9999997}
   m_Children:
   - {fileID: 1800330014648977658}
+  - {fileID: 1916996957}
   m_Father: {fileID: 1800330014648977632}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1438,9 +1503,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977662}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: cephalothorax
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1469,9 +1534,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977536}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: mandibul_R_b
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1500,9 +1565,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977538}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: mandibul_R_a
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1531,7 +1596,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977540}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: mandibul_L_d
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1561,7 +1626,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977542}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: mandibul_L_c
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1593,9 +1658,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1800330014648977544}
   - component: {fileID: 1800330014646294996}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SK_DarknessSpider
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1736,9 +1801,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1800330014648977546}
   - component: {fileID: 1800330014642054934}
-  m_Layer: 0
+  - component: {fileID: 1004100316}
+  - component: {fileID: 1004100315}
+  - component: {fileID: 6425474830189227354}
+  m_Layer: 7
   m_Name: DarknessSpider_Legacy
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1778,6 +1846,73 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!195 &1004100316
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800330014649472362}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!65 &1004100315
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800330014649472362}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.5, z: 1}
+  m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &6425474830189227354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800330014649472362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6893329ffd5d8904cb7ced5a133894de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHp: 0
+  attackDistance: 0
+  traceDistance: 0
+  forgetTime: 0
+  target: {fileID: 0}
+  findPlayerTime:
+    lastFindTime: 0
+  monsterType: 0
+  monsterBehaviorState:
+    isAttack: 0
+    isHitting: 0
+    isDead: 0
+  monsterData: {fileID: 0}
+  monsterInfo:
+    name: 
+    maxHp: 0
+    speed: 0
+    traceDistance: 0
+    attackDistance: 0
+    forgetTime: 0
 --- !u!1 &1800330014649472364
 GameObject:
   m_ObjectHideFlags: 0
@@ -1787,7 +1922,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977548}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: mandibul_R_d
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1817,7 +1952,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977550}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: mandibul_R_c
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1848,7 +1983,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977552}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_R_3_c
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1879,7 +2014,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977554}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_R_3_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1910,9 +2045,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977556}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_R_3_a
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1941,7 +2076,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977558}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_R_2_e
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1971,9 +2106,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977560}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: mandibul_L_b
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2002,9 +2137,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977562}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: mandibul_L_a
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2033,7 +2168,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977564}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_R_3_e
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2063,7 +2198,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1800330014648977566}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: leg_R_3_d
   m_TagString: Untagged
   m_Icon: {fileID: 0}
