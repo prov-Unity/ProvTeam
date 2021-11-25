@@ -10,13 +10,13 @@ public class LoadPopup : MonoBehaviour
 
     private void Awake() {
         saveSlots = GetComponentInChildren<SaveSlots>();
-        slotIndex = 0;
     }
 
     private void Start() {
-        for(; slotIndex < SaveLoadManager.instance.maxSaveSlot; slotIndex++) {
+        for(slotIndex = 0; slotIndex < SaveLoadManager.instance.maxSaveSlot; slotIndex++) {
             DisableCurrentSaveSlot();
         }
+        slotIndex = 0;
 
         EnableCurrentSaveSlot();
         LoadFiles();

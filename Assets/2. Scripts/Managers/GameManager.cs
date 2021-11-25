@@ -75,8 +75,6 @@ public class GameManager : MonoBehaviour
         player.playerInfo.curWeapon = new AvailableWeapon(WeaponType.No_Weapon, -1);
         WeaponSelectionManager.instance.SelectCurrentWeapon();
         player.playerInfo.curWeapon = player.playerInfo.availableWeapons[0];
-
-        SaveLoadManager.instance.SaveData(0, new SaveData(sceneName, DateTime.Now, player.transform.position, player.playerInfo.availableWeapons, player.playerInfo.health));
     }
 
     public void RespawnPlayer() {
