@@ -6,10 +6,10 @@ using Random = System.Random;
 
 public class SkeletonKnightBT : MonsterAI
 {
-    private Node topNode;
-    private bool isAppear;
-    private bool AppearEnd;
-    private Random random;
+    private Node _topNode;
+    private bool _isAppear;
+    private bool _appearEnd;
+    private Random _random;
     private const int AttackPatternLength = 1;
     private static readonly int AppearIndex = Animator.StringToHash("AppearIndex");
     private const int MAXAppearIndex = 4;
@@ -17,14 +17,14 @@ public class SkeletonKnightBT : MonsterAI
     protected override void Awake()
     {
         base.Awake();
-        random = new Random();
+        _random = new Random();
         monsterType = MonsterType.SkeletonKnight;
     }
 
     protected override void Start()
     {
         base.Start();
-        target = PPAP.Instance.player.transform;
+        target = GameManager.instance.player.transform;
         ConstructBehaviorTree();
     }
 
@@ -37,26 +37,26 @@ public class SkeletonKnightBT : MonsterAI
         Sequence attackSequence = new Sequence(new List<Node>{attackRangeNode, attackNode});
         Sequence traceSequence = new Sequence(new List<Node> {traceRangeNode, traceNode});
 
-        topNode = new Selector(new List<Node> {attackSequence, traceSequence});
+        _topNode = new Selector(new List<Node> {attackSequence, traceSequence});
     }
 
 
     public override void StartAction()
     {
         base.StartAction();
-        if (!isAppear)
+        if (!_isAppear)
         {
-            Anim.SetFloat(AppearIndex, random.Next(MAXAppearIndex));
-            Debug.Log(isAppear);
-            isAppear = true;
+            Anim.SetFloat(AppearIndex, _random.Next(MAXAppearIndex));
+            Debug.Log(_isAppear);
+            _isAppear = true;
         }        
-        if (!isRunning && AppearEnd)
+        if (!isRunning && _appearEnd)
             StartCoroutine(Action());
     }
 
     public void ChangeAppearState()
     {
-        AppearEnd = !AppearEnd;
+        _appearEnd = !_appearEnd;
     }
 
     public override IEnumerator Action()
@@ -69,8 +69,8 @@ public class SkeletonKnightBT : MonsterAI
             CheckForgetTime();
             target.position = GameManager.instance.player.transform.position;
             yield return new WaitForSeconds(0.2f);
-            topNode.Evaluate();
-            if (topNode.NodeState == NodeState.FAILURE)
+            _topNode.Evaluate();
+            if (_topNode.NodeState == NodeState.FAILURE)
             {
                 AgentMoveControl(false);
             }

@@ -2,19 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = System.Random;
 
-public class GolemBT : MonsterAI
+public class SpiderMiniBT : MonsterAI
 {
     private Node _topNode;
-    private static readonly int RoarHash = Animator.StringToHash("Roar");
-    private static readonly int HpHash = Animator.StringToHash("Hp");
-    private const int AttackPatternLength = 2;
+    private const int AttackPatternLength = 1;
 
     protected override void Awake()
     {
         base.Awake();
-        monsterType = MonsterType.Golem;
+        monsterType = MonsterType.Spider;
     }
 
     protected override void Start()
@@ -40,7 +37,6 @@ public class GolemBT : MonsterAI
     public override void StartAction()
     {
         base.StartAction();
-  
         if (!isRunning)
             StartCoroutine(Action());
     }
@@ -53,8 +49,8 @@ public class GolemBT : MonsterAI
         while (true)
         {
             CheckForgetTime();
-            yield return new WaitForSeconds(0.2f);
             target.position = GameManager.instance.player.transform.position;
+            yield return new WaitForSeconds(0.2f);
             _topNode.Evaluate();
             if (_topNode.NodeState == NodeState.FAILURE)
             {
@@ -63,20 +59,5 @@ public class GolemBT : MonsterAI
         }
     }
 
-    public void IncreaseAttackPower()
-    {
-        Anim.SetInteger(HpHash, currentHp);
-        if (currentHp > 50)
-            return;
-        Anim.SetBool(RoarHash, true);
-        for (int i = 0; i < weapon.Length; i++)
-        {
-            weapon[i].attackPower += 10;
-        }
-    }
 
-    public void RoarStateChange()
-    {
-        Anim.SetBool(RoarHash, false);
-    }
 }

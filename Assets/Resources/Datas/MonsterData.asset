@@ -43,3 +43,15 @@ MonoBehaviour:
     traceDistance: 7
     attackDistance: 2
     forgetTime: 9
+  - name: GhostMIni
+    maxHp: 20
+    speed: 3
+    traceDistance: 7
+    attackDistance: 4
+    forgetTime: 9
+  - name: SpiderMini
+    maxHp: 20
+    speed: 3
+    traceDistance: 7
+    attackDistance: 3
+    forgetTime: 9
