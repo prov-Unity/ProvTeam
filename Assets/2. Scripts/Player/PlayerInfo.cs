@@ -45,19 +45,13 @@ public class PlayerInfo : MonoBehaviour
 
         player = GetComponentInChildren<Player>();     
 
-        curWeapon = new AvailableWeapon(WeaponType.No_Weapon, -1);
+        curWeapon = new AvailableWeapon(WeaponType.Fist_Left, -1);
     }
     
-    private void Start() {
-        availableWeapons = new List<AvailableWeapon>();
-        availableWeapons.Add(new AvailableWeapon(WeaponType.Fist_Left, WeaponManager.instance.weaponInitialDurabilities[(int)WeaponType.Fist_Left]));
-
-        // these codes would be altered after save/load functionality is implemented 
-        availableWeapons.Add(new AvailableWeapon(WeaponType.Bone_Right, WeaponManager.instance.weaponInitialDurabilities[(int)WeaponType.Bone_Right] - 4));
- 
+    private void Start() {        
         UIManager.instance.EnableWeaponSelectionPopup();
         WeaponSelectionManager.instance.UpdateWeaponSelectionBox();
-        WeaponSelectionManager.instance.SelectCurrentWeapon();
+        UIManager.instance.UpdateCurWeaponInfo();
         UIManager.instance.DisableWeaponSelectionPopup();
     }
 }

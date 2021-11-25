@@ -6,6 +6,7 @@ public class MySceneManager : MonoBehaviour
 {
     public static MySceneManager instance;
     [ReadOnly] public string curSceneName;
+    [ReadOnly] public bool isInitial;
 
     private void Awake() {
         instance = this;

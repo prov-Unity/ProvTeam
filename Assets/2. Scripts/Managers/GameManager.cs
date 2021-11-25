@@ -20,7 +20,10 @@ public class GameManager : MonoBehaviour
 
     private void Start() {
         if(MySceneManager.instance.curSceneName != "MainMenu") {
-            InitSpawnPlayer(MySceneManager.instance.curSceneName);
+            if(MySceneManager.instance.isInitial)
+                InitSpawnPlayer();
+            else
+                SpawnPlayer(MySceneManager.instance.curSceneName);
         }
     }
 
@@ -37,39 +40,42 @@ public class GameManager : MonoBehaviour
         player.playerInput.enabled = false;
     }
 
-    public void InitSpawnPlayer(string sceneName) {
-        switch(sceneName) {
-            case "Tutorial": tutorialStartPoint = FindObjectOfType<TutorialStartPoint>().transform; break;
-            case "PlayScene": stageOneStartPoint = FindObjectOfType<StageOneStartPoint>().transform; break;
-        }
+    public void InitSpawnPlayer() {
+        Destroy(player.GetComponentsInParent<Transform>()[1].gameObject);
+        GameObject instantiatedPlayerAndCameraObject = Instantiate(playerAndCameraPrefab);
+        player = instantiatedPlayerAndCameraObject.GetComponentInChildren<Player>();
+        
 
-        if(player != null) {}
-            Destroy(player.GetComponentsInParent<Transform>()[1].gameObject);
+        tutorialStartPoint = FindObjectOfType<TutorialStartPoint>().transform;
+        player.transform.position = tutorialStartPoint.position;
+
+
+        player.playerInfo.health = 100;
+        player.playerInfo.availableWeapons = new List<AvailableWeapon>();
+        player.playerInfo.availableWeapons.Add(new AvailableWeapon(WeaponType.Fist_Left, WeaponManager.instance.weaponInitialDurabilities[(int)WeaponType.Fist_Left]));
+        player.playerInfo.curWeapon = new AvailableWeapon(WeaponType.No_Weapon, -1);
+        WeaponSelectionManager.instance.SelectCurrentWeapon();
+        player.playerInfo.curWeapon = player.playerInfo.availableWeapons[0];
+
+
+        SaveLoadManager.instance.SaveData(0, new SaveData("Tutorial", DateTime.Now, player.transform.position, player.playerInfo.availableWeapons, player.playerInfo.health));
+    }
+
+    public void SpawnPlayer(string sceneName) {
+        Destroy(player.GetComponentsInParent<Transform>()[1].gameObject);
         GameObject instantiatedPlayerAndCameraObject = Instantiate(playerAndCameraPrefab);
         player = instantiatedPlayerAndCameraObject.GetComponentInChildren<Player>();
 
-        switch(sceneName) {
-            case "Tutorial":
-            player.transform.position = tutorialStartPoint.position;
-            
-            player.playerInfo.health = 100;
-            player.playerInfo.availableWeapons = new List<AvailableWeapon>();
-            player.playerInfo.availableWeapons.Add(new AvailableWeapon(WeaponType.Fist_Left, WeaponManager.instance.weaponInitialDurabilities[(int)WeaponType.Fist_Left]));
-            player.playerInfo.curWeapon = player.playerInfo.availableWeapons[0];
-            break;
-
-            case "PlayScene":
-            player.transform.position = stageOneStartPoint.position;
-            
-            SaveData latestData = SaveLoadManager.instance.GetLatestData();
-            player.playerInfo.health = latestData.savedHealth;
-            player.playerInfo.availableWeapons = new List<AvailableWeapon>();
-            foreach(AvailableWeapon curWeapon in latestData.savedAvailableWeapons) {
-                player.playerInfo.availableWeapons.Add(curWeapon);
-            }
-            player.playerInfo.curWeapon = player.playerInfo.availableWeapons[0];
-            break;
+        SaveData latestData = SaveLoadManager.instance.GetLatestData();
+        player.transform.position = latestData.respawnPoint;
+        player.playerInfo.health = latestData.savedHealth;
+        player.playerInfo.availableWeapons = new List<AvailableWeapon>();
+        foreach(AvailableWeapon curWeapon in latestData.savedAvailableWeapons) {
+            player.playerInfo.availableWeapons.Add(curWeapon);
         }
+        player.playerInfo.curWeapon = new AvailableWeapon(WeaponType.No_Weapon, -1);
+        WeaponSelectionManager.instance.SelectCurrentWeapon();
+        player.playerInfo.curWeapon = player.playerInfo.availableWeapons[0];
 
         SaveLoadManager.instance.SaveData(0, new SaveData(sceneName, DateTime.Now, player.transform.position, player.playerInfo.availableWeapons, player.playerInfo.health));
     }
