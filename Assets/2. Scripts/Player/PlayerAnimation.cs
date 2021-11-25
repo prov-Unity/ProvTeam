@@ -40,6 +40,9 @@ public class PlayerAnimation : MonoBehaviour
             case WeaponType.Sword_02: animator.SetTrigger("AttackSword"); break;
             case WeaponType.Dagger_01:
             case WeaponType.Dagger_02: animator.SetTrigger("AttackDagger"); break;
+            case WeaponType.Axe_01:
+            case WeaponType.Axe_02:
+            case WeaponType.Axe_03: animator.SetTrigger("AttackAxe"); break;
             case WeaponType.TwoHandSword_01:
             case WeaponType.TwoHandSword_02: animator.SetTrigger("Attack2Hand"); break;
         }   

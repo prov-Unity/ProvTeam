@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2826015707179930103}
   - component: {fileID: 1514990278158308316}
   m_Layer: 6
-  m_Name: SM_Wep_Ornate_Axe_02 (1) 1
+  m_Name: Axe_03
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ec82f97c8b4d974983f31b45e1570a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponType: 3
+  weaponType: 8
   checkMode: 0
   _col: {fileID: 6282640789348069527}
   attackPower: 0
