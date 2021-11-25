@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 958912767166897688}
   - component: {fileID: 985458190439912880}
   - component: {fileID: 7525229279854130069}
+  - component: {fileID: 1135115252343276519}
   m_Layer: 0
   m_Name: SM_Wep_GreatSword_01 (1)
   m_TagString: Untagged
@@ -92,7 +93,7 @@ MeshCollider:
   m_GameObject: {fileID: 958912767169381424}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
@@ -116,3 +117,16 @@ MonoBehaviour:
   durability: 0
   owner: 
   center: {x: 0, y: 0, z: 0}
+--- !u!65 &1135115252343276519
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 958912767169381424}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.04, y: 1.21, z: 0.18}
+  m_Center: {x: -0.000000031940452, y: 0.73, z: 0.028082885}

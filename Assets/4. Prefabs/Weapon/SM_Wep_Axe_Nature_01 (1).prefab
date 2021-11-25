@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4717244798804097029}
   - component: {fileID: 4724927359198376939}
   - component: {fileID: 2369181717934116488}
+  - component: {fileID: 335361537653803102}
   m_Layer: 0
   m_Name: SM_Wep_Axe_Nature_01 (1)
   m_TagString: Untagged
@@ -92,7 +93,7 @@ MeshCollider:
   m_GameObject: {fileID: 4717244798806198949}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
@@ -116,3 +117,16 @@ MonoBehaviour:
   durability: 0
   owner: 
   center: {x: 0, y: 0, z: 0}
+--- !u!65 &335361537653803102
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4717244798806198949}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.09, y: 0.44, z: 0.54}
+  m_Center: {x: -0.0021395814, y: 0.65, z: -0.0002527797}

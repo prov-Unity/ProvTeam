@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5606937001376078427}
   - component: {fileID: 5560070057731803013}
   - component: {fileID: 8449126342315739781}
+  - component: {fileID: 2803441800172246408}
   m_Layer: 0
   m_Name: SM_Wep_Halberd_06 (1)
   m_TagString: Untagged
@@ -92,7 +93,7 @@ MeshCollider:
   m_GameObject: {fileID: 5606937001378309165}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
@@ -116,3 +117,16 @@ MonoBehaviour:
   durability: 0
   owner: 
   center: {x: 0, y: 0, z: 0}
+--- !u!65 &2803441800172246408
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5606937001378309165}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.09768883, y: 0.38, z: 0.51626074}
+  m_Center: {x: 0.000000004952717, y: 0.33, z: -0.043418422}
