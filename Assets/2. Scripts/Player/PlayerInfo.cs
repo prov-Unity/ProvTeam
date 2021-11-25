@@ -30,8 +30,8 @@ public class PlayerInfo : MonoBehaviour
         maxHealth = 100;
         health = maxHealth;
         
-        speedMove = 2f;
-        speedJump = 5f;
+        speedMove = 3f;
+        speedJump = 7f;
 
         attackIndex = 0;
         comboLimitTime = 2f;
