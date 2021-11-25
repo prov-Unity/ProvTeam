@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
             if(MySceneManager.instance.isInitial)
                 InitSpawnPlayer();
             else
-                SpawnPlayer(MySceneManager.instance.curSceneName);
+                SpawnPlayer(MySceneManager.instance.curSceneName, MySceneManager.instance.loadedData);
         }
     }
 
@@ -61,16 +61,15 @@ public class GameManager : MonoBehaviour
         SaveLoadManager.instance.SaveData(0, new SaveData("Tutorial", DateTime.Now, player.transform.position, player.playerInfo.availableWeapons, player.playerInfo.health));
     }
 
-    public void SpawnPlayer(string sceneName) {
+    public void SpawnPlayer(string sceneName, SaveData loadedData) {
         Destroy(player.GetComponentsInParent<Transform>()[1].gameObject);
         GameObject instantiatedPlayerAndCameraObject = Instantiate(playerAndCameraPrefab);
         player = instantiatedPlayerAndCameraObject.GetComponentInChildren<Player>();
 
-        SaveData latestData = SaveLoadManager.instance.GetLatestData();
-        player.transform.position = latestData.respawnPoint;
-        player.playerInfo.health = latestData.savedHealth;
+        player.transform.position = loadedData.respawnPoint;
+        player.playerInfo.health = loadedData.savedHealth;
         player.playerInfo.availableWeapons = new List<AvailableWeapon>();
-        foreach(AvailableWeapon curWeapon in latestData.savedAvailableWeapons) {
+        foreach(AvailableWeapon curWeapon in loadedData.savedAvailableWeapons) {
             player.playerInfo.availableWeapons.Add(curWeapon);
         }
         player.playerInfo.curWeapon = new AvailableWeapon(WeaponType.No_Weapon, -1);

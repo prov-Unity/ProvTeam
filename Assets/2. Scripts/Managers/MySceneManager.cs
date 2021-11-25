@@ -4,7 +4,9 @@ using UnityEngine.SceneManagement;
 
 public class MySceneManager : MonoBehaviour
 {
-    public static MySceneManager instance;
+    [ReadOnly] public static MySceneManager instance;
+    [ReadOnly] public SaveData loadedData;
+
     [ReadOnly] public string curSceneName;
     [ReadOnly] public bool isInitial;
 
