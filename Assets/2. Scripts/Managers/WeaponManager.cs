@@ -29,24 +29,34 @@ public class WeaponManager : MonoBehaviour
     [ReadOnly] public List<GameObject> weaponPrefabs;
     [ReadOnly] public List<int> weaponAttackPowers;
     [ReadOnly] public List<int> weaponInitialDurabilities;
+    [ReadOnly] public List<int> maxComboIndexOfWeapons;
+
     private void Awake() {
         instance = this;
 
         weaponPrefabs = new List<GameObject>();
         weaponAttackPowers = new List<int>();
         weaponInitialDurabilities = new List<int>();
+        maxComboIndexOfWeapons = new List<int>();
 
+        // Fist_Left
         weaponPrefabs.Add(Resources.Load<GameObject>("Weapons/Fist"));
         weaponAttackPowers.Add(5);
         weaponInitialDurabilities.Add(100);
+        maxComboIndexOfWeapons.Add(3);
+        // Fist_Right
         weaponPrefabs.Add(weaponPrefabs[(int)WeaponType.Fist_Left]);
         weaponAttackPowers.Add(5);
         weaponInitialDurabilities.Add(100);
-
+        maxComboIndexOfWeapons.Add(3);
+        // Bone_Right
         weaponPrefabs.Add(Resources.Load<GameObject>("Weapons/Bone"));
         weaponAttackPowers.Add(10);
         weaponInitialDurabilities.Add(7);
+        maxComboIndexOfWeapons.Add(5);
         
+
+        // TwoHandedSword
         weaponPrefabs.Add(Resources.Load<GameObject>("Weapons/TwoHandedSword"));
         weaponAttackPowers.Add(12);
         weaponInitialDurabilities.Add(10);

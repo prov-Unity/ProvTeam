@@ -10,10 +10,6 @@ public class PlayerAnimation : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    // public float GetCurAnimationNormalizedTime() {
-    //     return animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-    // }
-
     public void UpdateCanJump() {
         animator.SetBool("CanJump", player.playerInfo.canJump);
     }
