@@ -17,8 +17,5 @@ public class MySceneManager : MonoBehaviour
     public void LoadScene(string sceneName) {
         curSceneName = sceneName;
         SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
-
-        if(GameManager.instance != null)
-            GameManager.instance.InitSpawnPlayer(sceneName);
     }
 }

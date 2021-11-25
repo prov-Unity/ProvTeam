@@ -16,8 +16,6 @@ public class GameManager : MonoBehaviour
         player = FindObjectOfType<Player>();
 
         playerAndCameraPrefab = Resources.Load<GameObject>("Player_And_Camera");
-
-        DontDestroyOnLoad(gameObject);
     }
 
     private void Start() {
