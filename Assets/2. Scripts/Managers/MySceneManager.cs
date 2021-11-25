@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class MySceneManager : MonoBehaviour
 {
     public static MySceneManager instance;
-    public string curSceneName;
+    [ReadOnly] public string curSceneName;
 
     private void Awake() {
         instance = this;
