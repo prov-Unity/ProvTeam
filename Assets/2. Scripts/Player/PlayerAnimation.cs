@@ -21,10 +21,14 @@ public class PlayerAnimation : MonoBehaviour
 
     public void UpdateCurWeaponIndex() {
         int curWeaponTypeIndex = ((int)GameManager.instance.player.playerInfo.curWeapon.weaponType);
-        if(curWeaponTypeIndex < (int)WeaponType.TwoHandSword_01)
+        if(curWeaponTypeIndex < (int)WeaponType.Axe_01)
             animator.SetInteger("CurWeaponIndex", 0);
-        else
+        else if(curWeaponTypeIndex < (int)WeaponType.Spear_01)
             animator.SetInteger("CurWeaponIndex", 1);
+        else if(curWeaponTypeIndex < (int)WeaponType.TwoHandSword_01)
+            animator.SetInteger("CurWeaponIndex", 2);
+        else
+            animator.SetInteger("CurWeaponIndex", 3);
     }
 
     public void UpdateGroundInfo(float groundDistance, bool isGrounded) {
