@@ -27,6 +27,23 @@ public class GameManager : MonoBehaviour
     }
 
     public void RespawnPlayer() {
-        
+        player.playerCombat.EnablePlayerCollider();
+        player.playerMovement.EnableGravity();
+        EnablePlayerInput();
+
+        SaveData latestData = SaveLoadManager.instance.GetLatestData();
+        player.transform.position = latestData.respawnPoint;
+        player.playerInfo.health = latestData.savedHealth;
+        player.playerInfo.availableWeapons = latestData.savedAvailableWeapons;
+        UIManager.instance.UpdatePlayerHealthBar();
+
+        player.playerInfo.isAttacking = false;
+
+        // force the player to select fist right after being respawned
+        UIManager.instance.EnableWeaponSelectionPopup();
+        WeaponSelectionManager.instance.ResetSelectedWeaponIndex();
+        WeaponSelectionManager.instance.UpdateWeaponSelectionBox();
+        WeaponSelectionManager.instance.SelectCurrentWeapon();
+        UIManager.instance.DisableWeaponSelectionPopup();
     }
 }

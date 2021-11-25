@@ -20,6 +20,10 @@ public class PlayerCombat : MonoBehaviour
         gettingHitResetTime = 0.8f;
     }
 
+    public void EnablePlayerCollider() {
+        curCollider.enabled = true;
+    }
+
     public void SetWeapons(Weapon inputLeftWeapon, Weapon inputRightWeapon) {
         leftWeapon = inputLeftWeapon;
         rightWeapon = inputRightWeapon;
@@ -112,35 +116,14 @@ public class PlayerCombat : MonoBehaviour
         player.playerAnimation.PlayDeathAnimation();
 
         curCollider.enabled = false;
-        player.playerMovement.curRigidbody.useGravity = false;
+        player.playerMovement.DisableGravity();
         GameManager.instance.DisablePlayerInput();
-        yield return new WaitForSeconds(3f); // -> this one also might be changed to waituntil or so
+        yield return new WaitForSeconds(2.5f); // -> this one also might be changed to waituntil or so
         // do something 
         // probably I will make a method of which name is might be Revive or Respawn from the Game Manager
         // that method would enable collider and gravity of player again, and do something
         // do something including reset attack index, reset is attacking, or so
 
-        Respawn();
-    }
-
-    private void Respawn() {
-        curCollider.enabled = true;
-        player.playerMovement.curRigidbody.useGravity = true;
-        GameManager.instance.EnablePlayerInput();
-
-        SaveData latestData = SaveLoadManager.instance.GetLatestData();
-        player.transform.position = latestData.respawnPoint;
-        player.playerInfo.health = latestData.savedHealth;
-        player.playerInfo.availableWeapons = latestData.savedAvailableWeapons;
-        UIManager.instance.UpdatePlayerHealthBar();
-
-        player.playerInfo.isAttacking = false;
-
-        // force the player to select fist right after being respawned
-        UIManager.instance.EnableWeaponSelectionPopup();
-        WeaponSelectionManager.instance.ResetSelectedWeaponIndex();
-        WeaponSelectionManager.instance.UpdateWeaponSelectionBox();
-        WeaponSelectionManager.instance.SelectCurrentWeapon();
-        UIManager.instance.DisableWeaponSelectionPopup();
+        UIManager.instance.EnableGameOverPopup();
     }
 }
