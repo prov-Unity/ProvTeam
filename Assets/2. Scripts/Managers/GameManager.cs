@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -14,13 +16,14 @@ public class GameManager : MonoBehaviour
         player = FindObjectOfType<Player>();
 
         playerAndCameraPrefab = Resources.Load<GameObject>("Player_And_Camera");
-        
+
         DontDestroyOnLoad(gameObject);
     }
 
     private void Start() {
-        if(MySceneManager.instance.curSceneName != "MainMenu")
+        if(MySceneManager.instance.curSceneName != "MainMenu") {
             InitSpawnPlayer(MySceneManager.instance.curSceneName);
+        }
     }
 
     public void SetTimeScale(float timeScale) {
@@ -43,16 +46,20 @@ public class GameManager : MonoBehaviour
         }
 
         if(player != null) {}
-            Destroy(player);
+            Destroy(player.GetComponentsInParent<Transform>()[1].gameObject);
         GameObject instantiatedPlayerAndCameraObject = Instantiate(playerAndCameraPrefab);
         player = instantiatedPlayerAndCameraObject.GetComponentInChildren<Player>();
-
-        Debug.Log("Worked");
 
         switch(sceneName) {
             case "Tutorial": player.transform.position = tutorialStartPoint.position; break;
             case "PlayScene": player.transform.position = stageOneStartPoint.position; break;
         }
+        player.playerInfo.health = 100;
+        player.playerInfo.availableWeapons = new List<AvailableWeapon>();
+        player.playerInfo.availableWeapons.Add(new AvailableWeapon(WeaponType.Fist_Left, WeaponManager.instance.weaponInitialDurabilities[(int)WeaponType.Fist_Left]));
+        player.playerInfo.curWeapon = player.playerInfo.availableWeapons[0];
+
+        SaveLoadManager.instance.SaveData(0, new SaveData(sceneName, DateTime.Now, player.transform.position, player.playerInfo.availableWeapons, player.playerInfo.health));
     }
 
     public void RespawnPlayer() {
