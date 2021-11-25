@@ -53,9 +53,10 @@ public class GameManager : MonoBehaviour
         player.playerInfo.health = 100;
         player.playerInfo.availableWeapons = new List<AvailableWeapon>();
         player.playerInfo.availableWeapons.Add(new AvailableWeapon(WeaponType.Fist_Left, WeaponManager.instance.weaponInitialDurabilities[(int)WeaponType.Fist_Left]));
+        player.playerInfo.curWeapon = new AvailableWeapon(WeaponType.No_Weapon, -1);
+        WeaponSelectionManager.instance.SelectCurrentWeapon();
         player.playerInfo.curWeapon = player.playerInfo.availableWeapons[0];
 
-        WeaponSelectionManager.instance.SelectCurrentWeapon();
 
         SaveLoadManager.instance.SaveData(0, new SaveData("Tutorial", DateTime.Now, player.transform.position, player.playerInfo.availableWeapons, player.playerInfo.health));
     }
@@ -72,8 +73,9 @@ public class GameManager : MonoBehaviour
         foreach(AvailableWeapon curWeapon in latestData.savedAvailableWeapons) {
             player.playerInfo.availableWeapons.Add(curWeapon);
         }
-        player.playerInfo.curWeapon = player.playerInfo.availableWeapons[0];
+        player.playerInfo.curWeapon = new AvailableWeapon(WeaponType.No_Weapon, -1);
         WeaponSelectionManager.instance.SelectCurrentWeapon();
+        player.playerInfo.curWeapon = player.playerInfo.availableWeapons[0];
 
         SaveLoadManager.instance.SaveData(0, new SaveData(sceneName, DateTime.Now, player.transform.position, player.playerInfo.availableWeapons, player.playerInfo.health));
     }
