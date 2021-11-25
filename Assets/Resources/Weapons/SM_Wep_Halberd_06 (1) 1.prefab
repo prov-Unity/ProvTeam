@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 5560070057731803013}
   - component: {fileID: 8449126342315739781}
   - component: {fileID: 2803441800172246408}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SM_Wep_Halberd_06 (1) 1
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

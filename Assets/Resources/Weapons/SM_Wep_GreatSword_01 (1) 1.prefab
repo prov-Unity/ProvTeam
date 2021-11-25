@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 985458190439912880}
   - component: {fileID: 7525229279854130069}
   - component: {fileID: 1135115252343276519}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SM_Wep_GreatSword_01 (1) 1
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

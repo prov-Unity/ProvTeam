@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 1840387460180057126}
   - component: {fileID: 257312158298096537}
   - component: {fileID: 2362105516880572129}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SM_Wep_Goblin_Mace_01 (1) 1
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

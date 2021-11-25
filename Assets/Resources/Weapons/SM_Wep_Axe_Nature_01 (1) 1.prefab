@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 4724927359198376939}
   - component: {fileID: 2369181717934116488}
   - component: {fileID: 335361537653803102}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SM_Wep_Axe_Nature_01 (1) 1
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

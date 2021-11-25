@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 8708222845943168131}
   - component: {fileID: 6022192346279032842}
   - component: {fileID: 2408455419282524654}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SM_Wep_Goblin_Halberd_01 (1) 1
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

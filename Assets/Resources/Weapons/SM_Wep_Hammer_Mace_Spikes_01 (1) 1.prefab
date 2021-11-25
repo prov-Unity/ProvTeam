@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 3968504972915961932}
   - component: {fileID: 104431417013739560}
   - component: {fileID: 2445478222501353578}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SM_Wep_Hammer_Mace_Spikes_01 (1) 1
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
