@@ -4,7 +4,7 @@ using UnityEngine;
 
 [Serializable]
 public enum WeaponType {
-    Fist_Left, Fist_Right, Bone, Sword_02, Dagger_01, Dagger_02, Axe_01, Axe_02, Axe_03, TwoHandSword_01, TwoHandSword_02, BlackHole, IceWheel, Spider, GolemWeapon, No_Weapon
+    Fist_Left, Fist_Right, Bone, Sword_02, Dagger_01, Dagger_02, Axe_01, Axe_02, Axe_03, Spear_01, Spear_02, TwoHandSword_01, TwoHandSword_02, BlackHole, IceWheel, Spider, GolemWeapon, No_Weapon
 }
 
 [Serializable]
@@ -110,6 +110,20 @@ public class WeaponManager : MonoBehaviour
         weaponInitialDurabilities.Add(24);
         maxComboIndexOfWeapons.Add(1);
 
+
+        // Spear_01
+        weaponPrefabs.Add(Resources.Load<GameObject>("Weapons/Spear_01"));
+        weaponIcons.Add(Resources.Load<Sprite>("UIWeaponsIcon/Spear_01"));
+        weaponAttackPowers.Add(27);
+        weaponInitialDurabilities.Add(26);
+        maxComboIndexOfWeapons.Add(1);
+
+        // Spear_02
+        weaponPrefabs.Add(Resources.Load<GameObject>("Weapons/Spear_02"));
+        weaponIcons.Add(Resources.Load<Sprite>("UIWeaponsIcon/Spear_02"));
+        weaponAttackPowers.Add(27);
+        weaponInitialDurabilities.Add(26);
+        maxComboIndexOfWeapons.Add(1);
 
 
 

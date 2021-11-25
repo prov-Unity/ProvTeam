@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6022192346279032842}
   - component: {fileID: 2408455419282524654}
   m_Layer: 6
-  m_Name: SM_Wep_Goblin_Halberd_01 (1) 1
+  m_Name: Spear_02
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ec82f97c8b4d974983f31b45e1570a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponType: 3
+  weaponType: 10
   checkMode: 0
   _col: {fileID: 8708222845943168131}
   attackPower: 0
