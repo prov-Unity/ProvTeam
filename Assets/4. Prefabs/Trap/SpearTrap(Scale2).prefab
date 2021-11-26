@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 8489970692163487290}
   m_Layer: 10
   m_Name: SM_Trap_Spears_01 (1)
-  m_TagString: Untagged
+  m_TagString: Trap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
