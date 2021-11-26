@@ -8,6 +8,7 @@ public class PlayerDetector : MonoBehaviour
 
     [ReadOnly, SerializeField] private float detectMonsterRange;
     [ReadOnly, SerializeField] private float detectCycle;
+    private static readonly int AssembleHash = Animator.StringToHash("Assemble");
 
     private void Awake() {
         player = GetComponent<Player>();
@@ -24,8 +25,16 @@ public class PlayerDetector : MonoBehaviour
         while (true) {
             colliders = Physics.OverlapSphere(player.cameraTargetTransform.position, detectMonsterRange, LayerMask.GetMask("Monster"));
             foreach (Collider curCollider in colliders) {
-                MonsterAI monsterAI = curCollider.GetComponent<MonsterAI>();
-                monsterAI.StartAction();
+                if (curCollider.CompareTag("Golem"))
+                {
+                    curCollider.GetComponent<Animator>().SetTrigger(AssembleHash);
+                }
+                else
+                {
+                    MonsterAI monsterAI = curCollider.GetComponent<MonsterAI>();
+                    monsterAI.StartAction();
+                }
+
             }
             yield return new WaitForSeconds(detectCycle);
         }
