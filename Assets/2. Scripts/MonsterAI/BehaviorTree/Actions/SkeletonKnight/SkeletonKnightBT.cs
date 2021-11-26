@@ -24,7 +24,6 @@ public class SkeletonKnightBT : MonsterAI
     protected override void Start()
     {
         base.Start();
-        target = GameManager.instance.player.transform;
         ConstructBehaviorTree();
     }
 
@@ -33,7 +32,7 @@ public class SkeletonKnightBT : MonsterAI
         Attack attackNode = new Attack(Anim, monsterBehaviorState, AttackPatternLength);
         Range attackRangeNode = new Range(this, attackDistance);
         Range traceRangeNode = new Range(this, traceDistance);
-        Trace traceNode = new Trace(Agent, Anim, target, monsterBehaviorState);
+        Trace traceNode = new Trace(Agent, Anim, GameManager.instance.player.transform, monsterBehaviorState);
         Sequence attackSequence = new Sequence(new List<Node>{attackRangeNode, attackNode});
         Sequence traceSequence = new Sequence(new List<Node> {traceRangeNode, traceNode});
 
@@ -67,7 +66,6 @@ public class SkeletonKnightBT : MonsterAI
         while (true)
         {
             CheckForgetTime();
-            target.position = GameManager.instance.player.transform.position;
             yield return new WaitForSeconds(0.2f);
             _topNode.Evaluate();
             if (_topNode.NodeState == NodeState.FAILURE)
