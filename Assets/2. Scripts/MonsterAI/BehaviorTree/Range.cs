@@ -20,7 +20,7 @@ public class Range : Node
         else if (range <= 2f)
             Debug.Log("AttackRange 실행됨");
 
-        float distance = Vector3.Distance(monsterAI.target.position, monsterAI.transform.position);
+        float distance = Vector3.Distance(GameManager.instance.player.transform.position, monsterAI.transform.position);
         if (range > distance)
         {
             return NodeState.SUCCESS;

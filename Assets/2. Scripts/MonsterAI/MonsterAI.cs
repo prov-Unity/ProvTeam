@@ -59,7 +59,6 @@ public abstract class MonsterAI : MonoBehaviour
     [ReadOnly] public float attackDistance;
     [ReadOnly] public float traceDistance;
     [ReadOnly] public float forgetTime;
-    [ReadOnly] public Transform target;
     [ReadOnly] public FindPlayerTime findPlayerTime;
     [ReadOnly] public MonsterType monsterType;
     [ReadOnly] public MonsterBehaviorState monsterBehaviorState;
