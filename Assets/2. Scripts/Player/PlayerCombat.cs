@@ -7,6 +7,7 @@ public class PlayerCombat : MonoBehaviour
     [ReadOnly, SerializeField] private Weapon leftWeapon;
     [ReadOnly, SerializeField] private Weapon rightWeapon;
     [ReadOnly, SerializeField] private Weapon monsterWeapon;
+    [ReadOnly, SerializeField] private Trap targetTrap;
     private Player player;
     private Collider curCollider;
     private Coroutine comboCoroutineInfo;
@@ -75,6 +76,11 @@ public class PlayerCombat : MonoBehaviour
             monsterWeapon = other.GetComponent<Weapon>();
             if(!player.playerInfo.isInvulnerable && monsterWeapon.owner == "Monster" && !player.playerInfo.isGettingHit)
                 GetDamaged(monsterWeapon.attackPower); 
+            break;
+            case "Trap": 
+            targetTrap = other.GetComponent<Trap>();
+            if(!player.playerInfo.isInvulnerable && !player.playerInfo.isGettingHit)
+                GetDamaged(targetTrap.attackPower); 
             break;
             case "DeadZone": StartCoroutine("Die"); break;
             case "Warp": 
