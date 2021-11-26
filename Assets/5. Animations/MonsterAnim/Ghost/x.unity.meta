@@ -1,5 +1,10 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/ExternalAssets/Key.meta
+guid: 15886fe88dae6484fb2ae524b384bab5
+folderAsset: yes
+=======
 guid: dd6f92daae1328e4dbb728c2fe67ec02
+>>>>>>> aa29eb46504f7e9f1501278169ed17103fc4cce0:Assets/5. Animations/MonsterAnim/Ghost/x.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

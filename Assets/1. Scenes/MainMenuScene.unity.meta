@@ -1,5 +1,10 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/4. Prefabs/Key.meta
+guid: 6867b8c5ca907f744af7aa3c51a76b09
+folderAsset: yes
+=======
 guid: 439de7369e5181b44ae0f044240dba87
+>>>>>>> aa29eb46504f7e9f1501278169ed17103fc4cce0:Assets/1. Scenes/MainMenuScene.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
