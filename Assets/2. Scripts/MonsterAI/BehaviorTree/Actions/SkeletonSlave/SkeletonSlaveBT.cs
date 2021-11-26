@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SkeletonSlaveBT : MonsterAI
 {
-    private Node topNode;
+    private Node _topNode;
     private const int AttackPatternLength = 1;
 
     protected override void Awake()
@@ -30,7 +30,7 @@ public class SkeletonSlaveBT : MonsterAI
         Sequence attackSequence = new Sequence(new List<Node>{attackRangeNode, attackNode});
         Sequence traceSequence = new Sequence(new List<Node> {traceRangeNode, traceNode});
 
-        topNode = new Selector(new List<Node> {attackSequence, traceSequence});
+        _topNode = new Selector(new List<Node> {attackSequence, traceSequence});
     }
 
 
@@ -51,8 +51,8 @@ public class SkeletonSlaveBT : MonsterAI
             CheckForgetTime();
             target.position = GameManager.instance.player.transform.position;
             yield return new WaitForSeconds(0.2f);
-            topNode.Evaluate();
-            if (topNode.NodeState == NodeState.FAILURE)
+            _topNode.Evaluate();
+            if (_topNode.NodeState == NodeState.FAILURE)
             {
                 AgentMoveControl(false);
             }

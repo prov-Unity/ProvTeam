@@ -212,7 +212,6 @@ public abstract class MonsterAI : MonoBehaviour
         if (canMove)
         {
             _agent.isStopped = false;
-            _agent.SetDestination(PPAP.Instance.player.transform.position);
         }
         else
         {
