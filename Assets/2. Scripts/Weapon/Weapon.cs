@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public enum AttackCheckMode
 {
@@ -23,6 +26,7 @@ public class Weapon : MonoBehaviour
     // OverlapBox로 공격판정할 때 쓰임
     public Vector3 center;
 
+    #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         if (_col == null)
@@ -97,6 +101,7 @@ public class Weapon : MonoBehaviour
         Handles.DrawWireDisc(upper, Vector3.up, radius);
         Handles.DrawWireDisc(lower, Vector3.up, radius);
     }
+    #endif
 
     private void Start()
     {
