@@ -109,11 +109,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ec82f97c8b4d974983f31b45e1570a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponType: 19
   checkMode: 0
   _col: {fileID: 8240460827967794563}
-  weaponType: 0
   attackPower: 0
   durability: 0
-  isSelected: 0
   owner: 
   center: {x: 0, y: 0, z: 0}

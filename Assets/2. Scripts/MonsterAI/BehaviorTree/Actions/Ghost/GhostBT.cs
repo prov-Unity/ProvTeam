@@ -2,11 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = System.Random;
 
 public class GhostBT : MonsterAI
 {
-    private Node topNode;
+    private Node _topNode;
     private const int AttackPatternLength = 2;
 
     protected override void Awake()
@@ -18,7 +17,7 @@ public class GhostBT : MonsterAI
     protected override void Start()
     {
         base.Start();
-        target = PPAP.Instance.player.transform;
+        target = GameManager.instance.player.transform;
         ConstructBehaviorTree();
     }
 
@@ -31,7 +30,7 @@ public class GhostBT : MonsterAI
         Sequence attackSequence = new Sequence(new List<Node>{attackRangeNode, attackNode});
         Sequence traceSequence = new Sequence(new List<Node> {traceRangeNode, traceNode});
 
-        topNode = new Selector(new List<Node> {attackSequence, traceSequence});
+        _topNode = new Selector(new List<Node> {attackSequence, traceSequence});
     }
 
 
@@ -46,21 +45,33 @@ public class GhostBT : MonsterAI
     public override IEnumerator Action()
     {
 
-        Debug.Log("코루틴 실행됨");
         isRunning = true;
         yield return StartCoroutine(base.Action());
         while (true)
         {
             CheckForgetTime();
-            target.position = PPAP.Instance.player.transform.position;
+            target.position = GameManager.instance.player.transform.position;
             yield return new WaitForSeconds(0.2f);
-            topNode.Evaluate();
-            if (topNode.NodeState == NodeState.FAILURE)
+            _topNode.Evaluate();
+            if (_topNode.NodeState == NodeState.FAILURE)
             {
                 AgentMoveControl(false);
             }
         }
     }
 
+    public void AttackBlackHole()
+    {
+        GameObject blackHole = Resources.Load<GameObject>("Weapons/BlackHole");
+        Instantiate(blackHole, transform.position + transform.forward * 3, Quaternion.identity);
+    }
 
+    public void AttackIceWheel()
+    {
+        Vector3 originPos = transform.position;
+        GameObject iceWheel = Resources.Load<GameObject>("Weapons/IceWheel");
+        Vector3 dir = PPAP.Instance.player.transform.position - originPos;
+        Instantiate(iceWheel, originPos + transform.forward * 3, Quaternion.identity);
+        
+    }
 }

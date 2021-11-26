@@ -11,23 +11,31 @@ public class VariousTranslateMove : MonoBehaviour {
     public bool m_upMove;
     public float m_changedFactor;
     float m_Time;
+    public Vector3 dir;
+    public Vector3 target;
+    private bool isSetPos;
 
-    void Start()
+    private void Start()
     {
         m_Time = Time.time;
+        target = PPAP.Instance.player.transform.position;
+
     }
 
-	void Update () {
+    private void Update () {
         m_changedFactor = VariousEffectsScene.m_gaph_scenesizefactor;
+        if (!isSetPos)
+        {
+            setTargetPosition();
+        }
+        transform.Translate(dir * 2f);
+        // if (m_fowardMove)
+        //     transform.Translate(transform.forward * m_power * m_changedFactor);
+        // if (m_rightMove)
+        //     transform.Translate(transform.right * m_power* m_changedFactor);
+        // if (m_upMove)
+        //     transform.Translate(transform.up * m_power* m_changedFactor);
 
-        if (m_fowardMove)
-            transform.Translate(transform.forward * m_power * m_changedFactor);
-        if (m_rightMove)
-            transform.Translate(transform.right * m_power* m_changedFactor);
-        if (m_upMove)
-            transform.Translate(transform.up * m_power* m_changedFactor);
-
-        //transform.LookAt(Vector3.zero);
 
         if (m_Time + m_reduceTime < Time.time && m_reduceTime != 0)
         {
@@ -35,4 +43,11 @@ public class VariousTranslateMove : MonoBehaviour {
             m_power = Mathf.Clamp01(m_power);
         }
     }
+
+    private void setTargetPosition()
+    {
+        dir = (target - transform.position).normalized;
+        transform.LookAt(dir);
+    }
+    
 }

@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerInteraction : MonoBehaviour
 {
     [ReadOnly] public Weapon targetWeapon;
+    [ReadOnly] public SavePoint targetSavePoint;
     [ReadOnly] public bool isNewWeapon;
 
     private Player player;
@@ -25,14 +26,17 @@ public class PlayerInteraction : MonoBehaviour
         player = GetComponent<Player>();
 
 
-        distanceToInteract = 0.6f;
+        distanceToInteract = 0.15f;
         yValueForInteractionBox = 0.45f;
     }
 
     private void Update() {
-        colliders = Physics.OverlapBox(player.transform.position + new Vector3((player.cameraTargetTransform.position-Camera.main.transform.position).normalized.x, yValueForInteractionBox, (player.cameraTargetTransform.position-Camera.main.transform.position).normalized.z), new Vector3(distanceToInteract, player.transform.lossyScale.y, distanceToInteract), Quaternion.identity, LayerMask.GetMask("Interactable"));
+        colliders = Physics.OverlapBox(player.transform.position + new Vector3(player.transform.forward.normalized.x, yValueForInteractionBox, player.transform.forward.normalized.z), 
+                                        new Vector3(distanceToInteract, player.transform.lossyScale.y, distanceToInteract), Quaternion.identity, LayerMask.GetMask("Interactable"));
+        
         if(colliders.Length > 0) {
             targetWeapon = colliders[0].GetComponent<Weapon>();
+            targetSavePoint = colliders[0].GetComponentInParent<SavePoint>();
 
             if(targetWeapon != null && targetWeapon.owner == null) {
                 UIManager.instance.EnableInteractionPopup();
@@ -50,10 +54,15 @@ public class PlayerInteraction : MonoBehaviour
                     isNewWeapon = false;
                 }
             }
+            else if(targetSavePoint != null) {
+                UIManager.instance.EnableInteractionPopup();
+                UIManager.instance.SetInteractionPopupText("Press E to save");
+            }
             else {
                 if(!UIManager.instance.isInteractionPopupDisabled) {
                     UIManager.instance.DisableInteractionPopup();
                     targetWeapon = null;
+                    targetSavePoint = null;
                 }
             }
         }
@@ -61,6 +70,7 @@ public class PlayerInteraction : MonoBehaviour
             if(!UIManager.instance.isInteractionPopupDisabled) {
                 UIManager.instance.DisableInteractionPopup();
                 targetWeapon = null;
+                targetSavePoint = null;
             }
         }
     }
@@ -127,10 +137,11 @@ public class PlayerInteraction : MonoBehaviour
         UIManager.instance.DisableWeaponSelectionPopup();
     }
 
-    // this method would occur error before starting the game because the values which this method uses are initialized after the game begins
+    // // this method would occur error before starting the game because the values which this method uses are initialized after the game begins
     // private void OnDrawGizmos() {
     //     Gizmos.color = Color.blue;
         
-        // Gizmos.DrawWireCube(player.transform.position + new Vector3((player.neckTransform.position-Camera.main.transform.position).normalized.x, 0.5f, (player.neckTransform.position-Camera.main.transform.position).normalized.z), new Vector3(distanceToInteract, player.transform.lossyScale.y, distanceToInteract));
+    //     Gizmos.DrawWireCube(player.transform.position + new Vector3(player.transform.forward.normalized.x, yValueForInteractionBox, player.transform.forward.normalized.z), 
+    //                         new Vector3(distanceToInteract, player.transform.lossyScale.y, distanceToInteract));
     // }    
 }

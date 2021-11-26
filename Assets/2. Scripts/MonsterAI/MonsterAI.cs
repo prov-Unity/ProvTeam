@@ -38,7 +38,11 @@ public enum MonsterType
 {
     SkeletonSlave,
     SkeletonKnight,
-    Ghost
+    Ghost,
+    GhostMini,
+    Spider,
+    SpiderMini,
+    Golem
 }
 
 [Serializable]
@@ -63,10 +67,10 @@ public abstract class MonsterAI : MonoBehaviour
     public MonsterInfo monsterInfo;
     
     protected bool isRunning;
-    
+    protected Weapon[] weapon;
+
     private NavMeshAgent _agent;
     private Animator _animator;
-    private Weapon weapon;
     private Weapon hitWeapon;
     private static readonly int HitHash = Animator.StringToHash("Hit");
     private static readonly int Dead = Animator.StringToHash("Dead");
@@ -86,7 +90,7 @@ public abstract class MonsterAI : MonoBehaviour
     {
         findPlayerTime = new FindPlayerTime(Time.time);
         monsterBehaviorState = new MonsterBehaviorState();
-        weapon = GetComponentInChildren<Weapon>();
+        weapon = GetComponentsInChildren<Weapon>();
         _animator = GetComponent<Animator>();
         _agent = GetComponent<NavMeshAgent>();
         monsterData = Resources.Load<MonsterData>("Datas/MonsterData");
@@ -103,10 +107,10 @@ public abstract class MonsterAI : MonoBehaviour
 
     public void CheckForgetTime()
     {
-
         if (findPlayerTime.CheckExpire(forgetTime))
         {
-            StopCoroutine(Action());
+            Debug.Log("모두 멈춰!");
+            StopAllCoroutines();
             isRunning = false;
             _animator.SetBool(TraceHash, false);
             AgentMoveControl(false);
@@ -137,10 +141,11 @@ public abstract class MonsterAI : MonoBehaviour
 
     private IEnumerator GetDamage(int damage)
     {
+        if (monsterBehaviorState.isHitting)
+            yield break;
         _animator.SetTrigger(HitHash);
         yield return new WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(0)
                                     .normalizedTime >= 0.9f);
-        monsterBehaviorState.isHitting = !monsterBehaviorState.isHitting;
         currentHp -= damage;
         Debug.Log(currentHp);
         if (currentHp <= 0)
@@ -159,7 +164,11 @@ public abstract class MonsterAI : MonoBehaviour
     {
         _animator.SetTrigger(Dead);
         yield return new WaitForSeconds(3.0f);
-        string weaponName = weapon.weaponType.ToString().Split('_')[0];
+        if (monsterType == MonsterType.Ghost || 
+            monsterType == MonsterType.Spider ||
+            monsterType == MonsterType.Golem)
+            yield break;
+        string weaponName = weapon[0].weaponType.ToString().Split('_')[0];
         Debug.Log(weaponName);
         GameObject weaponItem = Resources.Load<GameObject>("Weapons/"+weaponName);
         Weapon dropWeapon = weaponItem.GetComponent<Weapon>();
@@ -170,12 +179,14 @@ public abstract class MonsterAI : MonoBehaviour
     
     public void TurnOnWeaponCollider()
     {
-        weapon.EnableCollider(true);
+        for (int i = 0; i < weapon.Length; i++)
+            weapon[i].EnableCollider(true);
     }
 
     public void TurnOffWeaponCollider()
     {
-        weapon.EnableCollider(false);
+        for (int i = 0; i < weapon.Length; i++)
+            weapon[i].EnableCollider(false);
     }
 
     public void ChangeAttackState()
@@ -187,13 +198,13 @@ public abstract class MonsterAI : MonoBehaviour
     public void ChangeHitState()
     {
         monsterBehaviorState.isHitting = !monsterBehaviorState.isHitting;
-        AgentMoveControl(monsterBehaviorState.isHitting);
+        AgentMoveControl(!monsterBehaviorState.isHitting);
     }
 
     public void ChangeDeadState()
     {
         monsterBehaviorState.isDead = !monsterBehaviorState.isDead;
-        AgentMoveControl(monsterBehaviorState.isDead);
+        AgentMoveControl(!monsterBehaviorState.isDead);
     }
 
     public void AgentMoveControl(bool canMove)
@@ -201,10 +212,12 @@ public abstract class MonsterAI : MonoBehaviour
         if (canMove)
         {
             _agent.isStopped = false;
+            _agent.SetDestination(PPAP.Instance.player.transform.position);
         }
         else
         {
             _agent.isStopped = true;
+            _agent.ResetPath();
         }
     }
 }

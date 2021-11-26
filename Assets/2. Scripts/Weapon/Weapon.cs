@@ -100,21 +100,20 @@ public class Weapon : MonoBehaviour
 
     private void Start()
     {
+        _col = GetComponent<Collider>();
         SetOwner();
         SetAttackPower();
-        _col = GetComponent<Collider>();
     }
 
     public void SetOwner()
     {
         string tagName = "";
-        GameObject parent;
         if(transform.parent != null)
         {
             tagName = transform.parent.tag;
-            while (tagName.Equals("Weapon"))
+            while (tagName is "Weapon")
             {
-                parent = transform.parent.gameObject;
+                GameObject parent = transform.parent.gameObject;
                 tagName = parent.transform.parent.tag;
             }
         }
@@ -128,15 +127,21 @@ public class Weapon : MonoBehaviour
             owner = "Monster";
             _col.enabled = false;
             break;
-
+            
+            // Ghost 마법의 경우, 소유자가 정해져 있지 않아서 이렇게 구현
+            // default:
+            // owner = "Monster";
+            // _col.enabled = false;
+            // break;
             default:
             owner = null;
+            durability = WeaponManager.instance.weaponInitialDurabilities[(int)weaponType];
             break;
         }
     }
 
     public void SetAttackPower() {
-        attackPower = WeaponManager.instance.weaponAttackPowers[(int)weaponType];
+//        attackPower = WeaponManager.instance.weaponAttackPowers[(int)weaponType];
     }
 
     /// <summary>
@@ -154,7 +159,7 @@ public class Weapon : MonoBehaviour
             durability--;
             GameManager.instance.player.playerInfo.curWeapon.durability = durability;
             if(durability <= 0)
-                GameManager.instance.player.playerInteractionManager.DestoryCurrentWeapon();
+                GameManager.instance.player.playerInteraction.DestoryCurrentWeapon();
             else
                 UIManager.instance.UpdateCurWeaponInfo();
         }

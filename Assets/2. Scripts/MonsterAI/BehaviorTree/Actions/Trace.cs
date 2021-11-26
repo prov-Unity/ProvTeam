@@ -26,9 +26,8 @@ public class Trace : Node
 
         if (monsterBehaviorState.isAttack)
             return NodeState.FAILURE;
-        agent.isStopped = false;
-        agent.SetDestination(target.position);
         animator.SetBool(AttackHash, false);
+        agent.isStopped = false;
         animator.SetBool(TraceHash, true);
         return NodeState.SUCCESS;
     }

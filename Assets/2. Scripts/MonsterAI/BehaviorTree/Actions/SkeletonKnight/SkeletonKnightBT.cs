@@ -6,9 +6,10 @@ using Random = System.Random;
 
 public class SkeletonKnightBT : MonsterAI
 {
-    private Node topNode;
-    private bool isAppear;
-    private Random random;
+    private Node _topNode;
+    private bool _isAppear;
+    private bool _appearEnd;
+    private Random _random;
     private const int AttackPatternLength = 1;
     private static readonly int AppearIndex = Animator.StringToHash("AppearIndex");
     private const int MAXAppearIndex = 4;
@@ -16,14 +17,14 @@ public class SkeletonKnightBT : MonsterAI
     protected override void Awake()
     {
         base.Awake();
-        random = new Random();
+        _random = new Random();
         monsterType = MonsterType.SkeletonKnight;
     }
 
     protected override void Start()
     {
         base.Start();
-        target = PPAP.Instance.player.transform;
+        target = GameManager.instance.player.transform;
         ConstructBehaviorTree();
     }
 
@@ -36,41 +37,40 @@ public class SkeletonKnightBT : MonsterAI
         Sequence attackSequence = new Sequence(new List<Node>{attackRangeNode, attackNode});
         Sequence traceSequence = new Sequence(new List<Node> {traceRangeNode, traceNode});
 
-        topNode = new Selector(new List<Node> {attackSequence, traceSequence});
+        _topNode = new Selector(new List<Node> {attackSequence, traceSequence});
     }
 
 
     public override void StartAction()
     {
         base.StartAction();
-        Debug.Log("aa");
-        if (!isAppear)
+        if (!_isAppear)
         {
-            Anim.SetInteger(AppearIndex, random.Next(MAXAppearIndex));
-            Debug.Log(isAppear);
+            Anim.SetFloat(AppearIndex, _random.Next(MAXAppearIndex));
+            Debug.Log(_isAppear);
+            _isAppear = true;
         }        
-        if (!isRunning && isAppear)
+        if (!isRunning && _appearEnd)
             StartCoroutine(Action());
     }
 
     public void ChangeAppearState()
     {
-        isAppear = !isAppear;
+        _appearEnd = !_appearEnd;
     }
 
     public override IEnumerator Action()
     {
 
-        Debug.Log("코루틴 실행됨");
         isRunning = true;
         yield return StartCoroutine(base.Action());
         while (true)
         {
             CheckForgetTime();
-            target.position = PPAP.Instance.player.transform.position;
+            target.position = GameManager.instance.player.transform.position;
             yield return new WaitForSeconds(0.2f);
-            topNode.Evaluate();
-            if (topNode.NodeState == NodeState.FAILURE)
+            _topNode.Evaluate();
+            if (_topNode.NodeState == NodeState.FAILURE)
             {
                 AgentMoveControl(false);
             }

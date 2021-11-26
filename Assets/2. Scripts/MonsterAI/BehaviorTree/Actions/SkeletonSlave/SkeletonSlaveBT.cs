@@ -17,7 +17,7 @@ public class SkeletonSlaveBT : MonsterAI
     protected override void Start()
     {
         base.Start();
-        target = PPAP.Instance.player.transform;
+        target = GameManager.instance.player.transform;
         ConstructBehaviorTree();
     }
 
@@ -44,13 +44,12 @@ public class SkeletonSlaveBT : MonsterAI
     public override IEnumerator Action()
     {
 
-        Debug.Log("코루틴 실행됨");
         isRunning = true;
         yield return StartCoroutine(base.Action());
         while (true)
         {
             CheckForgetTime();
-            target.position = PPAP.Instance.player.transform.position;
+            target.position = GameManager.instance.player.transform.position;
             yield return new WaitForSeconds(0.2f);
             topNode.Evaluate();
             if (topNode.NodeState == NodeState.FAILURE)

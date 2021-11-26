@@ -1,27 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
 public class InteractionPopup : MonoBehaviour
 {
-    [ReadOnly] private TextMeshProUGUI interactionText;
+    [ReadOnly, SerializeField] private TextMeshProUGUI interactionText;
 
     private void Awake() {
         interactionText = GetComponentInChildren<TextMeshProUGUI>();
     }
 
     private void Update() {
-        if(Input.GetKeyDown(KeyCode.E) && GameManager.instance.player.playerInteractionManager.targetWeapon != null) {
-            if(GameManager.instance.player.playerInteractionManager.isNewWeapon) {
-                // code for picking up new weapon
-                GameManager.instance.player.playerInteractionManager.PickupNewWeapon();
+        if(Input.GetKeyDown(KeyCode.E)) {
+            if(GameManager.instance.player.playerInteraction.targetWeapon != null) {
+                if(GameManager.instance.player.playerInteraction.isNewWeapon) {
+                    GameManager.instance.player.playerInteraction.PickupNewWeapon();
+                }
+                else {
+                    GameManager.instance.player.playerInteraction.ReplaceCurrentWeapon();
+                }
             }
-            else {
-                // code for replacing existing weapon
-                GameManager.instance.player.playerInteractionManager.ReplaceCurrentWeapon();
+            else if(GameManager.instance.player.playerInteraction.targetSavePoint != null) {
+                UIManager.instance.EnableSavePopup();
             }
-        }
+        }    
     }
 
     public void SetInteractionText(string inputText) {

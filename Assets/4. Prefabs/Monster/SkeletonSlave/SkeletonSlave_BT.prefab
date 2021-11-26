@@ -2593,7 +2593,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: cc9890b5b3500455e9cd4ae680d33e83, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -2663,6 +2663,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1942fac4d90e336429032c001eb374c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHp: 0
   attackDistance: 0
   traceDistance: 0
   forgetTime: 0
@@ -2670,10 +2671,18 @@ MonoBehaviour:
   findPlayerTime:
     lastFindTime: 6.377269e+17
   monsterType: 0
-  isAttack: 0
   monsterBehaviorState:
     isAttack: 0
+    isHitting: 0
     isDead: 0
+  monsterData: {fileID: 0}
+  monsterInfo:
+    name: 
+    maxHp: 0
+    speed: 0
+    traceDistance: 0
+    attackDistance: 0
+    forgetTime: 0
 --- !u!1 &7528020939604746548
 GameObject:
   m_ObjectHideFlags: 0

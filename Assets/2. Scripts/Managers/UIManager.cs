@@ -1,20 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [ReadOnly] public static UIManager instance;
+    [ReadOnly] public WeaponSelectionPopup popupWeaponSelection;
+
+    [ReadOnly] public bool isInteractionPopupDisabled;
+
 
     [ReadOnly, SerializeField] private Image playerHealthBar;
     [ReadOnly, SerializeField] private UIMonsterInfo monsterInfo;
     [ReadOnly, SerializeField] private UICurWeaponInfo curWeaponInfo;
 
-
-    [ReadOnly] public WeaponSelectionPopup popupWeaponSelection;
-    [ReadOnly] private InteractionPopup popupInteraction;
-
-    [ReadOnly] public bool isInteractionPopupDisabled;
+    [ReadOnly, SerializeField] private InteractionPopup popupInteraction;
+    [ReadOnly, SerializeField] private SavePopup popupSave;
+    [ReadOnly, SerializeField] private GameOverPopup popupGameOver;
 
     private void Awake()
     {        
@@ -27,6 +27,10 @@ public class UIManager : MonoBehaviour
         popupWeaponSelection = FindObjectOfType<WeaponSelectionPopup>();
         popupInteraction = FindObjectOfType<InteractionPopup>();
         popupInteraction.gameObject.SetActive(false);
+        popupSave = FindObjectOfType<SavePopup>();
+        popupSave.gameObject.SetActive(false);
+        popupGameOver = FindObjectOfType<GameOverPopup>();
+        popupGameOver.gameObject.SetActive(false);
 
         isInteractionPopupDisabled = true;
     }
@@ -55,21 +59,27 @@ public class UIManager : MonoBehaviour
 
 
     public void UpdateCurWeaponInfo() {
-        if(GameManager.instance.player.playerInfo.curWeapon.weaponType == WeaponType.Fist_Left)
-            curWeaponInfo.textWeaponDurability.text = "";
-        else
-            curWeaponInfo.textWeaponDurability.text = GameManager.instance.player.playerInfo.curWeapon.durability.ToString();
+        if(GameManager.instance.player.playerInfo.curWeapon.weaponType == WeaponType.Fist_Left) {
+            if(curWeaponInfo.IsWeaponDurabilityActive()) 
+                curWeaponInfo.DisableWeaponDurability();
+        }
+        else {
+            if(curWeaponInfo.IsWeaponDurabilityActive() == false) 
+                curWeaponInfo.EnableWeaponDurability();
 
-        curWeaponInfo.imageWeaponIcon.sprite = WeaponSelectionManager.instance.weaponIcons[(int)GameManager.instance.player.playerInfo.curWeapon.weaponType];
+            curWeaponInfo.UpdateWeaponDurability(GameManager.instance.player.playerInfo.curWeapon);
+        }
+        curWeaponInfo.UpdatecurWeaponIcon(WeaponManager.instance.weaponIcons[(int)GameManager.instance.player.playerInfo.curWeapon.weaponType]);
     }
-
 
     public void EnableWeaponSelectionPopup() {
         popupWeaponSelection.gameObject.SetActive(true);
+        GameManager.instance.DisablePlayerInput();
     }
 
     public void DisableWeaponSelectionPopup() {
         popupWeaponSelection.gameObject.SetActive(false);
+        GameManager.instance.EnablePlayerInput();
     }
 
 
@@ -85,5 +95,24 @@ public class UIManager : MonoBehaviour
     public void DisableInteractionPopup() {
         popupInteraction.gameObject.SetActive(false);
         isInteractionPopupDisabled = true;
+    }
+
+    public void EnableSavePopup() {
+        GameManager.instance.DisablePlayerInput();
+        GameManager.instance.SetTimeScale(0.01f);
+        popupSave.gameObject.SetActive(true);
+        popupSave.LoadFiles();
+    }
+
+    public void EnableGameOverPopup() {
+        GameManager.instance.DisablePlayerInput();
+        GameManager.instance.SetTimeScale(0);
+        popupGameOver.gameObject.SetActive(true);
+    }
+
+    public void DisableGameOverPopup() {
+        GameManager.instance.EnablePlayerInput();
+        GameManager.instance.SetTimeScale(1f);
+        popupGameOver.gameObject.SetActive(false);
     }
 }
