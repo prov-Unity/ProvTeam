@@ -9,6 +9,8 @@ TagManager:
   - Sensor
   - Monster
   - DeadZone
+  - Golem
+  - Warp
   layers:
   - Default
   - TransparentFX

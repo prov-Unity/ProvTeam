@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SavePopup : MonoBehaviour
@@ -75,6 +73,6 @@ public class SavePopup : MonoBehaviour
     }
     private void SaveToCurrentSlot() {
         SavePoint targetSavePoint = GameManager.instance.player.playerInteraction.targetSavePoint;
-        SaveLoadManager.instance.SaveData(slotIndex, new SaveData(targetSavePoint.stageName, DateTime.Now, targetSavePoint.respawnPoint, GameManager.instance.player.playerInfo.availableWeapons, GameManager.instance.player.playerInfo.health));
+        SaveLoadManager.instance.SaveData(slotIndex, new SaveData(MySceneManager.instance.curSceneName, DateTime.Now, targetSavePoint.respawnPoint, GameManager.instance.player.playerInfo.availableWeapons, GameManager.instance.player.playerInfo.health));
     }
 }

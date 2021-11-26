@@ -2,11 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = System.Random;
 
 public class GhostBT : MonsterAI
 {
-    private Node topNode;
+    private Node _topNode;
     private const int AttackPatternLength = 2;
 
     protected override void Awake()
@@ -18,7 +17,7 @@ public class GhostBT : MonsterAI
     protected override void Start()
     {
         base.Start();
-        target = PPAP.Instance.player.transform;
+        target = GameManager.instance.player.transform;
         ConstructBehaviorTree();
     }
 
@@ -31,7 +30,7 @@ public class GhostBT : MonsterAI
         Sequence attackSequence = new Sequence(new List<Node>{attackRangeNode, attackNode});
         Sequence traceSequence = new Sequence(new List<Node> {traceRangeNode, traceNode});
 
-        topNode = new Selector(new List<Node> {attackSequence, traceSequence});
+        _topNode = new Selector(new List<Node> {attackSequence, traceSequence});
     }
 
 
@@ -51,10 +50,10 @@ public class GhostBT : MonsterAI
         while (true)
         {
             CheckForgetTime();
-            target.position = PPAP.Instance.player.transform.position;
+            target.position = GameManager.instance.player.transform.position;
             yield return new WaitForSeconds(0.2f);
-            topNode.Evaluate();
-            if (topNode.NodeState == NodeState.FAILURE)
+            _topNode.Evaluate();
+            if (_topNode.NodeState == NodeState.FAILURE)
             {
                 AgentMoveControl(false);
             }

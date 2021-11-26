@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SpiderBT : MonsterAI
 {
-    private Node topNode;
+    private Node _topNode;
     private const int AttackPatternLength = 1;
 
     protected override void Awake()
@@ -17,7 +17,7 @@ public class SpiderBT : MonsterAI
     protected override void Start()
     {
         base.Start();
-        target = PPAP.Instance.player.transform;
+        target = GameManager.instance.player.transform;
         ConstructBehaviorTree();
     }
 
@@ -30,7 +30,7 @@ public class SpiderBT : MonsterAI
         Sequence attackSequence = new Sequence(new List<Node>{attackRangeNode, attackNode});
         Sequence traceSequence = new Sequence(new List<Node> {traceRangeNode, traceNode});
 
-        topNode = new Selector(new List<Node> {attackSequence, traceSequence});
+        _topNode = new Selector(new List<Node> {attackSequence, traceSequence});
     }
 
 
@@ -49,10 +49,10 @@ public class SpiderBT : MonsterAI
         while (true)
         {
             CheckForgetTime();
-            target.position = PPAP.Instance.player.transform.position;
+            target.position = GameManager.instance.player.transform.position;
             yield return new WaitForSeconds(0.2f);
-            topNode.Evaluate();
-            if (topNode.NodeState == NodeState.FAILURE)
+            _topNode.Evaluate();
+            if (_topNode.NodeState == NodeState.FAILURE)
             {
                 AgentMoveControl(false);
             }

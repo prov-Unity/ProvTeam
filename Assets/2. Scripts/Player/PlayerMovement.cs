@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [ReadOnly] public Rigidbody curRigidbody;
+    [ReadOnly] private Rigidbody curRigidbody;
 
     private Player player;
     
@@ -33,6 +33,14 @@ public class PlayerMovement : MonoBehaviour
             }
             player.playerAnimation.UpdateMoveInfo(inputX, inputY);
         }
+    }
+
+    public void EnableGravity() {
+        curRigidbody.useGravity = true;
+    }
+
+    public void DisableGravity() {
+        curRigidbody.useGravity = false;
     }
 
     private void RotateBasedOnCamera() {

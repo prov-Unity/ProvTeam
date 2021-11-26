@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class UIManager : MonoBehaviour
@@ -16,6 +14,7 @@ public class UIManager : MonoBehaviour
 
     [ReadOnly, SerializeField] private InteractionPopup popupInteraction;
     [ReadOnly, SerializeField] private SavePopup popupSave;
+    [ReadOnly, SerializeField] private GameOverPopup popupGameOver;
 
     private void Awake()
     {        
@@ -30,6 +29,8 @@ public class UIManager : MonoBehaviour
         popupInteraction.gameObject.SetActive(false);
         popupSave = FindObjectOfType<SavePopup>();
         popupSave.gameObject.SetActive(false);
+        popupGameOver = FindObjectOfType<GameOverPopup>();
+        popupGameOver.gameObject.SetActive(false);
 
         isInteractionPopupDisabled = true;
     }
@@ -68,9 +69,8 @@ public class UIManager : MonoBehaviour
 
             curWeaponInfo.UpdateWeaponDurability(GameManager.instance.player.playerInfo.curWeapon);
         }
-        curWeaponInfo.UpdatecurWeaponIcon(WeaponSelectionManager.instance.weaponIcons[(int)GameManager.instance.player.playerInfo.curWeapon.weaponType]);
+        curWeaponInfo.UpdatecurWeaponIcon(WeaponManager.instance.weaponIcons[(int)GameManager.instance.player.playerInfo.curWeapon.weaponType]);
     }
-
 
     public void EnableWeaponSelectionPopup() {
         popupWeaponSelection.gameObject.SetActive(true);
@@ -102,5 +102,17 @@ public class UIManager : MonoBehaviour
         GameManager.instance.SetTimeScale(0.01f);
         popupSave.gameObject.SetActive(true);
         popupSave.LoadFiles();
+    }
+
+    public void EnableGameOverPopup() {
+        GameManager.instance.DisablePlayerInput();
+        GameManager.instance.SetTimeScale(0);
+        popupGameOver.gameObject.SetActive(true);
+    }
+
+    public void DisableGameOverPopup() {
+        GameManager.instance.EnablePlayerInput();
+        GameManager.instance.SetTimeScale(1f);
+        popupGameOver.gameObject.SetActive(false);
     }
 }
