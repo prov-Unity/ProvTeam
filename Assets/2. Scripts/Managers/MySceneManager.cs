@@ -22,7 +22,6 @@ public class MySceneManager : MonoBehaviour
 
     public void LoadScene(string sceneName) {
         curSceneName = sceneName;
-        loadedData = SaveLoadManager.instance.GetLatestData();
         SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
     }
 }
