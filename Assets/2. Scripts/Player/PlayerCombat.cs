@@ -77,7 +77,12 @@ public class PlayerCombat : MonoBehaviour
                 GetDamaged(monsterWeapon.attackPower); 
             break;
             case "DeadZone": StartCoroutine("Die"); break;
-            case "Warp": MySceneManager.instance.LoadScene(other.GetComponent<WarpPoint>().warpDestination); break;
+            case "Warp": 
+            MySceneManager.instance.isInitial = false;
+            MySceneManager.instance.isWarped = true;
+            MySceneManager.instance.loadedData = new SaveData(MySceneManager.instance.curSceneName, System.DateTime.Now, Vector3.one, player.playerInfo.availableWeapons, player.playerInfo.health);
+            MySceneManager.instance.LoadScene(other.GetComponent<WarpPoint>().warpDestination);
+            break;
         }
     }
 

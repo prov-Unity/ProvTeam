@@ -19,12 +19,10 @@ public class GameManager : MonoBehaviour
     }
 
     private void Start() {
-        if(MySceneManager.instance.curSceneName != "MainMenu") {
-            if(MySceneManager.instance.isInitial && MySceneManager.instance.curSceneName == "Tutorial")
-                InitSpawnPlayer();
-            else
-                SpawnPlayer(MySceneManager.instance.curSceneName, MySceneManager.instance.loadedData);
-        }
+        if(MySceneManager.instance.isInitial)
+            InitSpawnPlayer();
+        else
+            SpawnPlayer(MySceneManager.instance.curSceneName, MySceneManager.instance.loadedData);
     }
 
     public void SetTimeScale(float timeScale) {
@@ -66,7 +64,7 @@ public class GameManager : MonoBehaviour
         GameObject instantiatedPlayerAndCameraObject = Instantiate(playerAndCameraPrefab);
         player = instantiatedPlayerAndCameraObject.GetComponentInChildren<Player>();
 
-        if(MySceneManager.instance.isInitial) {
+        if(MySceneManager.instance.isWarped) {
             stageOneStartPoint = FindObjectOfType<StageOneStartPoint>().transform;
             player.transform.position = stageOneStartPoint.position;
         }

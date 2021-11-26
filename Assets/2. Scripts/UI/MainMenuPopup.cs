@@ -8,6 +8,7 @@ public class MainMenuPopup : MonoBehaviour
     }
 
     public void OnClickLoad() {
+        MySceneManager.instance.isInitial = false;
         MainMenuUIManager.instance.EnableLoadPopup();
     }
 }
