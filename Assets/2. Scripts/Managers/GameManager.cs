@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
 
     private void Start() {
         if(MySceneManager.instance.curSceneName != "MainMenu") {
-            if(MySceneManager.instance.isInitial)
+            if(MySceneManager.instance.isInitial && MySceneManager.instance.curSceneName == "Tutorial")
                 InitSpawnPlayer();
             else
                 SpawnPlayer(MySceneManager.instance.curSceneName, MySceneManager.instance.loadedData);
@@ -66,13 +66,19 @@ public class GameManager : MonoBehaviour
         GameObject instantiatedPlayerAndCameraObject = Instantiate(playerAndCameraPrefab);
         player = instantiatedPlayerAndCameraObject.GetComponentInChildren<Player>();
 
-        player.transform.position = loadedData.respawnPoint;
+        if(MySceneManager.instance.isInitial) {
+            stageOneStartPoint = FindObjectOfType<StageOneStartPoint>().transform;
+            player.transform.position = stageOneStartPoint.position;
+        }
+        else
+            player.transform.position = loadedData.respawnPoint;
+
         player.playerInfo.health = loadedData.savedHealth;
         player.playerInfo.availableWeapons = new List<AvailableWeapon>();
         foreach(AvailableWeapon curWeapon in loadedData.savedAvailableWeapons) {
             player.playerInfo.availableWeapons.Add(curWeapon);
         }
-        player.playerInfo.curWeapon = new AvailableWeapon(WeaponType.No_Weapon, -1);
+        player.playerInfo.curWeapon = new AvailableWeapon(WeaponType.Fist_Left, -1);
         WeaponSelectionManager.instance.SelectCurrentWeapon();
         player.playerInfo.curWeapon = player.playerInfo.availableWeapons[0];
     }
