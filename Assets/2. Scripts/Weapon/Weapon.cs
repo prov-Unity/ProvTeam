@@ -141,7 +141,7 @@ public class Weapon : MonoBehaviour
     }
 
     public void SetAttackPower() {
-//        attackPower = WeaponManager.instance.weaponAttackPowers[(int)weaponType];
+       attackPower = WeaponManager.instance.weaponAttackPowers[(int)weaponType];
     }
 
     /// <summary>
